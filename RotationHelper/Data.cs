@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics;
 
 namespace RotationHelper
 {
+	[DebuggerDisplay("Lat: {Latitude} Lon: {Longitude} Ang: {Angle}")]
 	public struct Coordinates : IEquatable<Coordinates>
 	{
 		public double Latitude;
@@ -42,6 +44,7 @@ namespace RotationHelper
 		public override int GetHashCode() => Latitude.GetHashCode() ^ Longitude.GetHashCode() ^ Angle.GetHashCode();
 	}
 
+	[DebuggerDisplay("{PlateID} {TimeStamp} Coordinates {ConjugatePlateID} ! {Comment}")]
 	public class RotationEvent : IEquatable<RotationEvent>
 	{
 		//400 1900.0   12.0868  -83.5756  -27.0759  000 ! Starts moving independently
@@ -78,9 +81,9 @@ namespace RotationHelper
 				return false;
 			else if (this.ConjugatePlateID != other.ConjugatePlateID)
 				return false;
-			else if (other.TimeStamp != other.TimeStamp)
+			else if (this.TimeStamp != other.TimeStamp)
 				return false;
-			else if (other.Coordinates != other.Coordinates)
+			else if (this.Coordinates != other.Coordinates)
 				return false;
 			else
 				return true;
@@ -98,7 +101,9 @@ namespace RotationHelper
 
 		public static RotationEvent Parse(string txt)
 		{
-			var contents = txt.Split(' ').Select(x => x.Trim()).TakeWhile(s => string.IsNullOrEmpty(s)).ToArray();
+			var rough = txt.Split('!');
+
+			var contents = rough[0].Split(' ').Select(x => x.Trim()).Where(r => !string.IsNullOrEmpty(r)).ToArray();
 
 			RotationEvent rotation = new RotationEvent(int.Parse(contents[0]))
 			{
@@ -110,7 +115,7 @@ namespace RotationHelper
 					Longitude = double.Parse(contents[4])
 				},
 				ConjugatePlateID = int.Parse(contents[5]),
-				Comment = contents[6],
+				Comment = rough[1].Trim(),
 			};
 
 			return rotation;
