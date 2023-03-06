@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rotation_Editor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Rotation Editor" Height="450" Width="450">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
+    </Window.CommandBindings>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.RowSpan="2">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New"/>
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Save"/>
+            </MenuItem>
+            <MenuItem Header="_Refresh"/>
+            <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
+        </Menu>
+
+        <ListView Margin="10,25,10,10" Name="rotListView">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Plate ID" DisplayMemberBinding="{Binding PlateID, StringFormat=D3}"/>
+                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimeStamp}"/>
+                    <GridViewColumn Header="Latitude" DisplayMemberBinding="{Binding Latitude}"/>
+                    <GridViewColumn Header="Longitude" DisplayMemberBinding="{Binding Longitude}"/>
+                    <GridViewColumn Header="Angle" DisplayMemberBinding="{Binding Angle}"/>
+                    <GridViewColumn Header="Conjugate ID" DisplayMemberBinding="{Binding ConjugateID, StringFormat=D3}"/>
+                    <GridViewColumn Header="Comment" DisplayMemberBinding="{Binding Comment}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <WrapPanel Grid.Row="1" Margin="10,0">
+            <WrapPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </WrapPanel.Resources>
+            <Button Name="btnDriftCorrection" Click="btnDriftCorrection_Click" ToolTip="Generate drift correction for all plates at 1.0 Ma">Generate drift correction</Button>
+            <Button x:Name="btnNewPlate" Click="btnNewPlate_Click" ToolTip="Generate new plate at a given time">New plate</Button>
+            <Button x:Name="btnStartIndependent" Click="btnStartIndependent_Click" ToolTip="A plate starts moving independently">Independent move</Button>
+            <Button x:Name="btnJoinIndependent" Click="btnJoinIndependent_Click" ToolTip="An independent plate joins another plate and starts moving with that plate">Join plate</Button>
+            
+        </WrapPanel>
 
     </Grid>
 </Window>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Rotation_Editor.ViewModel;
+using RotationHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,15 +25,73 @@ namespace Rotation_Editor
 		public MainWindow()
 		{
 			InitializeComponent();
+			List<RotationModel> rotations = new()
+			{
+				new RotationModel()
+				{
+					PlateID = 1,
+					TimeStamp = 2000,
+					Latitude = 90,
+					Longitude = 0,
+					Angle = 0,
+					ConjugateID = 0,
+					Comment = "comment"
+				},
+				new RotationModel()
+				{
+					PlateID = 100,
+					TimeStamp = 0,
+					Latitude = 90,
+					Longitude = 0,
+					Angle = 0,
+					ConjugateID = 0,
+					Comment = "Plate A at the end"
+				},
+				new RotationModel()
+				{
+					PlateID = 100,
+					TimeStamp = 2000,
+					Latitude = 90,
+					Longitude = 0,
+					Angle = 0,
+					ConjugateID = 0,
+					Comment = "Plate A at the start"
+				}
+			};
+
+			rotListView.ItemsSource = rotations;
 		}
 
+		//Drift correction
+		private void btnDriftCorrection_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		//Create new container
+		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		//Container starts moving independently
+		private void btnStartIndependent_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		//Container joins exsisting container
+		private void btnJoinIndependent_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
+		private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Application.Current.Shutdown();
+		
 		//Actions:
 		//Parse existing file
 		//Refresh file, as it has been modified by GPlates
-		//Create new container
-		//Container starts moving independently
-		//Container joins exsisting container
 		//Save edits to the existing file/to new file
-		//Drift correction
 	}
 }
