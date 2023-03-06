@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -22,9 +23,9 @@ namespace RotationHelper
 
 		public bool Equals(Coordinates other)
 		{
-			if(Latitude != other.Latitude)
+			if (Latitude != other.Latitude)
 				return false;
-			else if(Longitude != other.Longitude)
+			else if (Longitude != other.Longitude)
 				return false;
 			else if (Angle != other.Angle)
 				return false;
@@ -37,6 +38,8 @@ namespace RotationHelper
 		public static bool operator !=(Coordinates lhs, Coordinates rhs) => !lhs.Equals(rhs);
 
 		public override string ToString() => $"{Latitude} {Longitude} {Angle}";
+
+		public override int GetHashCode() => Latitude.GetHashCode() ^ Longitude.GetHashCode() ^ Angle.GetHashCode();
 	}
 
 	public class RotationEvent : IEquatable<RotationEvent>
@@ -52,7 +55,7 @@ namespace RotationHelper
 
 		public RotationEvent(int plateId)
 		{
-			PlateID	= plateId;
+			PlateID = plateId;
 		}
 
 		public override bool Equals(object? obj)
@@ -90,28 +93,55 @@ namespace RotationHelper
 			else
 				return $"{PlateID} {TimeStamp} {Coordinates} {ConjugatePlateID} ! {Comment}";
 		}
+
+		public override int GetHashCode() => ToString().GetHashCode();
+
+		public static RotationEvent Parse(string txt)
+		{
+			var contents = txt.Split(' ').Select(x => x.Trim()).TakeWhile(s => string.IsNullOrEmpty(s)).ToArray();
+
+			RotationEvent rotation = new RotationEvent(int.Parse(contents[0]))
+			{
+				TimeStamp = double.Parse(contents[1]),
+				Coordinates = new Coordinates() 
+				{
+					Angle = double.Parse(contents[2]), 
+					Latitude = double.Parse(contents[3]), 
+					Longitude = double.Parse(contents[4])
+				},
+				ConjugatePlateID = int.Parse(contents[5]),
+				Comment = contents[6],
+			};
+
+			return rotation;
+		}
 	}
 
 	public class FullRotationReconstruction
 	{
-		Dictionary<int, List<RotationEvent>> rotations = new Dictionary<int, List<RotationEvent>>();
+		public Dictionary<int, List<RotationEvent>> Rotations { get; private set; }
+
+		public FullRotationReconstruction()
+		{
+			Rotations = new Dictionary<int, List<RotationEvent>>();
+		}
 
 		public void AddNewRotation(RotationEvent rotation)
 		{
 			if (rotation == null)
-				throw new ArgumentNullException("Rotation should never be null");
+				throw new ArgumentNullException($"{nameof(rotation)} should never be null");
 			if (rotation.PlateID == 0)
 				throw new ArgumentException("PlateID 000 is used for other purposes, please do not use it!");
 
-			if (rotations.ContainsKey(rotation.PlateID))
+			if (Rotations.ContainsKey(rotation.PlateID))
 			{
-				if (rotations[rotation.PlateID].Contains(rotation))
+				if (Rotations[rotation.PlateID].Contains(rotation))
 					throw new ArgumentException("Same rotation is already added");
 				else
-					rotations[rotation.PlateID].Add(rotation);
+					Rotations[rotation.PlateID].Add(rotation);
 			}
 			else
-				rotations[rotation.PlateID] = new List<RotationEvent>() { rotation };
+				Rotations[rotation.PlateID] = new List<RotationEvent>() { rotation };
 		}
 	}
 }
