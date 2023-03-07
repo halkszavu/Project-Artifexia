@@ -33,9 +33,21 @@ namespace Rotation_Editor.ViewModel
 	{
 		internal List<RotationModel> Rotations { get; set; }
 
+		HashSet<int> PlateIds;
+
+		public ReconstructionModel()
+		{
+			Rotations = new();
+			PlateIds = new();
+		}
+
 		internal void AddRotation(RotationModel model)
 		{
+			if (PlateIds.Contains(model.PlateID))
+				throw new PlateIDExsistException();
 
+			PlateIds.Add(model.PlateID);
+			Rotations.Add(model);
 		}
 	}
 }
