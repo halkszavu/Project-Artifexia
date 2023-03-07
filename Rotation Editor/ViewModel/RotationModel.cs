@@ -1,13 +1,16 @@
 ﻿using RotationHelper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Rotation_Editor.ViewModel
 {
-	internal class RotationModel
+	public class RotationModel
 	{
 		public int PlateID { get; set; }
 		public double TimeStamp { get; set; }
@@ -29,9 +32,21 @@ namespace Rotation_Editor.ViewModel
 		};
 	}
 
-	internal class ReconstructionModel
+	public class ReconstructionModel : INotifyPropertyChanged
 	{
-		internal List<RotationModel> Rotations { get; set; }
+		private ObservableCollection<RotationModel> _rotations;
+		public ObservableCollection<RotationModel> Rotations
+		{
+			get => this._rotations;
+			set
+			{
+				if (value != this._rotations)
+				{
+					this._rotations = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 
 		HashSet<int> PlateIds;
 
@@ -43,11 +58,14 @@ namespace Rotation_Editor.ViewModel
 
 		internal void AddRotation(RotationModel model)
 		{
-			if (PlateIds.Contains(model.PlateID))
-				throw new PlateIDExsistException();
-
-			PlateIds.Add(model.PlateID);
+			if (!PlateIds.Contains(model.PlateID))
+				PlateIds.Add(model.PlateID);
 			Rotations.Add(model);
+
+			OnPropertyChanged(nameof(Rotations));
 		}
+
+		public event PropertyChangedEventHandler? PropertyChanged;
+		private void OnPropertyChanged([CallerMemberName] string  propertyName = "")=>PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 }

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rotation_Editor"
         mc:Ignorable="d"
-        Title="Rotation Editor" Height="450" Width="450">
+        Title="Rotation Editor" Height="450" Width="600">
     <Window.CommandBindings>
         <CommandBinding Command="local:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Open" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -18,14 +19,14 @@
         <Menu Grid.RowSpan="2">
             <MenuItem Header="_File">
                 <MenuItem Header="_New"/>
-                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
                 <MenuItem Header="_Save"/>
             </MenuItem>
             <MenuItem Header="_Refresh"/>
             <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
         </Menu>
 
-        <ListView Margin="10,25,10,10" Name="rotListView">
+        <ListView Margin="10,25,10,10" ItemsSource="{Binding Rotations}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Plate ID" DisplayMemberBinding="{Binding PlateID, StringFormat=D3}"/>

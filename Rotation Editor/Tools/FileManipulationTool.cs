@@ -12,9 +12,9 @@ namespace Rotation_Editor.Tools
 	{
 		internal static readonly string DefaultExtension = ".rot";
 
-		internal static FullRotationReconstruction ReadFile(Uri source)
+		internal static FullRotationReconstruction ReadFile(Stream stream)
 		{
-			using (StreamReader sr = File.OpenText(source.AbsolutePath))
+			using (StreamReader sr = new StreamReader(stream))
 			{
 				var reconstruction = Parser.ParseReconstruction(sr.ReadToEnd());
 				return reconstruction;

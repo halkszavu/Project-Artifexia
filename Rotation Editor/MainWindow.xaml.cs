@@ -1,4 +1,6 @@
-﻿using Rotation_Editor.ViewModel;
+﻿using Microsoft.Win32;
+using Rotation_Editor.Tools;
+using Rotation_Editor.ViewModel;
 using RotationHelper;
 using System;
 using System.Collections.Generic;
@@ -22,9 +24,12 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		ReconstructionModel model;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			model = new ReconstructionModel();
 			List<RotationModel> rotations = new()
 			{
 				new RotationModel()
@@ -59,7 +64,12 @@ namespace Rotation_Editor
 				}
 			};
 
-			rotListView.ItemsSource = rotations;
+			this.DataContext = model;
+
+			foreach (var item in rotations)
+			{
+				model.AddRotation(item);
+			}
 		}
 
 		//Drift correction
@@ -88,7 +98,27 @@ namespace Rotation_Editor
 
 		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Application.Current.Shutdown();
-		
+		private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
+		private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			OpenFileDialog dlg = new()
+			{
+				DefaultExt = FileManipulationTool.DefaultExtension,
+				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
+			};
+			
+			
+			if(dlg.ShowDialog() == true)
+			{
+				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(dlg.OpenFile()));
+				model.Rotations.Clear();
+				foreach (var item in m.Rotations)
+				{
+					model.Rotations.Add(item);
+				}
+			}
+		}
+
 		//Actions:
 		//Parse existing file
 		//Refresh file, as it has been modified by GPlates
