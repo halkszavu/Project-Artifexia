@@ -8,25 +8,31 @@
         Title="Rotation Editor" Height="450" Width="600">
     <Window.CommandBindings>
         <CommandBinding Command="local:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
-        <CommandBinding Command="ApplicationCommands.Open" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
     </Window.CommandBindings>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        
-        <Menu Grid.RowSpan="2">
+
+        <Menu Grid.RowSpan="2" Grid.ColumnSpan="2">
             <MenuItem Header="_File">
-                <MenuItem Header="_New"/>
+                <MenuItem Header="_New" Command="ApplicationCommands.New"/>
                 <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
-                <MenuItem Header="_Save"/>
+                <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
             </MenuItem>
             <MenuItem Header="_Refresh"/>
             <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
         </Menu>
 
-        <ListView Margin="10,25,10,10" ItemsSource="{Binding Rotations}">
+        <ListView Margin="10,25,10,10" ItemsSource="{Binding Rotations}" Grid.ColumnSpan="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Plate ID" DisplayMemberBinding="{Binding PlateID, StringFormat=D3}"/>
@@ -40,17 +46,32 @@
             </ListView.View>
         </ListView>
 
-        <WrapPanel Grid.Row="1" Margin="10,0">
+        <Grid Grid.Row="0" Grid.Column="1" Margin="10">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="22"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnUp" Grid.Row="0">↑</Button>
+            <Button x:Name="btnDown" Grid.Row="1">↓</Button>
+        </Grid>
+
+        <WrapPanel Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="2">
             <WrapPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5"/>
                 </Style>
             </WrapPanel.Resources>
-            <Button Name="btnDriftCorrection" Click="btnDriftCorrection_Click" ToolTip="Generate drift correction for all plates at 1.0 Ma">Generate drift correction</Button>
-            <Button x:Name="btnNewPlate" Click="btnNewPlate_Click" ToolTip="Generate new plate at a given time">New plate</Button>
-            <Button x:Name="btnStartIndependent" Click="btnStartIndependent_Click" ToolTip="A plate starts moving independently">Independent move</Button>
-            <Button x:Name="btnJoinIndependent" Click="btnJoinIndependent_Click" ToolTip="An independent plate joins another plate and starts moving with that plate">Join plate</Button>
-            
+            <Button x:Name="btnValidate" Click="btnValidate_Click" ToolTip="Check if a rotation file is compliant with GPlate's rotation expectations">Validate</Button>
+            <Button Name="btnDriftCorrection" Click="btnDriftCorrection_Click" ToolTip="Generate drift correction for all independently moving plates at 1.0 Ma">Generate drift correction</Button>
+            <Button x:Name="btnNewPlate" Click="btnNewPlate_Click" ToolTip="Generate an entirely new plate at a given time. Useful for creating new microcontinents or split off oceanic plates.">New plate</Button>
+            <Button x:Name="btnStartIndependent" Click="btnStartIndependent_Click" ToolTip="An existing plate starts moving independently.">Independent move</Button>
+            <Button x:Name="btnJoinIndependent" Click="btnJoinIndependent_Click" ToolTip="An independent plate joins another plate and starts moving with that plate.">Join plate</Button>
+
         </WrapPanel>
 
     </Grid>

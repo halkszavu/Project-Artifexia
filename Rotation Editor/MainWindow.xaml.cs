@@ -101,11 +101,15 @@ namespace Rotation_Editor
 			//Workflow:
 
 		}
+		private void btnValidate_Click(object sender, RoutedEventArgs e)
+		{
+			//Workflow
+		}
 
 		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => Application.Current.Shutdown();
-		private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
-		private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		private void OpenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
+		private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			OpenFileDialog dlg = new()
 			{
@@ -123,6 +127,19 @@ namespace Rotation_Editor
 					model.Rotations.Add(item);
 				}
 			}
+		}
+		private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+
+		}
+		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+
+		}
+		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
+		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+
 		}
 
 		//Actions:
