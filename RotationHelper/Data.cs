@@ -13,6 +13,13 @@ namespace RotationHelper
 		public double Longitude;
 		public double Angle;
 
+		public Coordinates(double latitude, double longitude, double angle)
+		{
+			Latitude = latitude;
+			Longitude = longitude;
+			Angle = angle;
+		}
+
 		public override bool Equals([NotNullWhen(true)] object? obj)
 		{
 			if (obj == null)

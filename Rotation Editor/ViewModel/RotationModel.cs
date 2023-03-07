@@ -16,10 +16,26 @@ namespace Rotation_Editor.ViewModel
 		public double Angle { get; set; }
 		public int ConjugateID { get; set; }
 		public string Comment { get; set; }
+
+		public static explicit operator RotationModel(RotationEvent rotEvent) => new RotationModel()
+		{
+			PlateID = rotEvent.PlateID,
+			TimeStamp = rotEvent.TimeStamp,
+			ConjugateID = rotEvent.ConjugatePlateID,
+			Comment = rotEvent.Comment,
+			Longitude = rotEvent.Coordinates.Longitude,
+			Latitude = rotEvent.Coordinates.Latitude,
+			Angle = rotEvent.Coordinates.Angle,
+		};
 	}
 
 	internal class ReconstructionModel
 	{
-		List<RotationModel> Rotations { get; set; }
+		internal List<RotationModel> Rotations { get; set; }
+
+		internal void AddRotation(RotationModel model)
+		{
+
+		}
 	}
 }
