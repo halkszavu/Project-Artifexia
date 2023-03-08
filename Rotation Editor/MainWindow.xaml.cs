@@ -75,35 +75,29 @@ namespace Rotation_Editor
 		//Drift correction
 		private void btnDriftCorrection_Click(object sender, RoutedEventArgs e)
 		{
-			//Workflow: for every container that has an entry at 1.0 update that entry to have the same Coordinates as the last non 1.0 entry. If the last non 1.0 entry has a conjugate ID, then delete the 1.0 entry.
-			// for every container that doesn't have a 1.0 entry but in the last entry they have a conjugate plate 000, create a 1.0 entry with Coordinates identical to the last non 1.0 entry
-			//No need for new form
 
 		}
 
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-			//Workflow:
 
 		}
 
 		//Container starts moving independently
 		private void btnStartIndependent_Click(object sender, RoutedEventArgs e)
 		{
-			//Workflow:
 
 		}
 
 		//Container joins exsisting container
 		private void btnJoinIndependent_Click(object sender, RoutedEventArgs e)
 		{
-			//Workflow:
 
 		}
 		private void btnValidate_Click(object sender, RoutedEventArgs e)
 		{
-			//Workflow
+			
 		}
 
 		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
