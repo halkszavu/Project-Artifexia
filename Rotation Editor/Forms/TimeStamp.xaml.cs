@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Rotation_Editor.Forms
+namespace Rotation_Editor
 {
 	/// <summary>
 	/// Interaction logic for TimeStamp.xaml
