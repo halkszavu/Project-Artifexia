@@ -17,7 +17,7 @@ namespace Rotation_Editor
 	/// <summary>
 	/// Interaction logic for TimeStamp.xaml
 	/// </summary>
-	public partial class TimeStamp : Window
+	public partial class TimeStamp : BaseWindow
 	{
 		public TimeStamp()
 		{

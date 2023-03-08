@@ -17,7 +17,7 @@ namespace Rotation_Editor
 	/// <summary>
 	/// Interaction logic for Coordinate.xaml
 	/// </summary>
-	public partial class Coordinate : Window
+	public partial class Coordinate : BaseWindow
 	{
 		public Coordinate()
 		{

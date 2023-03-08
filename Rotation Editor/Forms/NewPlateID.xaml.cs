@@ -17,7 +17,7 @@ namespace Rotation_Editor
 	/// <summary>
 	/// Interaction logic for NewPlateID.xaml
 	/// </summary>
-	public partial class NewPlateID : Window
+	public partial class NewPlateID : BaseWindow
 	{
 		public NewPlateID()
 		{
