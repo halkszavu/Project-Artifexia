@@ -64,6 +64,13 @@ namespace Rotation_Editor.ViewModel
 			OnPropertyChanged(nameof(Rotations));
 		}
 
+		internal void InsertRotation(int position, RotationModel model)
+		{
+			Rotations.Insert(position, model);
+
+			OnPropertyChanged(nameof(Rotations));
+		}
+
 		public (double latitude, double longitude, double angle) GetCoordinatesOfIDAtTimestep(int plateId, double timeStamp, bool isUpper = true)
 		{
 			var plateRotations = Rotations.Where(r => r.PlateID == plateId).Where(r =>r.TimeStamp == timeStamp).ToList();
