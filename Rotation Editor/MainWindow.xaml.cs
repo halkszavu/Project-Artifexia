@@ -24,52 +24,15 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		ReconstructionModel model;
+		public ReconstructionModel Model { get; private set; }
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			model = new ReconstructionModel();
-			List<RotationModel> rotations = new()
-			{
-				new RotationModel()
-				{
-					PlateID = 1,
-					TimeStamp = 2000,
-					Latitude = 90,
-					Longitude = 0,
-					Angle = 0,
-					ConjugateID = 0,
-					Comment = "comment"
-				},
-				new RotationModel()
-				{
-					PlateID = 100,
-					TimeStamp = 0,
-					Latitude = 90,
-					Longitude = 0,
-					Angle = 0,
-					ConjugateID = 0,
-					Comment = "Plate A at the end"
-				},
-				new RotationModel()
-				{
-					PlateID = 100,
-					TimeStamp = 2000,
-					Latitude = 90,
-					Longitude = 0,
-					Angle = 0,
-					ConjugateID = 0,
-					Comment = "Plate A at the start"
-				}
-			};
-
-			this.DataContext = model;
-
-			foreach (var item in rotations)
-			{
-				model.AddRotation(item);
-			}
+			Model = new ReconstructionModel();
+			
+			this.DataContext = Model;
+						
 		}
 
 		//Drift correction
@@ -81,7 +44,11 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-
+			var form = new NewPlateID();
+			if (form.ShowDialog() == true)
+			{
+				
+			}			
 		}
 
 		//Container starts moving independently
@@ -115,10 +82,10 @@ namespace Rotation_Editor
 			if(dlg.ShowDialog() == true)
 			{
 				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(dlg.OpenFile()));
-				model.Rotations.Clear();
+				Model.Rotations.Clear();
 				foreach (var item in m.Rotations)
 				{
-					model.Rotations.Add(item);
+					Model.Rotations.Add(item);
 				}
 			}
 		}

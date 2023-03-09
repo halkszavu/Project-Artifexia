@@ -12,8 +12,4 @@
     <ProjectReference Include="..\RotationHelper\RotationHelper.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Forms\" />
-  </ItemGroup>
-
 </Project>

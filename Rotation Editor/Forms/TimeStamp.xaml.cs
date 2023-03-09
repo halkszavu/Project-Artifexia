@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Rotation_Editor
+{
+	/// <summary>
+	/// Interaction logic for TimeStamp.xaml
+	/// </summary>
+	public partial class TimeStamp : BaseWindow
+	{
+		double _timeStamp;
+		public double DesiredTimestamp
+		{
+			get => _timeStamp;
+			set
+			{
+				if(_timeStamp != value)
+				{
+					_timeStamp = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public TimeStamp()
+		{
+			InitializeComponent();
+		}
+	}
+}
