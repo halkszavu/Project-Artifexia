@@ -17,7 +17,13 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
-
+            <TextBlock Margin="3" TextWrapping="Wrap" Text="{Binding HelpText, FallbackValue=FallbackValue}"/>
+            <TextBlock Margin="3">Latitude:</TextBlock>
+            <TextBox Margin="3" Text="{Binding Latitude, FallbackValue=90.0}" PreviewTextInput="DoubleNumericTextInput_Preview"/>
+            <TextBlock Margin="3">Longitude:</TextBlock>
+            <TextBox Margin="3" Text="{Binding Longitude, FallbackValue=0.0}" PreviewTextInput="DoubleNumericTextInput_Preview"/>
+            <TextBlock Margin="3">Angle:</TextBlock>
+            <TextBox Margin="3" Text="{Binding Angle, FallbackValue=0.0}" PreviewTextInput="DoubleNumericTextInput_Preview"/>
         </StackPanel>
         <Button Grid.Column="0" Grid.Row="1" Content="Confirm" Margin="3" Click="ConfirmClick"/>
         <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick"/>
