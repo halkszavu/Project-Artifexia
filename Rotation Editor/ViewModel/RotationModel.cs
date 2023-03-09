@@ -5,8 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rotation_Editor.ViewModel
 {
@@ -49,6 +47,7 @@ namespace Rotation_Editor.ViewModel
 		}
 
 		HashSet<int> PlateIds;
+		public List<int> GetPlateIDs => PlateIds.ToList();
 
 		public ReconstructionModel()
 		{
