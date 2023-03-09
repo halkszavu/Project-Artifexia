@@ -25,6 +25,7 @@ namespace Rotation_Editor
 	public partial class MainWindow : Window
 	{
 		ReconstructionModel model;
+		BaseWindow form;
 
 		public MainWindow()
 		{
@@ -70,6 +71,11 @@ namespace Rotation_Editor
 			{
 				model.AddRotation(item);
 			}
+		}
+
+		public void FormConfirmed(Message message)
+		{
+
 		}
 
 		//Drift correction
