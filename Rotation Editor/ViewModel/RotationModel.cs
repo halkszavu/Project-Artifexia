@@ -65,6 +65,25 @@ namespace Rotation_Editor.ViewModel
 			OnPropertyChanged(nameof(Rotations));
 		}
 
+		public (double latitude, double longitude, double angle) GetCoordinatesOfIDAtTimestep(int plateId, double timeStamp, bool isUpper = true)
+		{
+			var plateRotations = Rotations.Where(r => r.PlateID == plateId).Where(r =>r.TimeStamp == timeStamp).ToList();
+			if (plateRotations.Any())
+			{
+				if(plateRotations.Count == 1)
+					return ( plateRotations[0].Latitude, plateRotations[0].Longitude, plateRotations[0].Angle);
+				else
+				{
+					if (isUpper)
+						return (plateRotations[0].Latitude, plateRotations[0].Longitude, plateRotations[0].Angle);
+					else
+						return (plateRotations[1].Latitude, plateRotations[1].Longitude, plateRotations[1].Angle);
+				}
+			}
+			else
+				throw new ArgumentException("There is no Coordinates for this ID at this Timestamp");
+		}
+
 		public event PropertyChangedEventHandler? PropertyChanged;
 		private void OnPropertyChanged([CallerMemberName] string  propertyName = "")=>PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
