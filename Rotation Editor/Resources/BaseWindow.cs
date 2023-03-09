@@ -16,20 +16,9 @@ namespace Rotation_Editor
 {
 	public abstract class BaseWindow : Window
 	{
-		public Message Message { get; set; }
-		protected MainWindow ParentWnd { get; private set; }
-
-		public BaseWindow(Message message)
-		{
-			this.ParentWnd = Application.Current.MainWindow as MainWindow;
-			Message = message;
-
-			this.DataContext = Message;
-		}
-
 		protected void ConfirmClick(object sender, RoutedEventArgs e)
 		{
-			(Application.Current.MainWindow as MainWindow).FormConfirmed(Message);
+			
 
 			this.Close();
 		}

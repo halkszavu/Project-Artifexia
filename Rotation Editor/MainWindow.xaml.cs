@@ -73,11 +73,6 @@ namespace Rotation_Editor
 			}
 		}
 
-		public void FormConfirmed(Message message)
-		{
-
-		}
-
 		//Drift correction
 		private void btnDriftCorrection_Click(object sender, RoutedEventArgs e)
 		{
@@ -87,8 +82,7 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-			form = new NewPlateID(new NewPlateIDMessage());
-			form.Show();
+
 		}
 
 		//Container starts moving independently
