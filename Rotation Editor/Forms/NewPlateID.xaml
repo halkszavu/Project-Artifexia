@@ -7,12 +7,24 @@
         xmlns:local="clr-namespace:Rotation_Editor"
         mc:Ignorable="d"
         Title="NewPlateID" Height="250" Width="250" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStyle="ToolWindow">
-    <StackPanel Margin="5">
-        <TextBlock Margin="3">Enter new plate ID:</TextBlock>
-        <TextBox Margin="3"/>
-        <Button Margin="3">Generate new plate ID</Button>
-        <TextBlock Margin="3" TextWrapping="Wrap">Enter the parent plate ID, which can be used to generate the new plate ID:</TextBlock>
-        <TextBox Margin="3"/>
-    </StackPanel>
-    
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <TextBlock Margin="3">Enter new plate ID:</TextBlock>
+            <TextBox Margin="3" Text="{Binding NewPlateID}" PreviewTextInput="IntegerNumericTextInput_Preview"/>
+            <Button Margin="3">Generate new plate ID</Button>
+            <TextBlock Margin="3" TextWrapping="Wrap">Enter the parent plate ID, which can be used to generate the new plate ID:</TextBlock>
+            <TextBox Margin="3" Text="{Binding ParentPlateID}" PreviewTextInput="IntegerNumericTextInput_Preview"/>
+        </StackPanel>
+        <Button Grid.Column="0" Grid.Row="1" Content="Confirm" Margin="3" Click="ConfirmClick"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick"/>
+    </Grid>
+
 </local:BaseWindow>
