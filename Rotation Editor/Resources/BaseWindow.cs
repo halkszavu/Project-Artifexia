@@ -7,8 +7,15 @@ using System.Windows;
 
 namespace Rotation_Editor
 {
-	public class BaseWindow : Window
+	public abstract class BaseWindow : Window
 	{
+		public Message Message { get; set; }
 
+		public BaseWindow(Message message)
+		{
+			Message = message;
+
+			this.DataContext = Message;
+		}
 	}
 }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Rotation_Editor
 {
-	internal class Message : INotifyPropertyChanged
+	public abstract class Message : INotifyPropertyChanged
 	{
 
 
 		public event PropertyChangedEventHandler? PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string property = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+		protected void OnPropertyChanged([CallerMemberName] string property = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 	}
 }
