@@ -19,7 +19,7 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class TimeStamp : BaseWindow
 	{
-		public TimeStamp() 
+		public TimeStamp()
 		{
 			InitializeComponent();
 		}

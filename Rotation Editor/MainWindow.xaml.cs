@@ -25,13 +25,13 @@ namespace Rotation_Editor
 	public partial class MainWindow : Window
 	{
 		public ReconstructionModel Model { get; private set; }
-		BaseWindow form;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			Model = new ReconstructionModel();
-			List<RotationModel> rotations = new()
+
+			/*List < RotationModel > rotations = new()
 			{
 				new RotationModel()
 				{
@@ -63,14 +63,15 @@ namespace Rotation_Editor
 					ConjugateID = 0,
 					Comment = "Plate A at the start"
 				}
-			};
+			};*/
+
 
 			this.DataContext = Model;
 
-			foreach (var item in rotations)
-			{
-				Model.AddRotation(item);
-			}
+			//foreach (var item in rotations)
+			//{
+			//	Model.AddRotation(item);
+			//}
 		}
 
 		//Drift correction
@@ -82,7 +83,11 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-
+			var form = new NewPlateID();
+			if (form.ShowDialog() == true)
+			{
+				
+			}			
 		}
 
 		//Container starts moving independently

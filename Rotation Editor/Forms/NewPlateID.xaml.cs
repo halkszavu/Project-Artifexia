@@ -19,6 +19,32 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class NewPlateID : BaseWindow
 	{
+		int _newPlate;
+		public int NewPlate
+		{
+			get => _newPlate;
+			set
+			{
+				if (_newPlate != value)
+				{
+					_newPlate = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+		int _parentPlate;
+		public int ParentPlate
+		{
+			get => _parentPlate;
+			set
+			{
+				if (_parentPlate != value)
+				{
+					_parentPlate = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 
 		public NewPlateID()
 		{
@@ -27,7 +53,7 @@ namespace Rotation_Editor
 
 		private void btnGenerate_Click(object sender, RoutedEventArgs e)
 		{
-			
+			NewPlate = ParentWnd.Model.GeneratePlateID(ParentPlate);
 		}
 	}
 }
