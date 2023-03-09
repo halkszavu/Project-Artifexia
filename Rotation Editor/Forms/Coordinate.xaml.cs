@@ -58,6 +58,16 @@ namespace Rotation_Editor
 				}
 			}
 		}
+		string _helpTxt;
+		public string HelpText
+		{
+			get => _helpTxt;
+			set
+			{
+				_helpTxt = value;
+				OnPropertyChanged();
+			}
+		}
 		public Coordinate()
 		{
 			InitializeComponent();
