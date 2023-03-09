@@ -19,7 +19,7 @@
         <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
             <TextBlock Margin="3">Enter new plate ID:</TextBlock>
             <TextBox Margin="3" Text="{Binding NewPlateID}" PreviewTextInput="IntegerNumericTextInput_Preview"/>
-            <Button Margin="3">Generate new plate ID</Button>
+            <Button Margin="3" Click="btnGenerate_Click">Generate new plate ID</Button>
             <TextBlock Margin="3" TextWrapping="Wrap">Enter the parent plate ID, which can be used to generate the new plate ID:</TextBlock>
             <TextBox Margin="3" Text="{Binding ParentPlateID}" PreviewTextInput="IntegerNumericTextInput_Preview"/>
         </StackPanel>

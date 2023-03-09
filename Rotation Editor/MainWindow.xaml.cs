@@ -24,13 +24,13 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		ReconstructionModel model;
+		public ReconstructionModel Model { get; private set; }
 		BaseWindow form;
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			model = new ReconstructionModel();
+			Model = new ReconstructionModel();
 			List<RotationModel> rotations = new()
 			{
 				new RotationModel()
@@ -65,11 +65,11 @@ namespace Rotation_Editor
 				}
 			};
 
-			this.DataContext = model;
+			this.DataContext = Model;
 
 			foreach (var item in rotations)
 			{
-				model.AddRotation(item);
+				Model.AddRotation(item);
 			}
 		}
 
@@ -87,7 +87,8 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-
+			form = new NewPlateID(new NewPlateIDMessage());
+			form.Show();
 		}
 
 		//Container starts moving independently
@@ -121,10 +122,10 @@ namespace Rotation_Editor
 			if(dlg.ShowDialog() == true)
 			{
 				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(dlg.OpenFile()));
-				model.Rotations.Clear();
+				Model.Rotations.Clear();
 				foreach (var item in m.Rotations)
 				{
-					model.Rotations.Add(item);
+					Model.Rotations.Add(item);
 				}
 			}
 		}
