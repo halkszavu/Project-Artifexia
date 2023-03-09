@@ -19,7 +19,7 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class NewPlateID : BaseWindow
 	{
-		public NewPlateID()
+		public NewPlateID(NewPlateIDMessage message) : base(message)
 		{
 			InitializeComponent();
 		}
