@@ -19,7 +19,7 @@
         <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
 
         </StackPanel>
-        <Button Grid.Column="0" Grid.Row="1" Content="Confirm" Margin="3" Click="ConfirmClick"/>
-        <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick"/>
+        <Button Grid.Column="0" Grid.Row="1" Content="Confirm" Margin="3" Click="ConfirmClick" IsDefault="True"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick" IsCancel="True"/>
     </Grid>
 </local:BaseWindow>
