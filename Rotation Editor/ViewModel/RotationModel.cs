@@ -5,8 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rotation_Editor.ViewModel
 {
@@ -49,6 +47,7 @@ namespace Rotation_Editor.ViewModel
 		}
 
 		HashSet<int> PlateIds;
+		public List<int> GetPlateIDs => PlateIds.ToList();
 
 		public ReconstructionModel()
 		{
@@ -83,8 +82,26 @@ namespace Rotation_Editor.ViewModel
 			else
 				throw new ArgumentException("There is no Coordinates for this ID at this Timestamp");
 		}
+    
+		public bool IsIDInUse(int id)
+		{
+			if (id == 0)
+				return true;
+			else
+				return PlateIds.Contains(id);
+		}
 
+		public int GeneratePlateID(int parentID = 1)
+		{
+			int gen = parentID;
+			while (IsIDInUse(gen))
+			{
+				gen++;
+			}
+			return gen;
+		}
+    
 		public event PropertyChangedEventHandler? PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string  propertyName = "")=>PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		private void OnPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 }
