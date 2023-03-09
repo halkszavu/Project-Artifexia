@@ -27,11 +27,13 @@ namespace Rotation_Editor
 
 		protected void ConfirmClick(object sender, RoutedEventArgs e)
 		{
+			(Application.Current.MainWindow as MainWindow).FormConfirmed(Message);
 
+			this.Close();
 		}
 		protected void CancelClick(object sender, RoutedEventArgs e)
 		{
-
+			this.Close();
 		}
 
 		protected void IntegerNumericTextInput_Preview(object sender, TextCompositionEventArgs e)
