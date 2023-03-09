@@ -19,18 +19,41 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class NewPlateID : BaseWindow
 	{
-		private NewPlateIDMessage message;
+		int _newPlate;
+		public int NewPlate
+		{
+			get => _newPlate;
+			set
+			{
+				if (_newPlate != value)
+				{
+					_newPlate = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+		int _parentPlate;
+		public int ParentPlate
+		{
+			get => _parentPlate;
+			set
+			{
+				if (_parentPlate != value)
+				{
+					_parentPlate = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 
-		public NewPlateID(NewPlateIDMessage message) : base(message)
+		public NewPlateID()
 		{
 			InitializeComponent();
-
-			this.message = Message as NewPlateIDMessage;
 		}
 
 		private void btnGenerate_Click(object sender, RoutedEventArgs e)
 		{
-			message.NewPlateID = ParentWnd.Model.GeneratePlateID(message.ParentPlateID);
+			NewPlate = ParentWnd.Model.GeneratePlateID(ParentPlate);
 		}
 	}
 }

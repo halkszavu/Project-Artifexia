@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,27 +16,23 @@ using System.Windows.Shapes;
 
 namespace Rotation_Editor
 {
-	public abstract class BaseWindow : Window
+	public abstract class BaseWindow : Window, INotifyPropertyChanged
 	{
-		public Message Message { get; set; }
-		protected MainWindow ParentWnd { get; private set; }
+		public MainWindow ParentWnd => (Application.Current.MainWindow as MainWindow);
 
-		public BaseWindow(Message message)
+		public BaseWindow()
 		{
-			this.ParentWnd = Application.Current.MainWindow as MainWindow;
-			Message = message;
-
-			this.DataContext = Message;
+			DataContext = this;
 		}
 
 		protected void ConfirmClick(object sender, RoutedEventArgs e)
 		{
-			(Application.Current.MainWindow as MainWindow).FormConfirmed(Message);
-
+			DialogResult = true;
 			this.Close();
 		}
 		protected void CancelClick(object sender, RoutedEventArgs e)
 		{
+			DialogResult= false;
 			this.Close();
 		}
 
@@ -47,5 +45,8 @@ namespace Rotation_Editor
 		{
 			//Create a check if the text is valid: would the new text result in a number-Double
 		}
+
+		public event PropertyChangedEventHandler? PropertyChanged;
+		protected void OnPropertyChanged([CallerMemberName] string property = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 	}
 }

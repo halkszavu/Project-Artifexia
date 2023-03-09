@@ -19,7 +19,7 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class Coordinate : BaseWindow
 	{
-		public Coordinate(CoordinateMessage message) : base(message)
+		public Coordinate()
 		{
 			InitializeComponent();
 		}
