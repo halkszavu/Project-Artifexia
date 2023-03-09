@@ -83,7 +83,23 @@ namespace Rotation_Editor.ViewModel
 				throw new ArgumentException("There is no Coordinates for this ID at this Timestamp");
 		}
 
-		public bool IsIDInUse(int id) => PlateIds.Contains(id);
+		public bool IsIDInUse(int id)
+		{
+			if (id == 0)
+				return true;
+			else
+				return PlateIds.Contains(id);
+		}
+
+		public int GeneratePlateID(int parentID = 1)
+		{
+			int gen = parentID;
+			while (IsIDInUse(gen))
+			{
+				gen++;
+			}
+			return gen;
+		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 		private void OnPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
