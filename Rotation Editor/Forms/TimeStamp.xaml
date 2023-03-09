@@ -20,7 +20,7 @@
             <TextBlock Margin="3">Enter the desired time in Myr:</TextBlock>
             <TextBox Margin="3" Text="{Binding DesiredTimestamp}" PreviewTextInput="DoubleNumericTextInput_Preview"/>
         </StackPanel>
-        <Button Grid.Column="0" Grid.Row="1" Content="Confirm" Margin="3" Click="ConfirmClick"/>
-        <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick"/>
+        <Button Grid.Column="0" Grid.Row="1" Content="Confirm" Margin="3" Click="ConfirmClick" IsDefault="True"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick" IsCancel="True"/>
     </Grid>
 </local:BaseWindow>

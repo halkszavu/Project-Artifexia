@@ -30,53 +30,9 @@ namespace Rotation_Editor
 		{
 			InitializeComponent();
 			Model = new ReconstructionModel();
-
-			/*List < RotationModel > rotations = new()
-			{
-				new RotationModel()
-				{
-					PlateID = 1,
-					TimeStamp = 2000,
-					Latitude = 90,
-					Longitude = 0,
-					Angle = 0,
-					ConjugateID = 0,
-					Comment = "comment"
-				},
-				new RotationModel()
-				{
-					PlateID = 100,
-					TimeStamp = 0,
-					Latitude = 90,
-					Longitude = 0,
-					Angle = 0,
-					ConjugateID = 0,
-					Comment = "Plate A at the end"
-				},
-				new RotationModel()
-				{
-					PlateID = 100,
-					TimeStamp = 2000,
-					Latitude = 90,
-					Longitude = 0,
-					Angle = 0,
-					ConjugateID = 0,
-					Comment = "Plate A at the start"
-				}
-			};*/
-
-
+			
 			this.DataContext = Model;
-
-			//foreach (var item in rotations)
-			//{
-			//	Model.AddRotation(item);
-			//}
-		}
-
-		public void FormConfirmed(Message message)
-		{
-
+						
 		}
 
 		//Drift correction
