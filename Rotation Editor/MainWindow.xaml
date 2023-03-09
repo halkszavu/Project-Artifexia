@@ -56,8 +56,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnUp" Grid.Row="0">↑</Button>
-            <Button x:Name="btnDown" Grid.Row="1">↓</Button>
+            <Button x:Name="btnUp" Grid.Row="0" Margin="1">↑</Button>
+            <Button x:Name="btnDown" Grid.Row="1" Margin="1">↓</Button>
         </Grid>
 
         <WrapPanel Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="2">
