@@ -103,6 +103,11 @@ namespace Rotation_Editor
 
 		}
 
+		private void SaveAsMenuItem_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
 		//Actions:
 		//Parse existing file
 		//Refresh file, as it has been modified by GPlates

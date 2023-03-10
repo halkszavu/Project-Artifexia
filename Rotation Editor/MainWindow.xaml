@@ -27,6 +27,7 @@
                 <MenuItem Header="_New" Command="ApplicationCommands.New"/>
                 <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
                 <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
+                <MenuItem Header="Save as" Click="SaveAsMenuItem_Click"/>
             </MenuItem>
             <MenuItem Header="_Refresh"/>
             <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
