@@ -99,9 +99,9 @@ namespace RotationHelper
 		public override string ToString()
 		{
 			if (ConjugatePlateID == 0)
-				return $"{PlateID} {TimeStamp} {Coordinates} 000 ! {Comment}";
+				return $"{PlateID:D3} {TimeStamp:F1} {Coordinates} 000 ! {Comment}";
 			else
-				return $"{PlateID} {TimeStamp} {Coordinates} {ConjugatePlateID} ! {Comment}";
+				return $"{PlateID:D3} {TimeStamp:F1} {Coordinates} {ConjugatePlateID:D3} ! {Comment}";
 		}
 
 		public override int GetHashCode() => ToString().GetHashCode();
