@@ -44,8 +44,8 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-			var form = new NewPlateID();
-			if (form.ShowDialog() == true)
+			var newPlateIdForm = new NewPlateID();
+			if (newPlateIdForm.ShowDialog() == true)
 			{
 				
 			}			
