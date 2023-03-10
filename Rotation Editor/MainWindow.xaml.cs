@@ -76,8 +76,7 @@ namespace Rotation_Editor
 			{
 				DefaultExt = FileManipulationTool.DefaultExtension,
 				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
-			};
-			
+			};			
 			
 			if(dlg.ShowDialog() == true)
 			{
@@ -91,19 +90,21 @@ namespace Rotation_Editor
 		}
 		private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
-
+			if(Model.Rotations == null || Model.Rotations.Count == 0)
+				e.CanExecute = false;
+			else
+				e.CanExecute = true;
 		}
 		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 
 		}
-		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
-		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		private void SaveAsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 
 		}
-
-		private void SaveAsMenuItem_Click(object sender, RoutedEventArgs e)
+		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
+		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 
 		}

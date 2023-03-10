@@ -8,6 +8,7 @@
         Title="Rotation Editor" Height="450" Width="600">
     <Window.CommandBindings>
         <CommandBinding Command="local:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
+        <CommandBinding Command="local:CustomCommands.SaveAs" CanExecute="SaveCommand_CanExecute" Executed="SaveAsCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
@@ -27,7 +28,7 @@
                 <MenuItem Header="_New" Command="ApplicationCommands.New"/>
                 <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
                 <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
-                <MenuItem Header="Save as" Click="SaveAsMenuItem_Click"/>
+                <MenuItem Header="Save as" Command="local:CustomCommands.SaveAs"/>
             </MenuItem>
             <MenuItem Header="_Refresh"/>
             <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
