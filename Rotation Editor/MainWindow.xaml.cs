@@ -101,11 +101,22 @@ namespace Rotation_Editor
 		}
 		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-
+			var rot = Mapper.MapToData(Model);
+			FileManipulationTool.WriteFile(FileName, rot);
 		}
 		private void SaveAsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
+			SaveFileDialog dlg = new()
+			{
+				DefaultExt = FileManipulationTool.DefaultExtension,
+				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
+			};
 
+			if( dlg.ShowDialog() == true)
+			{
+				var rot = Mapper.MapToData(Model);
+				FileManipulationTool.WriteFile(dlg.FileName, rot);
+			}
 		}
 		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
