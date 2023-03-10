@@ -4,6 +4,7 @@ using Rotation_Editor.ViewModel;
 using RotationHelper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private string FileName;
 		public ReconstructionModel Model { get; private set; }
 
 		public MainWindow()
@@ -80,7 +82,9 @@ namespace Rotation_Editor
 			
 			if(dlg.ShowDialog() == true)
 			{
-				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(dlg.OpenFile()));
+				FileName = dlg.FileName;
+
+				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(new FileStream(FileName, FileMode.Open)));
 				Model.Rotations.Clear();
 				foreach (var item in m.Rotations)
 				{
