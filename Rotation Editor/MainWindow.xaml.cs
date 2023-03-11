@@ -4,6 +4,7 @@ using Rotation_Editor.ViewModel;
 using RotationHelper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private string FileName;
 		public ReconstructionModel Model { get; private set; }
 
 		public MainWindow()
@@ -72,16 +74,18 @@ namespace Rotation_Editor
 		private void OpenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
+			//Parse existing file
 			OpenFileDialog dlg = new()
 			{
 				DefaultExt = FileManipulationTool.DefaultExtension,
 				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
-			};
-			
+			};			
 			
 			if(dlg.ShowDialog() == true)
 			{
-				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(dlg.OpenFile()));
+				FileName = dlg.FileName;
+
+				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(new FileStream(FileName, FileMode.Open)));
 				Model.Rotations.Clear();
 				foreach (var item in m.Rotations)
 				{
@@ -91,11 +95,22 @@ namespace Rotation_Editor
 		}
 		private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
-
+			if(Model.Rotations == null || Model.Rotations.Count == 0)
+				e.CanExecute = false;
+			else
+				e.CanExecute = true;
 		}
-		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e) => SaveModelToFile(FileName);
+		private void SaveAsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
+			SaveFileDialog dlg = new()
+			{
+				DefaultExt = FileManipulationTool.DefaultExtension,
+				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
+			};
 
+			if( dlg.ShowDialog() == true)
+				SaveModelToFile(dlg.FileName);
 		}
 		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -104,8 +119,13 @@ namespace Rotation_Editor
 		}
 
 		//Actions:
-		//Parse existing file
 		//Refresh file, as it has been modified by GPlates
-		//Save edits to the existing file/to new file
+
+		private void SaveModelToFile(string fileName)
+		{
+			//Save edits to the existing file/to new file
+			var rot = Mapper.MapToData(Model);
+			FileManipulationTool.WriteFile(FileName, rot);
+		}
 	}
 }
