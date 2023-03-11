@@ -44,11 +44,37 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
+				RotationModel plateAtEnd, plateMovingIndependently, plateEndFollowingParent, plateAtStart;
 			var newPlateIdForm = new NewPlateID();
 			if (newPlateIdForm.ShowDialog() == true)
 			{
-				
-			}			
+				int newPlateId = newPlateIdForm.NewPlate;
+				plateAtEnd = new()
+				{
+					PlateID = newPlateId,
+					TimeStamp = 0.0D,
+					Latitude = 90.0D,
+					Longitude = 0.0D,
+					Angle = 0.0D,
+					ConjugateID = 0,
+					Comment = $"{newPlateId} at the end",
+				};
+				var timeStampForm = new TimeStamp();
+				if(timeStampForm.ShowDialog() == true)
+				{
+					double newTimeStamp = timeStampForm.DesiredTimestamp;
+					plateMovingIndependently = new()
+					{
+						PlateID = newPlateId,
+						TimeStamp = newTimeStamp,
+						Latitude = 90.0D,
+						Longitude = 0.0D,
+						Angle = 0.0D,
+						ConjugateID = 0,
+						Comment = $"{newPlateId} start moving independently",
+					};
+				}
+			}
 		}
 
 		//Container starts moving independently
