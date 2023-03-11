@@ -45,6 +45,7 @@ namespace Rotation_Editor.ViewModel
 				}
 			}
 		}
+		public double SimulationStart { get; private set; }
 
 		HashSet<int> PlateIds;
 		public List<int> GetPlateIDs => PlateIds.ToList();
@@ -53,6 +54,7 @@ namespace Rotation_Editor.ViewModel
 		{
 			Rotations = new();
 			PlateIds = new();
+			SimulationStart = 0;
 		}
 
 		internal void AddRotation(RotationModel model)
@@ -60,6 +62,9 @@ namespace Rotation_Editor.ViewModel
 			if (!PlateIds.Contains(model.PlateID))
 				PlateIds.Add(model.PlateID);
 			Rotations.Add(model);
+
+			if(model.TimeStamp > SimulationStart)
+				SimulationStart = model.TimeStamp;
 
 			OnPropertyChanged(nameof(Rotations));
 		}
