@@ -4,6 +4,7 @@ using Rotation_Editor.ViewModel;
 using RotationHelper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Rotation_Editor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private string FileName;
 		public ReconstructionModel Model { get; private set; }
 
 		public MainWindow()
@@ -76,12 +78,13 @@ namespace Rotation_Editor
 			{
 				DefaultExt = FileManipulationTool.DefaultExtension,
 				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
-			};
-			
+			};			
 			
 			if(dlg.ShowDialog() == true)
 			{
-				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(dlg.OpenFile()));
+				FileName = dlg.FileName;
+
+				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(new FileStream(FileName, FileMode.Open)));
 				Model.Rotations.Clear();
 				foreach (var item in m.Rotations)
 				{
@@ -91,11 +94,29 @@ namespace Rotation_Editor
 		}
 		private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
-
+			if(Model.Rotations == null || Model.Rotations.Count == 0)
+				e.CanExecute = false;
+			else
+				e.CanExecute = true;
 		}
 		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
+			var rot = Mapper.MapToData(Model);
+			FileManipulationTool.WriteFile(FileName, rot);
+		}
+		private void SaveAsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			SaveFileDialog dlg = new()
+			{
+				DefaultExt = FileManipulationTool.DefaultExtension,
+				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
+			};
 
+			if( dlg.ShowDialog() == true)
+			{
+				var rot = Mapper.MapToData(Model);
+				FileManipulationTool.WriteFile(dlg.FileName, rot);
+			}
 		}
 		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
