@@ -51,6 +51,7 @@ namespace Rotation_Editor
 			if (newPlateIdForm.ShowDialog() == true)
 			{
 				int newPlateId = newPlateIdForm.NewPlate;
+				int parentPlateId = newPlateIdForm.ParentPlate == 0? 1 : newPlateIdForm.ParentPlate;
 				plateAtEnd = new()
 				{
 					PlateID = newPlateId,
@@ -75,6 +76,18 @@ namespace Rotation_Editor
 						ConjugateID = 0,
 						Comment = $"{newPlateId} start moving independently",
 					};
+
+					var parentLastEntry = Model.Rotations.First(x => (x.PlateID == parentPlateId && x.TimeStamp == 2000.0D));
+					int parentEntryIndex = Model.Rotations.IndexOf(parentLastEntry);
+
+					Model.InsertRotation(parentEntryIndex, plateMovingIndependently);
+					Model.InsertRotation(parentEntryIndex, plateAtEnd);
+
+					SaveModelToFile(FileName);
+					//now prompt the user to reload the .rot to GPlates, and then get the Coordinates of the new plate relative to the Parent plate
+					MessageBox.Show("The Rotation is now saved, please reload it in GPlates.", "Reload", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
 				}
 			}
 		}
