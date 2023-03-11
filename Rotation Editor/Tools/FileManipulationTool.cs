@@ -21,9 +21,9 @@ namespace Rotation_Editor.Tools
 			}
 		}
 
-		internal static void WriteFile(Uri destination, FullRotationReconstruction reconstruction)
+		internal static void WriteFile(string destination, FullRotationReconstruction reconstruction)
 		{
-			using (StreamWriter sw = File.CreateText(destination.AbsolutePath))
+			using (StreamWriter sw = File.CreateText(destination))
 			{
 				sw.Write(Parser.PrintFullReconstruction(reconstruction));
 			}
