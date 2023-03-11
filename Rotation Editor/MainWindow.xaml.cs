@@ -74,6 +74,7 @@ namespace Rotation_Editor
 		private void OpenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
+			//Parse existing file
 			OpenFileDialog dlg = new()
 			{
 				DefaultExt = FileManipulationTool.DefaultExtension,
@@ -99,11 +100,7 @@ namespace Rotation_Editor
 			else
 				e.CanExecute = true;
 		}
-		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			var rot = Mapper.MapToData(Model);
-			FileManipulationTool.WriteFile(FileName, rot);
-		}
+		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e) => SaveModelToFile(FileName);
 		private void SaveAsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			SaveFileDialog dlg = new()
@@ -113,10 +110,7 @@ namespace Rotation_Editor
 			};
 
 			if( dlg.ShowDialog() == true)
-			{
-				var rot = Mapper.MapToData(Model);
-				FileManipulationTool.WriteFile(dlg.FileName, rot);
-			}
+				SaveModelToFile(dlg.FileName);
 		}
 		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -125,8 +119,13 @@ namespace Rotation_Editor
 		}
 
 		//Actions:
-		//Parse existing file
 		//Refresh file, as it has been modified by GPlates
-		//Save edits to the existing file/to new file
+
+		private void SaveModelToFile(string fileName)
+		{
+			//Save edits to the existing file/to new file
+			var rot = Mapper.MapToData(Model);
+			FileManipulationTool.WriteFile(FileName, rot);
+		}
 	}
 }
