@@ -32,9 +32,8 @@ namespace Rotation_Editor
 		{
 			InitializeComponent();
 			Model = new ReconstructionModel();
-			
+
 			this.DataContext = Model;
-						
 		}
 
 		//Drift correction
@@ -46,12 +45,12 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-				RotationModel plateAtEnd, plateMovingIndependently, plateEndFollowingParent, plateAtStart;
+			RotationModel plateAtEnd, plateMovingIndependently, plateEndFollowingParent, plateAtStart;
 			var newPlateIdForm = new NewPlateID();
 			if (newPlateIdForm.ShowDialog() == true)
 			{
 				int newPlateId = newPlateIdForm.NewPlate;
-				int parentPlateId = newPlateIdForm.ParentPlate == 0? 1 : newPlateIdForm.ParentPlate;
+				int parentPlateId = newPlateIdForm.ParentPlate == 0 ? 1 : newPlateIdForm.ParentPlate;
 				plateAtEnd = new()
 				{
 					PlateID = newPlateId,
@@ -63,7 +62,7 @@ namespace Rotation_Editor
 					Comment = $"{newPlateId} at the end",
 				};
 				var timeStampForm = new TimeStamp();
-				if(timeStampForm.ShowDialog() == true)
+				if (timeStampForm.ShowDialog() == true)
 				{
 					double newTimeStamp = timeStampForm.DesiredTimestamp;
 					plateMovingIndependently = new()
@@ -77,7 +76,7 @@ namespace Rotation_Editor
 						Comment = $"{newPlateId} start moving independently",
 					};
 
-					var parentLastEntry = Model.Rotations.First(x => (x.PlateID == parentPlateId && x.TimeStamp == 2000.0D));
+					var parentLastEntry = Model.Rotations.First(x => (x.PlateID == parentPlateId && x.TimeStamp == Model.SimulationStart));
 					int parentEntryIndex = Model.Rotations.IndexOf(parentLastEntry);
 
 					Model.InsertRotation(parentEntryIndex, plateMovingIndependently);
@@ -85,9 +84,43 @@ namespace Rotation_Editor
 
 					SaveModelToFile(FileName);
 					//now prompt the user to reload the .rot to GPlates, and then get the Coordinates of the new plate relative to the Parent plate
-					MessageBox.Show("The Rotation is now saved, please reload it in GPlates.", "Reload", MessageBoxButton.OK, MessageBoxImage.Information);
+					MessageBox.Show("The Rotation is now saved, please reload it in GPlates. Use Ctrl+M.", "Reload", MessageBoxButton.OK, MessageBoxImage.Information);
 
+					var coordinateForm = new Coordinate
+					{
+						HelpText = "1. In GPlates: Specify Anchored Plate ID (Ctrl+D)-specify the parent plate ID\n2. In GPlates: Total Reconstruction Poles (Ctrl+P)-get Equivalent Rotations Relative to Anchored Plate ID, and fetch the coordinates"
+					};
+					if(coordinateForm.ShowDialog() == true)
+					{
+						plateEndFollowingParent = new()
+						{
+							PlateID = newPlateId,
+							TimeStamp = newTimeStamp,
+							Longitude = coordinateForm.Longitude,
+							Latitude = coordinateForm.Latitude,
+							Angle = coordinateForm.Angle,
+							ConjugateID = parentPlateId,
+							Comment = $"{newPlateId} end following {parentPlateId} parent",
+						};
 
+						plateAtStart = new()
+						{
+							PlateID = newPlateId,
+							TimeStamp = Model.SimulationStart,
+							Longitude = coordinateForm.Longitude,
+							Latitude = coordinateForm.Latitude,
+							Angle = coordinateForm.Angle,
+							ConjugateID= parentPlateId,
+							Comment = $"{newPlateId} at start"
+						};
+
+						Model.InsertRotation(parentEntryIndex + 3, plateEndFollowingParent);
+						Model.InsertRotation(parentEntryIndex + 4, plateAtStart);
+
+						SaveModelToFile(FileName);
+
+						MessageBox.Show("The full Rotation is now saved. Reload it in GPlates and then Specify Anchored Plate (Ctrl+D) to 000, to reset the simulation", "New Plate ID added", MessageBoxButton.OK, MessageBoxImage.Information);
+					}
 				}
 			}
 		}
@@ -105,7 +138,7 @@ namespace Rotation_Editor
 		}
 		private void btnValidate_Click(object sender, RoutedEventArgs e)
 		{
-			
+
 		}
 
 		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
@@ -118,23 +151,24 @@ namespace Rotation_Editor
 			{
 				DefaultExt = FileManipulationTool.DefaultExtension,
 				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
-			};			
-			
-			if(dlg.ShowDialog() == true)
+			};
+
+			if (dlg.ShowDialog() == true)
 			{
 				FileName = dlg.FileName;
 
-				var m = Mapper.MapToModel(FileManipulationTool.ReadFile(new FileStream(FileName, FileMode.Open)));
-				Model.Rotations.Clear();
+				ReconstructionModel m = Mapper.MapToModel(FileManipulationTool.ReadFile(new FileStream(FileName, FileMode.Open)));
+
+				Model.Clear();
 				foreach (var item in m.Rotations)
 				{
-					Model.Rotations.Add(item);
+					Model.AddRotation(item);
 				}
 			}
 		}
 		private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
-			if(Model.Rotations == null || Model.Rotations.Count == 0)
+			if (Model.Rotations == null || Model.Rotations.Count == 0)
 				e.CanExecute = false;
 			else
 				e.CanExecute = true;
@@ -148,7 +182,7 @@ namespace Rotation_Editor
 				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
 			};
 
-			if( dlg.ShowDialog() == true)
+			if (dlg.ShowDialog() == true)
 				SaveModelToFile(dlg.FileName);
 		}
 		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;

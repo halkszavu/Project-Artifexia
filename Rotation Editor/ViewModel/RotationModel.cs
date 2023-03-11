@@ -45,22 +45,29 @@ namespace Rotation_Editor.ViewModel
 				}
 			}
 		}
-		public double SimulationStart { get; private set; }
+		internal double SimulationStart { get; private set; }
 
-		HashSet<int> PlateIds;
-		public List<int> GetPlateIDs => PlateIds.ToList();
+		HashSet<int> plateIds;
+		internal List<int> GetPlateIDs => plateIds.ToList();
 
 		public ReconstructionModel()
 		{
 			Rotations = new();
-			PlateIds = new();
+			plateIds = new();
 			SimulationStart = 0;
+		}
+
+		public void Clear()
+		{
+			SimulationStart = 0;
+			plateIds = new();
+			Rotations.Clear();
 		}
 
 		internal void AddRotation(RotationModel model)
 		{
-			if (!PlateIds.Contains(model.PlateID))
-				PlateIds.Add(model.PlateID);
+			if (!plateIds.Contains(model.PlateID))
+				plateIds.Add(model.PlateID);
 			Rotations.Add(model);
 
 			if(model.TimeStamp > SimulationStart)
@@ -100,7 +107,7 @@ namespace Rotation_Editor.ViewModel
 			if (id == 0)
 				return true;
 			else
-				return PlateIds.Contains(id);
+				return plateIds.Contains(id);
 		}
 
 		public int GeneratePlateID(int parentID = 1)
