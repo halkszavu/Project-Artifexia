@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rotation_Editor"
         mc:Ignorable="d"
-        Title="New Plate ID" Height="205" Width="250" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStyle="ToolWindow">
+        Title="New Plate ID" Height="215" Width="250" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStyle="ToolWindow">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition/>
