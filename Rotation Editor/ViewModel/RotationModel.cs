@@ -63,7 +63,6 @@ namespace Rotation_Editor.ViewModel
 
 			OnPropertyChanged(nameof(Rotations));
 		}
-
 		internal void InsertRotation(int position, RotationModel model)
 		{
 			Rotations.Insert(position, model);
@@ -88,8 +87,7 @@ namespace Rotation_Editor.ViewModel
 			}
 			else
 				throw new ArgumentException("There is no Coordinates for this ID at this Timestamp");
-		}
-    
+		}    
 		public bool IsIDInUse(int id)
 		{
 			if (id == 0)
@@ -97,7 +95,6 @@ namespace Rotation_Editor.ViewModel
 			else
 				return PlateIds.Contains(id);
 		}
-
 		public int GeneratePlateID(int parentID = 1)
 		{
 			int gen = parentID;
