@@ -74,6 +74,7 @@ namespace Rotation_Editor
 						rotation1.Longitude = lastRotation.Longitude;
 						rotation1.Angle = lastRotation.Angle;
 						rotation1.ConjugateID = lastRotation.ConjugateID;
+						rotation1.Comment = "Drift correction";
 					}
 				}
 			}
