@@ -111,6 +111,9 @@ namespace Rotation_Editor
 		private void TestingCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			//various testing behaviour
+			Coordinate coordForm = new Coordinate();
+			coordForm.HelpText = "A very very very long helptext for the form.\n Still going on\n Still on and on...";
+			coordForm.ShowDialog();
 		}
 
 		//Actions:
