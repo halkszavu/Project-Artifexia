@@ -15,6 +15,10 @@ namespace Rotation_Editor
 					new KeyGesture(Key.F4, ModifierKeys.Alt),
 				}
 			);
+
 		public static readonly RoutedUICommand Testing = new RoutedUICommand("Testing", "Testing", typeof(CustomCommands));
+
+		public static readonly RoutedUICommand SaveAs = new RoutedUICommand("Save as", "SaveAs", typeof(CustomCommands));
+
 	}
 }
