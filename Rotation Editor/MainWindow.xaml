@@ -7,11 +7,15 @@
         mc:Ignorable="d"
         Title="Rotation Editor" Height="450" Width="600">
     <Window.CommandBindings>
+        <CommandBinding Command="local:CustomCommands.Testing" Executed="TestingCommand_Executed"/>
         <CommandBinding Command="local:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
     </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="local:CustomCommands.Testing" Key="F12"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>

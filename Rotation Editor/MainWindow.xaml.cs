@@ -108,6 +108,11 @@ namespace Rotation_Editor
 
 		}
 
+		private void TestingCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			//various testing behaviour
+		}
+
 		//Actions:
 		//Parse existing file
 		//Refresh file, as it has been modified by GPlates
