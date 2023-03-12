@@ -45,7 +45,7 @@ namespace Rotation_Editor
 					continue;//leave plateID 1 alone, as it is used for other purposes
 				var myRots = Model.Rotations.Where(rot => rot.PlateID == plateId);
 				var lastRotation = myRots.Where(rot => rot.TimeStamp > 1.0).OrderBy(x=>x.TimeStamp).First();
-				var rotation1 = myRots.First(rot => rot.TimeStamp == 1.0);
+				var rotation1 = myRots.FirstOrDefault(rot => rot.TimeStamp == 1.0);
 				if (lastRotation != null)
 				{
 					if(lastRotation.TimeStamp == Model.SimulationStart)
