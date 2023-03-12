@@ -191,6 +191,19 @@ namespace Rotation_Editor
 
 		}
 
+		private void SaveAsMenuItem_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void TestingCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			//various testing behaviour
+			//var formToShow = new TimeStamp();
+			//formToShow.HelpText = "A very very very long helptext for the form.\n Still going on\n Still on and on...";
+			//formToShow.ShowDialog();
+		}
+
 		//Actions:
 		//Refresh file, as it has been modified by GPlates
 
