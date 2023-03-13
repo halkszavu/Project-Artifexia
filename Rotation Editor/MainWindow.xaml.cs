@@ -134,7 +134,50 @@ namespace Rotation_Editor
 		//Container joins exsisting container
 		private void btnJoinIndependent_Click(object sender, RoutedEventArgs e)
 		{
+			TwoPlateID twoPlateForm = new();
+			if (twoPlateForm.ShowDialog() == true)
+			{
+				int parentPlateId = Model.GetPlateIDs[twoPlateForm.FirstSelectedIndex];
+				int childPlateId = Model.GetPlateIDs[twoPlateForm.SecondSelectedIndex];
 
+				if(childPlateId < parentPlateId)
+					(childPlateId, parentPlateId) = (parentPlateId, childPlateId);
+
+				TimeStamp timeStampForm = new();
+				if(timeStampForm.ShowDialog() == true)
+				{
+					double joinTimeStamp = timeStampForm.DesiredTimestamp;
+
+					Coordinate coordForm = new()
+					{
+						HelpText = $"1. In GPlates: Specify Anchored Plate ID (Ctrl+D): set the parent ID {parentPlateId}.\n2. In GPlates: Total Reconstruction Poles(Ctrl + P): Equivalent Rotations relative to Anchored Plate, fetch the child's ({childPlateId}) coordinates.",
+					};
+
+					if (coordForm.ShowDialog() == true)
+					{
+						RotationModel rot = new()
+						{
+							PlateID = childPlateId,
+							TimeStamp = joinTimeStamp,
+							ConjugateID = parentPlateId,
+							Comment = $"{childPlateId} start following {parentPlateId}",
+							Latitude = coordForm.Latitude,
+							Longitude = coordForm.Longitude,
+							Angle = coordForm.Angle,
+						};
+
+						var x = Model.Rotations.First(o=>o.PlateID == childPlateId && o.TimeStamp == joinTimeStamp);
+						int index = Model.Rotations.IndexOf(x);
+
+						Model.InsertRotation(index, rot);
+
+						var first = Model.Rotations.First(o => o.PlateID == childPlateId && o.TimeStamp == 0.0D);
+						first.ConjugateID = parentPlateId;
+
+						SaveModelToFile(FileName);
+					}
+				}
+			}
 		}
 
 		private void btnValidate_Click(object sender, RoutedEventArgs e)
