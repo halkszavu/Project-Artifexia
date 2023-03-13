@@ -1,12 +1,12 @@
 ﻿<local:BaseWindow 
-        x:Class="Rotation_Editor.NewPlateID"
+        x:Class="Rotation_Editor.TwoPlateID"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rotation_Editor"
         mc:Ignorable="d"
-        Title="New Plate ID" Height="215" Width="250" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStyle="ToolWindow">
+        Title="PlateID" Height="260" Width="250" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStyle="ToolWindow">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,14 +17,13 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <TextBlock Margin="3">Enter new plate ID:</TextBlock>
-            <TextBox Margin="3" Text="{Binding NewPlate}" PreviewTextInput="IntegerNumericTextInput_Preview"/>
-            <Button Margin="3" Click="btnGenerate_Click">Generate new plate ID</Button>
-            <TextBlock Margin="3" TextWrapping="Wrap">Enter the parent plate ID, which can be used to generate the new plate ID:</TextBlock>
-            <TextBox Margin="3" Text="{Binding ParentPlate}" PreviewTextInput="IntegerNumericTextInput_Preview"/>
+            <TextBlock Margin="3" TextWrapping="Wrap">Please select the first desired Plate ID from the list:</TextBlock>
+            <ComboBox Margin="3" ItemsSource="{Binding PlateIDs}" SelectedIndex="{Binding FirstSelectedIndex}"/>
+            <TextBlock Margin="3" TextWrapping="Wrap">Please select the second desired Plate ID from the list:</TextBlock>
+            <ComboBox Margin="3" ItemsSource="{Binding PlateIDs}" SelectedIndex="{Binding SecondSelectedIndex}"/>
+            <TextBlock Margin="3" TextWrapping="Wrap" Text="Note, that the parent will automatically be the plate with the lower ID"/>
         </StackPanel>
         <Button Grid.Column="0" Grid.Row="1" Content="Confirm" Margin="3" Click="ConfirmClick" IsDefault="True"/>
         <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick" IsCancel="True"/>
     </Grid>
-
 </local:BaseWindow>
