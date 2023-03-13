@@ -136,6 +136,7 @@ namespace Rotation_Editor
 		{
 
 		}
+
 		private void btnValidate_Click(object sender, RoutedEventArgs e)
 		{
 
