@@ -168,7 +168,48 @@ namespace Rotation_Editor
 		//Container starts moving independently
 		private void btnStartIndependent_Click(object sender, RoutedEventArgs e)
 		{
+			PlateID plateIdForm = new();
+			if (plateIdForm.ShowDialog() == true)
+			{
+				TimeStamp timeStampForm = new();
+				if(timeStampForm.ShowDialog() == true)
+				{
+					int plateId = Model.GetPlateIDs[plateIdForm.SelectedIndex];
 
+					var lastEntry = Model.Rotations.First(rot => rot.PlateID == plateId && rot.TimeStamp > 1.0D);
+					int originalConjugateID = lastEntry.ConjugateID;
+					int lastEntryIndex = Model.Rotations.IndexOf(lastEntry);
+
+					RotationModel endFollowing = new()
+					{
+						PlateID = plateId,
+						TimeStamp = timeStampForm.DesiredTimestamp,
+						Latitude = lastEntry.Latitude,
+						Longitude = lastEntry.Longitude,
+						Angle = lastEntry.Angle,
+						ConjugateID = originalConjugateID,
+						Comment = $"End following {originalConjugateID}",
+					};
+
+					var conjugateCoordinates = Model.GetCoordinatesOfIDAtTimestep(originalConjugateID, timeStampForm.DesiredTimestamp);
+
+					RotationModel startIndependent = new()
+					{
+						PlateID = plateId,
+						TimeStamp = timeStampForm.DesiredTimestamp,
+						Latitude = conjugateCoordinates.latitude,
+						Longitude = conjugateCoordinates.longitude,
+						Angle = conjugateCoordinates.angle,
+						ConjugateID = 0,
+						Comment = "Start moving independently",
+					};
+
+					Model.InsertRotation(lastEntryIndex, endFollowing);
+					Model.InsertRotation(lastEntryIndex, startIndependent);
+
+					SaveModelToFile(FileName);
+				}
+			}
 		}
 
 		//Container joins exsisting container
