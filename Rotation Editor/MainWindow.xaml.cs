@@ -316,11 +316,6 @@ namespace Rotation_Editor
 
 		}
 
-		private void SaveAsMenuItem_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
 		private void TestingCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			//various testing behaviour
