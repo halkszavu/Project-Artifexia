@@ -90,7 +90,7 @@ namespace Rotation_Editor
 			if (newPlateIdForm.ShowDialog() == true)
 			{
 				int newPlateId = newPlateIdForm.NewPlate;
-				int parentPlateId = newPlateIdForm.ParentPlate == 0 ? 1 : newPlateIdForm.ParentPlate;
+				int parentPlateId = Model.GetPlateIDs[newPlateIdForm.SelectedPlateIndex];
 				plateAtEnd = new()
 				{
 					PlateID = newPlateId,
