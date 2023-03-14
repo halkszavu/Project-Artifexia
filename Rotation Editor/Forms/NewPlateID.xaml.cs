@@ -32,18 +32,23 @@ namespace Rotation_Editor
 				}
 			}
 		}
-		int _parentPlate;
-		public int ParentPlate
+		int _select;
+		public int SelectedPlateIndex
 		{
-			get => _parentPlate;
+			get => _select;
 			set
 			{
-				if (_parentPlate != value)
+				if(value != _select)
 				{
-					_parentPlate = value;
+					_select = value;
 					OnPropertyChanged();
 				}
 			}
+		}
+
+		public List<int> PlateIDs
+		{
+			get => ParentWnd.Model.GetPlateIDs;
 		}
 
 		public NewPlateID()
@@ -53,7 +58,9 @@ namespace Rotation_Editor
 
 		private void btnGenerate_Click(object sender, RoutedEventArgs e)
 		{
-			NewPlate = ParentWnd.Model.GeneratePlateID(ParentPlate);
+			//NewPlate = ParentWnd.Model.GeneratePlateID(ParentPlate);
+			int parentID = ParentWnd.Model.GetPlateIDs[SelectedPlateIndex];
+			NewPlate = ParentWnd.Model.GeneratePlateID(parentID);
 		}
 	}
 }
