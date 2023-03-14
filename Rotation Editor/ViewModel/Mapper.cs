@@ -18,7 +18,7 @@ namespace Rotation_Editor.ViewModel
 				reconstruction.AddNewRotation(new RotationEvent(item.PlateID)
 				{
 					Coordinates = coordinates,
-					ConjugatePlateID = item.PlateID,
+					ConjugatePlateID = item.ConjugateID,
 					TimeStamp = item.TimeStamp,
 					Comment = item.Comment,
 				});
