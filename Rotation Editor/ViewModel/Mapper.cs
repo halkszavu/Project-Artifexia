@@ -1,9 +1,5 @@
-﻿using System;
+﻿using RotationHelper;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RotationHelper;
 
 namespace Rotation_Editor.ViewModel
 {

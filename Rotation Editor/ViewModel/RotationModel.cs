@@ -70,7 +70,7 @@ namespace Rotation_Editor.ViewModel
 				plateIds.Add(model.PlateID);
 			Rotations.Add(model);
 
-			if(model.TimeStamp > SimulationStart)
+			if (model.TimeStamp > SimulationStart)
 				SimulationStart = model.TimeStamp;
 
 			OnPropertyChanged(nameof(Rotations));
@@ -84,11 +84,11 @@ namespace Rotation_Editor.ViewModel
 
 		public (double latitude, double longitude, double angle) GetCoordinatesOfIDAtTimestep(int plateId, double timeStamp, bool isUpper = true)
 		{
-			var plateRotations = Rotations.Where(r => r.PlateID == plateId).Where(r =>r.TimeStamp == timeStamp).ToList();
+			var plateRotations = Rotations.Where(r => r.PlateID == plateId).Where(r => r.TimeStamp == timeStamp).ToList();
 			if (plateRotations.Any())
 			{
-				if(plateRotations.Count == 1)
-					return ( plateRotations[0].Latitude, plateRotations[0].Longitude, plateRotations[0].Angle);
+				if (plateRotations.Count == 1)
+					return (plateRotations[0].Latitude, plateRotations[0].Longitude, plateRotations[0].Angle);
 				else
 				{
 					if (isUpper)
@@ -99,7 +99,7 @@ namespace Rotation_Editor.ViewModel
 			}
 			else
 				throw new ArgumentException("There is no Coordinates for this ID at this Timestamp");
-		}    
+		}
 		public bool IsIDInUse(int id)
 		{
 			if (id == 0)
@@ -116,7 +116,7 @@ namespace Rotation_Editor.ViewModel
 			}
 			return gen;
 		}
-    
+
 		public event PropertyChangedEventHandler? PropertyChanged;
 		private void OnPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
