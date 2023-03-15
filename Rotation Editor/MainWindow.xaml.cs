@@ -333,5 +333,13 @@ namespace Rotation_Editor
 			var rot = Mapper.MapToData(Model);
 			FileManipulationTool.WriteFile(FileName, rot);
 		}
+
+		private void About_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show(
+				@"This program is for manipulating the .rot file associated with GPlates.
+Created by: Lewis Callman", 
+				"About Rotation Editor", MessageBoxButton.OK, MessageBoxImage.Information);
+		}
 	}
 }
