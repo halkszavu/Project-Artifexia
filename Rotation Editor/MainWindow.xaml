@@ -35,6 +35,7 @@
                 <MenuItem Header="Save as" Command="local:CustomCommands.SaveAs"/>
             </MenuItem>
             <MenuItem Header="_Refresh"/>
+            <MenuItem Header="About" Click="About_Click"/>
             <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
         </Menu>
 

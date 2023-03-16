@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace RotationHelper
 {
@@ -115,7 +115,7 @@ namespace RotationHelper
 			RotationEvent rotation = new RotationEvent(int.Parse(contents[0]))
 			{
 				TimeStamp = double.Parse(contents[1]),
-				Coordinates = new Coordinates() 
+				Coordinates = new Coordinates()
 				{
 					Latitude = double.Parse(contents[2]),
 					Longitude = double.Parse(contents[3]),

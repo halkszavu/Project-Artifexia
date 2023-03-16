@@ -1,22 +1,10 @@
 ﻿using Microsoft.Win32;
 using Rotation_Editor.Tools;
 using Rotation_Editor.ViewModel;
-using RotationHelper;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rotation_Editor
 {
@@ -44,13 +32,13 @@ namespace Rotation_Editor
 				if (plateId == 1)
 					continue;//leave plateID 1 alone, as it is used for other purposes
 				var myRots = Model.Rotations.Where(rot => rot.PlateID == plateId);
-				var lastRotation = myRots.Where(rot => rot.TimeStamp > 1.0).OrderBy(x=>x.TimeStamp).First();
+				var lastRotation = myRots.Where(rot => rot.TimeStamp > 1.0).OrderBy(x => x.TimeStamp).First();
 				var rotation1 = myRots.FirstOrDefault(rot => rot.TimeStamp == 1.0);
 				if (lastRotation != null)
 				{
-					if(lastRotation.TimeStamp == Model.SimulationStart)
+					if (lastRotation.TimeStamp == Model.SimulationStart)
 						continue;//if a plate has only one entry at simulation's start, leave it alone, it didn't move independently at all
-					if(rotation1 == null)
+					if (rotation1 == null)
 					{
 						//there is no already existing drift correcting rotation entry
 						//let's create one:
@@ -130,7 +118,7 @@ namespace Rotation_Editor
 					{
 						HelpText = "1. In GPlates: Specify Anchored Plate ID (Ctrl+D)-specify the parent plate ID\n2. In GPlates: Total Reconstruction Poles (Ctrl+P)-get Equivalent Rotations Relative to Anchored Plate ID, and fetch the coordinates"
 					};
-					if(coordinateForm.ShowDialog() == true)
+					if (coordinateForm.ShowDialog() == true)
 					{
 						plateEndFollowingParent = new()
 						{
@@ -150,7 +138,7 @@ namespace Rotation_Editor
 							Longitude = coordinateForm.Longitude,
 							Latitude = coordinateForm.Latitude,
 							Angle = coordinateForm.Angle,
-							ConjugateID= parentPlateId,
+							ConjugateID = parentPlateId,
 							Comment = $"{newPlateId} at start"
 						};
 
@@ -172,7 +160,7 @@ namespace Rotation_Editor
 			if (plateIdForm.ShowDialog() == true)
 			{
 				TimeStamp timeStampForm = new();
-				if(timeStampForm.ShowDialog() == true)
+				if (timeStampForm.ShowDialog() == true)
 				{
 					int plateId = Model.GetPlateIDs[plateIdForm.SelectedIndex];
 
@@ -221,11 +209,11 @@ namespace Rotation_Editor
 				int parentPlateId = Model.GetPlateIDs[twoPlateForm.FirstSelectedIndex];
 				int childPlateId = Model.GetPlateIDs[twoPlateForm.SecondSelectedIndex];
 
-				if(childPlateId < parentPlateId)
+				if (childPlateId < parentPlateId)
 					(childPlateId, parentPlateId) = (parentPlateId, childPlateId);
 
 				TimeStamp timeStampForm = new();
-				if(timeStampForm.ShowDialog() == true)
+				if (timeStampForm.ShowDialog() == true)
 				{
 					double joinTimeStamp = timeStampForm.DesiredTimestamp;
 
@@ -247,7 +235,7 @@ namespace Rotation_Editor
 							Angle = coordForm.Angle,
 						};
 
-						var x = Model.Rotations.First(o=>o.PlateID == childPlateId && o.TimeStamp == joinTimeStamp);
+						var x = Model.Rotations.First(o => o.PlateID == childPlateId && o.TimeStamp == joinTimeStamp);
 						int index = Model.Rotations.IndexOf(x);
 
 						Model.InsertRotation(index, rot);
@@ -332,6 +320,14 @@ namespace Rotation_Editor
 			//Save edits to the existing file/to new file
 			var rot = Mapper.MapToData(Model);
 			FileManipulationTool.WriteFile(FileName, rot);
+		}
+
+		private void About_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show(
+				@"This program is for manipulating the .rot file associated with GPlates.
+Created by: Lewis Callman", 
+				"About Rotation Editor", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 	}
 }
