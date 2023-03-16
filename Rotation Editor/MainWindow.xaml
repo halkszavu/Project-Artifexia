@@ -20,7 +20,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
-            <!--<ColumnDefinition Width="1*"/>-->
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
@@ -34,7 +34,7 @@
                 <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
                 <MenuItem Header="Save as" Command="local:CustomCommands.SaveAs"/>
             </MenuItem>
-            <!--<MenuItem Header="_Refresh"/>-->
+            <MenuItem Header="_Refresh"/>
             <MenuItem Header="About" Click="About_Click"/>
             <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
         </Menu>
@@ -53,7 +53,7 @@
             </ListView.View>
         </ListView>
 
-        <!--<Grid Grid.Row="0" Grid.Column="1" Margin="10">
+        <Grid Grid.Row="0" Grid.Column="1" Margin="10">
             <Grid.Resources>
                 <Style TargetType="Button">
                     <Setter Property="FontSize" Value="22"/>
@@ -65,7 +65,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="btnUp" Grid.Row="0" Margin="1">↑</Button>
             <Button x:Name="btnDown" Grid.Row="1" Margin="1">↓</Button>
-        </Grid>-->
+        </Grid>
 
         <WrapPanel Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="2">
             <WrapPanel.Resources>
@@ -73,7 +73,7 @@
                     <Setter Property="Margin" Value="5"/>
                 </Style>
             </WrapPanel.Resources>
-            <!--<Button x:Name="btnValidate" Click="btnValidate_Click" ToolTip="Check if a rotation file is compliant with GPlate's rotation expectations">Validate</Button>-->
+            <Button x:Name="btnValidate" Click="btnValidate_Click" ToolTip="Check if a rotation file is compliant with GPlate's rotation expectations">Validate</Button>
             <Button Name="btnDriftCorrection" Click="btnDriftCorrection_Click" ToolTip="Generate drift correction for all independently moving plates at 1.0 Ma">Generate drift correction</Button>
             <Button x:Name="btnNewPlate" Click="btnNewPlate_Click" ToolTip="Generate an entirely new plate at a given time. Useful for creating new microcontinents or split off oceanic plates.">New plate</Button>
             <Button x:Name="btnStartIndependent" Click="btnStartIndependent_Click" ToolTip="An existing plate starts moving independently.">Independent move</Button>
