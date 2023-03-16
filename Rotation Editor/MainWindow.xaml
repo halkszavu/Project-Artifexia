@@ -62,7 +62,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="36"/>
-                <RowDefinition Height="36"/>
+                <!--<RowDefinition Height="36"/>-->
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button x:Name="btnUp" Grid.Row="0" Margin="1">↑</Button>
