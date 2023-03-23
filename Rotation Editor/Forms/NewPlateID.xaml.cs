@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 
-namespace Rotation_Editor
+namespace RotationEditor
 {
 	/// <summary>
 	/// Interaction logic for NewPlateID.xaml

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rotation_Editor.ViewModel
+namespace RotationEditor.ViewModel
 {
 	internal class PlateIDExsistException : Exception
 	{

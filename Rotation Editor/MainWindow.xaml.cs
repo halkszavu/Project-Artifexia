@@ -1,12 +1,12 @@
 ﻿using Microsoft.Win32;
-using Rotation_Editor.Tools;
-using Rotation_Editor.ViewModel;
+using RotationEditor.Tools;
+using RotationEditor.ViewModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Rotation_Editor
+namespace RotationEditor
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
@@ -73,7 +73,7 @@ namespace Rotation_Editor
 		//Create new container
 		private void btnNewPlate_Click(object sender, RoutedEventArgs e)
 		{
-			RotationModel plateAtEnd, plateMovingIndependently, plateEndFollowingParent, plateAtStart;
+			ViewModel.RotationModel plateAtEnd, plateMovingIndependently, plateEndFollowingParent, plateAtStart;
 			var newPlateIdForm = new NewPlateID();
 			if (newPlateIdForm.ShowDialog() == true)
 			{
@@ -168,7 +168,7 @@ namespace Rotation_Editor
 					int originalConjugateID = lastEntry.ConjugateID;
 					int lastEntryIndex = Model.Rotations.IndexOf(lastEntry);
 
-					RotationModel endFollowing = new()
+					ViewModel.RotationModel endFollowing = new()
 					{
 						PlateID = plateId,
 						TimeStamp = timeStampForm.DesiredTimestamp,
@@ -181,7 +181,7 @@ namespace Rotation_Editor
 
 					var conjugateCoordinates = Model.GetCoordinatesOfIDAtTimestep(originalConjugateID, timeStampForm.DesiredTimestamp);
 
-					RotationModel startIndependent = new()
+					ViewModel.RotationModel startIndependent = new()
 					{
 						PlateID = plateId,
 						TimeStamp = timeStampForm.DesiredTimestamp,
@@ -224,7 +224,7 @@ namespace Rotation_Editor
 
 					if (coordForm.ShowDialog() == true)
 					{
-						RotationModel rot = new()
+						ViewModel.RotationModel rot = new()
 						{
 							PlateID = childPlateId,
 							TimeStamp = joinTimeStamp,

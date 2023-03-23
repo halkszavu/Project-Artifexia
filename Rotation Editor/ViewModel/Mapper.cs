@@ -1,7 +1,7 @@
-﻿using RotationHelper;
+﻿using RotationModel;
 using System.Collections.Generic;
 
-namespace Rotation_Editor.ViewModel
+namespace RotationEditor.ViewModel
 {
 	internal static class Mapper
 	{

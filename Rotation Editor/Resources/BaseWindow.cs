@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Rotation_Editor
+namespace RotationEditor
 {
 	public abstract class BaseWindow : Window, INotifyPropertyChanged
 	{

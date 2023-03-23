@@ -1,4 +1,4 @@
-﻿namespace Rotation_Editor
+﻿namespace RotationEditor
 {
 	/// <summary>
 	/// Interaction logic for Coordinate.xaml

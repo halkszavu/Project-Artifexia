@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace RotationHelper
+namespace RotationModel
 {
 	static public class Parser
 	{//text -> Rotations and Rotations -> text

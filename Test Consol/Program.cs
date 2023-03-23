@@ -1,4 +1,4 @@
-﻿using RotationHelper;
+﻿using RotationModel;
 using Test_Consol;
 
 using static System.Console;

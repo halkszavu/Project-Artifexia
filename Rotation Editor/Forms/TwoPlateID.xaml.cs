@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Rotation_Editor
+namespace RotationEditor
 {
 	/// <summary>
 	/// Interaction logic for TwoPlateID.xaml

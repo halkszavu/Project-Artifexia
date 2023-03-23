@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace RotationHelper
+namespace RotationModel
 {
 	[DebuggerDisplay("Lat: {Latitude} Lon: {Longitude} Ang: {Angle}")]
 	public struct Coordinates : IEquatable<Coordinates>

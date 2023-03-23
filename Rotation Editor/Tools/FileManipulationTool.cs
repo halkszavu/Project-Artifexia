@@ -1,7 +1,7 @@
-﻿using RotationHelper;
+﻿using RotationModel;
 using System.IO;
 
-namespace Rotation_Editor.Tools
+namespace RotationEditor.Tools
 {
 	internal static class FileManipulationTool
 	{
