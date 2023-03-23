@@ -303,6 +303,18 @@ namespace Rotation_Editor
 		{
 
 		}
+		private void CommentCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+
+		}
+		private void PlusCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+
+		}
+		private void MoveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+
+		}
 
 		private void TestingCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
