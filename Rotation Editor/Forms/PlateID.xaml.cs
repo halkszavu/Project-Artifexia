@@ -7,24 +7,24 @@ namespace RotationEditor
 	/// </summary>
 	public partial class PlateID : BaseWindow
 	{
-		public List<int> PlateIDs
-		{
-			get => ParentWnd.Model.GetPlateIDs;
-		}
+		//public List<int> PlateIDs
+		//{
+		//	get => ParentWnd.Model.GetPlateIDs;
+		//}
 
-		int _selected;
-		public int SelectedIndex
-		{
-			get => _selected;
-			set
-			{
-				if (_selected != value)
-				{
-					_selected = value;
-					OnPropertyChanged();
-				}
-			}
-		}
+		//int _selected;
+		//public int SelectedIndex
+		//{
+		//	get => _selected;
+		//	set
+		//	{
+		//		if (_selected != value)
+		//		{
+		//			_selected = value;
+		//			OnPropertyChanged();
+		//		}
+		//	}
+		//}
 		public PlateID()
 		{
 			InitializeComponent();
