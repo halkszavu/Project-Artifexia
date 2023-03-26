@@ -5,11 +5,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Rotation_Editor
 {
 	public class ViewModelBase : INotifyPropertyChanged
 	{
+		public ICommand ConfirmCommand;
+		public ICommand CancelCommand;
+
 		public event PropertyChangedEventHandler? PropertyChanged;
 		protected void OnPropertyChanged([CallerMemberName] string property = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 	}

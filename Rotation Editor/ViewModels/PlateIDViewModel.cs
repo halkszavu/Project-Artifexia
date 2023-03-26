@@ -10,7 +10,7 @@ namespace Rotation_Editor
 	{
 		public List<int> PlateIDs
 		{
-			get => ParentWnd.Model.GetPlateIDs;
+			get => new() { 1, 100, 200, 300, 400, 500 };// ParentWnd.Model.GetPlateIDs;
 		}
 
 		int _selected;

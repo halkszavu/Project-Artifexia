@@ -7,11 +7,11 @@ namespace RotationEditor
 {
 	public abstract class BaseWindow : Window
 	{
-		public MainWindow ParentWnd => (Application.Current.MainWindow as MainWindow);
+		//public MainWindow ParentWnd => (Application.Current.MainWindow as MainWindow);
 
 		public BaseWindow()
 		{
-			DataContext = this;
+			//DataContext = this;
 		}
 
 		protected void ConfirmClick(object sender, RoutedEventArgs e)
@@ -34,6 +34,5 @@ namespace RotationEditor
 		{
 			//Create a check if the text is valid: would the new text result in a number-Double
 		}
-
 	}
 }

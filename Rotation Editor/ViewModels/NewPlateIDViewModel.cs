@@ -8,6 +8,11 @@ namespace Rotation_Editor
 {
 	internal class NewPlateIDViewModel : ViewModelBase
 	{
+		public List<int> PlateIDs
+		{
+			get => new() { 1, 100, 200, 300, 400, 500 }; //ParentWnd.Model.GetPlateIDs;
+		}
+
 		int _newPlate;
 		public int NewPlate
 		{
@@ -33,11 +38,6 @@ namespace Rotation_Editor
 					OnPropertyChanged();
 				}
 			}
-		}
-
-		public List<int> PlateIDs
-		{
-			get => ParentWnd.Model.GetPlateIDs;
 		}
 	}
 }
