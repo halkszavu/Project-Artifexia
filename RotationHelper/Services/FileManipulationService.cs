@@ -15,7 +15,7 @@ namespace RotationModel
 		{
 			using(var reader = new StreamReader(fileStream))
 			{
-				var reconstruction = ParserService.ParseReconstruction(reader.ReadToEnd());
+				var reconstruction = ParseReconstruction(reader.ReadToEnd());
 				return reconstruction;
 			}
 		}
@@ -24,8 +24,39 @@ namespace RotationModel
 		{
 			using(StreamWriter writer = new StreamWriter(fileStream))
 			{
-				writer.Write(ParserService.PrintFullReconstruction(reconstruction));
+				writer.Write(PrintFullReconstruction(reconstruction));
 			}
+		}
+
+		private static string PrintFullReconstruction(FullRotationReconstruction reconstruction)
+		{
+			var firstOrdered = reconstruction.Rotations.OrderBy(o => o.Key).SelectMany(o => o.Value);
+			var rawRotations = firstOrdered.OrderByDescending(rot=>rot.TimeStamp).ToList();
+
+			string print = string.Empty;
+
+			foreach (RotationEvent rot in rawRotations)
+			{
+				print += rot.ToString();
+				print += Environment.NewLine;
+			}
+
+			return print;
+		}
+
+		private static FullRotationReconstruction ParseReconstruction(string text)
+		{
+			FullRotationReconstruction parsedReconstruction = new FullRotationReconstruction();
+
+			var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (var line in lines)
+			{
+				RotationEvent rot = RotationEvent.Parse(line);
+				parsedReconstruction.AddNewRotation(rot);
+			}
+
+			return parsedReconstruction;
 		}
 	}
 }
