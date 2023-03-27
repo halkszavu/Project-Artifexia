@@ -21,13 +21,13 @@
 
         <Menu Grid.RowSpan="2" Grid.ColumnSpan="2">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" Command="ApplicationCommands.New"/>
-                <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
-                <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
-                <MenuItem Header="Save as" Command="local:CustomCommands.SaveAs"/>
+                <MenuItem Header="_New" Command="{Binding NewCommand}"/>
+                <MenuItem Header="_Open" Command="{Binding OpenCommand}"/>
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}"/>
+                <MenuItem Header="Save as" Command="{Binding SaveAsCommand}"/>
             </MenuItem>
-            <MenuItem Header="_Refresh"/>
-            <MenuItem Header="About" Click="About_Click"/>
+            <MenuItem Header="_Refresh" Command="{Binding RefreshCommand}"/>
+            <MenuItem Header="About" Command="{Binding AboutCommand}"/>
             <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
         </Menu>
 
@@ -69,13 +69,11 @@
                     <Setter Property="Margin" Value="5"/>
                 </Style>
             </WrapPanel.Resources>
-            <Button x:Name="btnValidate" Click="btnValidate_Click" ToolTip="Check if a rotation file is compliant with GPlate's rotation expectations">Validate</Button>
-            <Button Name="btnDriftCorrection" Click="btnDriftCorrection_Click" ToolTip="Generate drift correction for all independently moving plates at 1.0 Ma">Generate drift correction</Button>
-            <Button x:Name="btnNewPlate" Click="btnNewPlate_Click" ToolTip="Generate an entirely new plate at a given time. Useful for creating new microcontinents or split off oceanic plates.">New plate</Button>
-            <Button x:Name="btnStartIndependent" Click="btnStartIndependent_Click" ToolTip="An existing plate starts moving independently.">Independent move</Button>
-            <Button x:Name="btnJoinIndependent" Click="btnJoinIndependent_Click" ToolTip="An independent plate joins another plate and starts moving with that plate.">Join plate</Button>
-
+            <Button x:Name="btnValidate" Command="{Binding ValidateCommand}" ToolTip="Check if a rotation file is compliant with GPlate's rotation expectations">Validate</Button>
+            <Button Name="btnDriftCorrection" Command="{Binding DriftCorrectionCommand}" ToolTip="Generate drift correction for all independently moving plates at 1.0 Ma">Generate drift correction</Button>
+            <Button x:Name="btnNewPlate" Command="{Binding NewPlateCommand}" ToolTip="Generate an entirely new plate at a given time. Useful for creating new microcontinents or split off oceanic plates.">New plate</Button>
+            <Button x:Name="btnStartIndependent" Command="{Binding IndependentMoveCommand}" ToolTip="An existing plate starts moving independently.">Independent move</Button>
+            <Button x:Name="btnJoinIndependent" Command="{Binding JoinPlateCommand}" ToolTip="An independent plate joins another plate and starts moving with that plate.">Join plate</Button>
         </WrapPanel>
-
     </Grid>
 </Window>

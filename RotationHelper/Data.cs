@@ -48,7 +48,7 @@ namespace RotationModel
 
 		public override string ToString() => $"{Latitude} {Longitude} {Angle}";
 
-		public override int GetHashCode() => Latitude.GetHashCode() ^ Longitude.GetHashCode() ^ Angle.GetHashCode();
+		public override int GetHashCode() => HashCode.Combine(Latitude, Longitude, Angle);
 	}
 
 	[DebuggerDisplay("{PlateID} {TimeStamp} Coordinates {ConjugatePlateID} ! {Comment}")]
@@ -132,10 +132,12 @@ namespace RotationModel
 	public class FullRotationReconstruction
 	{
 		public Dictionary<int, List<RotationEvent>> Rotations { get; private set; }
+		HashSet<int> plateIds;
 
 		public FullRotationReconstruction()
 		{
 			Rotations = new Dictionary<int, List<RotationEvent>>();
+			plateIds = new HashSet<int>();
 		}
 
 		public void AddNewRotation(RotationEvent rotation)
@@ -145,7 +147,7 @@ namespace RotationModel
 			if (rotation.PlateID == 0)
 				throw new ArgumentException("PlateID 000 is used for other purposes, please do not use it!");
 
-			if (Rotations.ContainsKey(rotation.PlateID))
+			if (plateIds.Contains(rotation.PlateID))
 			{
 				if (Rotations[rotation.PlateID].Contains(rotation))
 					throw new ArgumentException("Same rotation is already added");
@@ -153,7 +155,10 @@ namespace RotationModel
 					Rotations[rotation.PlateID].Add(rotation);
 			}
 			else
+			{
+				plateIds.Add(rotation.PlateID);
 				Rotations[rotation.PlateID] = new List<RotationEvent>() { rotation };
+			}
 		}
 	}
 }

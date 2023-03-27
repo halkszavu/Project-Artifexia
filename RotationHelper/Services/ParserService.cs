@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace RotationModel
 {
-	static public class Parser
+	static public class ParserService
 	{//text -> Rotations and Rotations -> text
 		public static string PrintFullReconstruction(FullRotationReconstruction reconstruction)
 		{

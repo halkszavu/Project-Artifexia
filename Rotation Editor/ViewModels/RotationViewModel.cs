@@ -88,5 +88,10 @@ namespace RotationEditor
 				}
 			}
 		}
+
+		public RotationViewModel(int plateId)
+		{
+			PlateID = plateId;
+		}
 	}
 }
