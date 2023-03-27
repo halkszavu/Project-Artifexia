@@ -6,16 +6,8 @@
         xmlns:local="clr-namespace:RotationEditor"
         mc:Ignorable="d"
         Title="Rotation Editor" Height="450" Width="600">
-    <Window.CommandBindings>
-        <CommandBinding Command="local:CustomCommands.Testing" Executed="TestingCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.SaveAs" CanExecute="SaveCommand_CanExecute" Executed="SaveAsCommand_Executed"/>
-        <CommandBinding Command="ApplicationCommands.Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed"/>
-        <CommandBinding Command="ApplicationCommands.Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed"/>
-        <CommandBinding Command="ApplicationCommands.New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
-    </Window.CommandBindings>
     <Window.InputBindings>
-        <KeyBinding Command="local:CustomCommands.Testing" Key="F12"/>
+        <KeyBinding Command="{Binding TestingCommand}" Key="F12"/>
     </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,7 +28,7 @@
             </MenuItem>
             <MenuItem Header="_Refresh"/>
             <MenuItem Header="About" Click="About_Click"/>
-            <MenuItem Header="_Exit" Command="local:CustomCommands.Exit"/>
+            <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
         </Menu>
 
         <ListView Margin="10,25,10,10" ItemsSource="{Binding Rotations}" Grid.ColumnSpan="1">
