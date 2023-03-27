@@ -57,15 +57,19 @@ namespace RotationModel
 		//400 1900.0   12.0868  -83.5756  -27.0759  000 ! Starts moving independently
 		//ID timestamp coordinates1 2 3 conjugatePlateId ! comment
 
-		public int PlateID { get; private set; }
-		public double TimeStamp { get; set; }
-		public Coordinates Coordinates { get; set; }
-		public int ConjugatePlateID { get; set; }
-		public string? Comment { get; set; }
+		public int PlateID { get; }
+		public double TimeStamp { get; }
+		public Coordinates Coordinates { get; }
+		public int ConjugatePlateID { get; }
+		public string? Comment { get; }
 
-		public RotationEvent(int plateId)
+		public RotationEvent(int plateId, double timeStamp, Coordinates coords, int conjugatePlateId, string comment = "")
 		{
 			PlateID = plateId;
+			TimeStamp = timeStamp;
+			Coordinates = coords;
+			ConjugatePlateID = conjugatePlateId;
+			Comment = comment;
 		}
 
 		public override bool Equals(object? obj)
@@ -112,18 +116,15 @@ namespace RotationModel
 
 			var contents = rough[0].Split(' ').Select(x => x.Trim()).Where(r => !string.IsNullOrEmpty(r)).ToArray();
 
-			RotationEvent rotation = new RotationEvent(int.Parse(contents[0]))
-			{
-				TimeStamp = double.Parse(contents[1]),
-				Coordinates = new Coordinates()
-				{
-					Latitude = double.Parse(contents[2]),
-					Longitude = double.Parse(contents[3]),
-					Angle = double.Parse(contents[4]),
-				},
-				ConjugatePlateID = int.Parse(contents[5]),
-				Comment = rough[1].Trim(),
-			};
+			RotationEvent rotation = new RotationEvent(
+				int.Parse(contents[0]),
+				double.Parse(contents[1]),
+				new Coordinates(
+					double.Parse(contents[2]),
+					double.Parse(contents[3]),
+					double.Parse(contents[4])),
+				int.Parse(contents[5]),
+				rough[1].Trim());
 
 			return rotation;
 		}
@@ -131,7 +132,7 @@ namespace RotationModel
 
 	public class FullRotationReconstruction
 	{
-		public Dictionary<int, List<RotationEvent>> Rotations { get; private set; }
+		public Dictionary<int, List<RotationEvent>> Rotations { get; }
 		HashSet<int> plateIds;
 
 		public FullRotationReconstruction()
