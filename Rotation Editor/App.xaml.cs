@@ -1,4 +1,4 @@
-﻿using Rotation_Editor;
+﻿using RotationEditor;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

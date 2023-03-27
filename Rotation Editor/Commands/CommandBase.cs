@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Rotation_Editor
+namespace RotationEditor
 {
 	public abstract class CommandBase : ICommand
 	{
