@@ -8,10 +8,7 @@ namespace RotationEditor
 {
 	public class ExitCommand : CommandBase
 	{
-		public override void Execute(object? parameter)
-		{
-			
-		}
+		public override void Execute(object? parameter) => App.Current.Shutdown();
 	}
 
 	public class SaveCommand : CommandBase
