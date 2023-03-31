@@ -5,9 +5,9 @@ namespace RotationEditor.ViewModel
 {
 	internal static class Mapper
 	{
-		public static FullRotationReconstruction MapToData(ReconstructionModel model)
+		public static global::RotationModel.RotationModel MapToData(ReconstructionModel model)
 		{
-			FullRotationReconstruction reconstruction = new();
+			global::RotationModel.RotationModel reconstruction = new();
 			foreach (var item in model.Rotations)
 			{
 				Coordinates coordinates = new Coordinates(item.Latitude, item.Longitude, item.Angle);
@@ -23,7 +23,7 @@ namespace RotationEditor.ViewModel
 			return reconstruction;
 		}
 
-		public static ReconstructionModel MapToModel(FullRotationReconstruction reconstruction)
+		public static ReconstructionModel MapToModel(global::RotationModel.RotationModel reconstruction)
 		{
 			ReconstructionModel model = new();
 			foreach (KeyValuePair<int, List<RotationEvent>> kvp in reconstruction.Rotations)

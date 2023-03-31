@@ -11,7 +11,7 @@ namespace RotationModel
 	{
 		public string DefaultExtension { get => ".rot"; }
 
-		public FullRotationReconstruction ReadFile(Stream fileStream)
+		public RotationModel ReadFile(Stream fileStream)
 		{
 			using (var reader = new StreamReader(fileStream))
 			{
@@ -20,7 +20,7 @@ namespace RotationModel
 			}
 		}
 
-		public void WriteToFile(Stream fileStream, FullRotationReconstruction reconstruction)
+		public void WriteToFile(Stream fileStream, RotationModel reconstruction)
 		{
 			using (StreamWriter writer = new StreamWriter(fileStream))
 			{
@@ -28,7 +28,7 @@ namespace RotationModel
 			}
 		}
 
-		private static string PrintFullReconstruction(FullRotationReconstruction reconstruction)
+		private static string PrintFullReconstruction(RotationModel reconstruction)
 		{
 			var firstOrdered = reconstruction.Rotations.OrderBy(o => o.Key).SelectMany(o => o.Value);
 			var rawRotations = firstOrdered.OrderByDescending(rot => rot.TimeStamp).ToList();
@@ -44,9 +44,9 @@ namespace RotationModel
 			return print;
 		}
 
-		private static FullRotationReconstruction ParseReconstruction(string text)
+		private static RotationModel ParseReconstruction(string text)
 		{
-			FullRotationReconstruction parsedReconstruction = new FullRotationReconstruction();
+			RotationModel parsedReconstruction = new RotationModel();
 
 			var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 

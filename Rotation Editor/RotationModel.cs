@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace RotationEditor.ViewModel
 {
+	//Should be removed
 	public class RotationModel
 	{
 		public int PlateID { get; set; }
@@ -30,6 +31,7 @@ namespace RotationEditor.ViewModel
 		};
 	}
 
+	//Should be removed
 	public class ReconstructionModel : INotifyPropertyChanged
 	{
 		private ObservableCollection<RotationModel> _rotations;

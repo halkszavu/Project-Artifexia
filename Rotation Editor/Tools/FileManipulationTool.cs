@@ -7,7 +7,7 @@ namespace RotationEditor.Tools
 	{
 		internal static readonly string DefaultExtension = ".rot";
 
-		internal static FullRotationReconstruction ReadFile(Stream stream)
+		internal static RotationModel.RotationModel ReadFile(Stream stream)
 		{
 			//using (StreamReader sr = new StreamReader(stream))
 			//{
@@ -16,7 +16,7 @@ namespace RotationEditor.Tools
 			//}
 		}
 
-		internal static void WriteFile(string destination, FullRotationReconstruction reconstruction)
+		internal static void WriteFile(string destination, RotationModel.RotationModel reconstruction)
 		{
 			//using (StreamWriter sw = File.CreateText(destination))
 			//{

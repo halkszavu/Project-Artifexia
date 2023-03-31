@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace RotationModel
 {
-	public class FullRotationReconstruction
+	public class RotationModel
 	{
 		public Dictionary<int, List<RotationEvent>> Rotations { get; }
 		HashSet<int> plateIds;
 
-		public FullRotationReconstruction()
+		public RotationModel()
 		{
 			Rotations = new Dictionary<int, List<RotationEvent>>();
 			plateIds = new HashSet<int>();
