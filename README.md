@@ -11,8 +11,9 @@ This Editor requires GPlates which is a free plate tectonic simulator. You can d
   * Joining up existing plates at a certain timestamp
   * Initiating independent movement of two co-moving plates
   * Creating the drift correction, so the plates will not move back to their original position after the last existing timestamp
-  <sup>This drift correction inserts a new line at 1.0 Ma.<sup>
+  <sup>This drift correction inserts a new line/updates the line at 1.0 Ma.<sup>
   
 ## Extra features (planned or present)
 
 * A rudimentary help on how to handle the main manipulations
+* Naming the plates and making a system to read/write these names into the .rot file. These names are used for the other comments, and are displayed in the plate lists (alongside the plateIDs)
