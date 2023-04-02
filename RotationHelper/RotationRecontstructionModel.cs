@@ -57,5 +57,10 @@ namespace RotationModel
 		{
 			
 		}
+
+		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords)
+		{
+			
+		}
 	}
 }
