@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RotationModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace RotationEditor
 
 		public ObservableCollection<RotationViewModel> Rotations { get; }
 
-		public MainViewModel()
+		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService)
 		{
 			#region Normal commands
 			ExitCommand = new ExitCommand();
@@ -41,10 +42,10 @@ namespace RotationEditor
 
 			#region Special commands
 			ValidateCommand = new ValidateCommand();
-			DriftCorrectionCommand = new DriftCorrectionCommand();
-			NewPlateCommand = new NewPlateCommand();
-			IndependentMoveCommand = new IndependentMoveCommand();
-			JoinPlateCommand = new JoinPlateCommand();
+			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService);
+			NewPlateCommand = new NewPlateCommand(newPlateService);
+			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService);
+			JoinPlateCommand = new JoinPlateCommand(joinIndependentService);
 			#endregion
 
 			TestingCommand = new TestingCommand();

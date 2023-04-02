@@ -12,4 +12,8 @@
     <ProjectReference Include="..\RotationHelper\RotationModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tools\" />
+  </ItemGroup>
+
 </Project>

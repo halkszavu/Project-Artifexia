@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using RotationModel;
 
 namespace RotationEditor
 {
@@ -16,9 +17,11 @@ namespace RotationEditor
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{
+			RotationRecontstructionModel rotationModel = new RotationRecontstructionModel();
+
 			MainWindow = new MainWindow()
 			{
-				DataContext = new MainViewModel()
+				DataContext = new MainViewModel(rotationModel, rotationModel, rotationModel, rotationModel),
 			};
 
 			MainWindow.Show();

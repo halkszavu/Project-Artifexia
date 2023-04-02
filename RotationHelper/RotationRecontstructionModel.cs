@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace RotationModel
 {
-	public class RotationModel
+	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService
 	{
 		public Dictionary<int, List<RotationEvent>> Rotations { get; }
 		HashSet<int> plateIds;
 
-		public RotationModel()
+		public RotationRecontstructionModel()
 		{
 			Rotations = new Dictionary<int, List<RotationEvent>>();
 			plateIds = new HashSet<int>();
@@ -36,6 +36,26 @@ namespace RotationModel
 				plateIds.Add(rotation.PlateID);
 				Rotations[rotation.PlateID] = new List<RotationEvent>() { rotation };
 			}
+		}
+
+		public void CreateDriftCorrection()
+		{
+			
+		}
+
+		public void NewPlateFirstStep(int newPlateid, double timeStamp)
+		{
+			
+		}
+
+		public void NewPlateSecondStep(Coordinates gotCoordinates)
+		{
+			
+		}
+
+		public void StartIndependentMove(int plateId, double timeStamp)
+		{
+			
 		}
 	}
 }

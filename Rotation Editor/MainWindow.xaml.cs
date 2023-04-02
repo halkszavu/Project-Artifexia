@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using RotationEditor.Tools;
 using RotationEditor.ViewModel;
 using System.IO;
 using System.Linq;
@@ -255,25 +254,25 @@ namespace RotationEditor
 		}
 		private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			//Parse existing file
-			OpenFileDialog dlg = new()
-			{
-				DefaultExt = FileManipulationTool.DefaultExtension,
-				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
-			};
+			////Parse existing file
+			//OpenFileDialog dlg = new()
+			//{
+			//	DefaultExt = FileManipulationTool.DefaultExtension,
+			//	Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
+			//};
 
-			if (dlg.ShowDialog() == true)
-			{
-				FileName = dlg.FileName;
+			//if (dlg.ShowDialog() == true)
+			//{
+			//	FileName = dlg.FileName;
 
-				ReconstructionModel m = Mapper.MapToModel(FileManipulationTool.ReadFile(new FileStream(FileName, FileMode.Open)));
+			//	ReconstructionModel m = Mapper.MapToModel(FileManipulationTool.ReadFile(new FileStream(FileName, FileMode.Open)));
 
-				Model.Clear();
-				foreach (var item in m.Rotations)
-				{
-					Model.AddRotation(item);
-				}
-			}
+			//	Model.Clear();
+			//	foreach (var item in m.Rotations)
+			//	{
+			//		Model.AddRotation(item);
+			//	}
+			//}
 		}
 		private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
@@ -285,14 +284,14 @@ namespace RotationEditor
 		private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e) => SaveModelToFile(FileName);
 		private void SaveAsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			SaveFileDialog dlg = new()
-			{
-				DefaultExt = FileManipulationTool.DefaultExtension,
-				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
-			};
+			//SaveFileDialog dlg = new()
+			//{
+			//	DefaultExt = FileManipulationTool.DefaultExtension,
+			//	Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
+			//};
 
-			if (dlg.ShowDialog() == true)
-				SaveModelToFile(dlg.FileName);
+			//if (dlg.ShowDialog() == true)
+			//	SaveModelToFile(dlg.FileName);
 		}
 		private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 		private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -313,9 +312,9 @@ namespace RotationEditor
 
 		private void SaveModelToFile(string fileName)
 		{
-			//Save edits to the existing file/to new file
-			var rot = Mapper.MapToData(Model);
-			FileManipulationTool.WriteFile(FileName, rot);
+			////Save edits to the existing file/to new file
+			//var rot = Mapper.MapToData(Model);
+			//FileManipulationTool.WriteFile(FileName, rot);
 		}
 
 		private void About_Click(object sender, RoutedEventArgs e)
