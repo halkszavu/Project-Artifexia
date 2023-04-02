@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using RotationModel;
+using RotationEditor.ViewModel;
 
 namespace RotationEditor
 {

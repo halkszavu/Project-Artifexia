@@ -1,4 +1,4 @@
-﻿namespace RotationEditor
+﻿namespace RotationEditor.Views
 {
 	/// <summary>
 	/// Interaction logic for TimeStamp.xaml

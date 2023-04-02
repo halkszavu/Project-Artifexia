@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RotationEditor.ViewModel;
+using RotationEditor.Views;
 using RotationModel;
 
 namespace RotationEditor.Commands
@@ -64,7 +65,7 @@ namespace RotationEditor.Commands
 			var newPlateVM = new NewPlateIDViewModel();
 			var timeStampVM = new TimeStampViewModel();
 
-
+			var newPlateView = new NewPlateID() { DataContext = newPlateVM };
 
 			newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, timeStampVM.DesiredTimestamp);
 
