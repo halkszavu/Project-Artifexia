@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RotationEditor
+namespace RotationEditor.ViewModel
 {
 	public class RotationViewModel : ViewModelBase
 	{

@@ -1,4 +1,5 @@
-﻿using RotationModel;
+﻿using RotationEditor.Commands;
+using RotationModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace RotationEditor
+namespace RotationEditor.ViewModel
 {
 	public class MainViewModel : ViewModelBase
 	{

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RotationEditor.ViewModel;
 using RotationModel;
 
-namespace RotationEditor
+namespace RotationEditor.Commands
 {
 	public class TestingCommand : CommandBase
 	{
@@ -60,7 +61,17 @@ namespace RotationEditor
 
 		public override void Execute(object? parameter)
 		{
+			var newPlateVM = new NewPlateIDViewModel();
+			var timeStampVM = new TimeStampViewModel();
 
+
+
+			newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, timeStampVM.DesiredTimestamp);
+
+			var coordsVM = new CoordinateViewModel();
+			var gotCoords = new Coordinates(coordsVM.Latitude, coordsVM.Longitude, coordsVM.Angle);
+
+			newPlateService.NewPlateSecondStep(gotCoords);
 		}
 	}
 

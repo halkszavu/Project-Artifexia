@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace RotationEditor
+namespace RotationEditor.ViewModel
 {
 	public class ViewModelBase : INotifyPropertyChanged
 	{
