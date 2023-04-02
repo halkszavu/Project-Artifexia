@@ -64,15 +64,24 @@ namespace RotationEditor.Commands
 		{
 			var newPlateVM = new NewPlateIDViewModel();
 			var timeStampVM = new TimeStampViewModel();
-
 			var newPlateView = new NewPlateID() { DataContext = newPlateVM };
+			var timeStampView = new TimeStamp() { DataContext = timeStampVM };
+			if (newPlateView.ShowDialog() == true)
+			{
+				if (timeStampView.ShowDialog() == true)
+				{
+					newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, timeStampVM.DesiredTimestamp);
 
-			newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, timeStampVM.DesiredTimestamp);
+					var coordsVM = new CoordinateViewModel();
+					var coordsView = new Coordinate() { DataContext = coordsVM };
+					if (coordsView.ShowDialog() == true)
+					{
+						var gotCoords = new Coordinates(coordsVM.Latitude, coordsVM.Longitude, coordsVM.Angle);
 
-			var coordsVM = new CoordinateViewModel();
-			var gotCoords = new Coordinates(coordsVM.Latitude, coordsVM.Longitude, coordsVM.Angle);
-
-			newPlateService.NewPlateSecondStep(gotCoords);
+						newPlateService.NewPlateSecondStep(gotCoords);
+					}
+				}
+			}
 		}
 	}
 
