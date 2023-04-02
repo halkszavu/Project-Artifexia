@@ -28,7 +28,7 @@ namespace RotationEditor.Commands
 
 		//Temporary:
 		public ValidateCommand() { }
-		
+		public override bool CanExecute(object? parameter) => false;
 
 		public override void Execute(object? parameter)
 		{
