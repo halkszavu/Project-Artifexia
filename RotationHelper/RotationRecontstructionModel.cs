@@ -6,35 +6,72 @@ using System.Threading.Tasks;
 
 namespace RotationModel
 {
-	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService
+	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService
 	{
-		public Dictionary<int, List<RotationEvent>> Rotations { get; }
+		public IEnumerable<RotationEvent> GetRotations => Rotations;
+		public double StartTime { get; private set; }
+
 		HashSet<int> plateIds;
+		List<RotationEvent> Rotations;
 
 		public RotationRecontstructionModel()
 		{
-			Rotations = new Dictionary<int, List<RotationEvent>>();
+			Rotations = new();
 			plateIds = new HashSet<int>();
+			StartTime = 0.0D;
 		}
 
-		public void AddNewRotation(RotationEvent rotation)
+		public void AddRotation(RotationEvent rotation)
 		{
 			if (rotation == null)
-				throw new ArgumentNullException($"{nameof(rotation)} should never be null");
+				throw new ArgumentNullException($"rotation should never be null");
 			if (rotation.PlateID == 0)
 				throw new ArgumentException("PlateID 000 is used for other purposes, please do not use it!");
 
 			if (plateIds.Contains(rotation.PlateID))
 			{
-				if (Rotations[rotation.PlateID].Contains(rotation))
+				if (Rotations.Contains(rotation))
 					throw new ArgumentException("Same rotation is already added");
 				else
-					Rotations[rotation.PlateID].Add(rotation);
+				{
+					Rotations.Add(rotation);
+					if(rotation.TimeStamp > StartTime)
+						StartTime = rotation.TimeStamp;
+				}
 			}
 			else
 			{
 				plateIds.Add(rotation.PlateID);
-				Rotations[rotation.PlateID] = new List<RotationEvent>() { rotation };
+				Rotations.Add(rotation);
+				if (rotation.TimeStamp > StartTime)
+					StartTime = rotation.TimeStamp;
+			}
+		}
+
+		public void InsertRotation(int index, RotationEvent rotation)
+		{
+			if (rotation == null)
+				throw new ArgumentNullException($"rotation should never be null");
+			if (rotation.PlateID == 0)
+				throw new ArgumentException("PlateID 000 is used for other purposes, please do not use it!");
+
+			if (plateIds.Contains(rotation.PlateID))
+			{
+				if (Rotations.Contains(rotation))
+					throw new ArgumentException("Same rotation is already added");
+				else
+				{
+					Rotations.Insert(index, rotation);
+					if (rotation.TimeStamp > StartTime)
+						StartTime = rotation.TimeStamp;
+				}
+			}
+			else
+			{
+				plateIds.Add(rotation.PlateID);
+				Rotations.Insert(index, rotation);
+				if(rotation.TimeStamp > StartTime)
+					StartTime=rotation.TimeStamp;
 			}
 		}
 

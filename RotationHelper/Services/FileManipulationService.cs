@@ -20,22 +20,19 @@ namespace RotationModel
 			}
 		}
 
-		public void WriteToFile(Stream fileStream, RotationRecontstructionModel reconstruction)
+		public void WriteToFile(Stream fileStream, IGetRotationsService rotationService)
 		{
 			using (StreamWriter writer = new StreamWriter(fileStream))
 			{
-				writer.Write(PrintFullReconstruction(reconstruction));
+				writer.Write(PrintFullReconstruction(rotationService));
 			}
 		}
 
-		private static string PrintFullReconstruction(RotationRecontstructionModel reconstruction)
+		private static string PrintFullReconstruction(IGetRotationsService rotationService)
 		{
-			var firstOrdered = reconstruction.Rotations.OrderBy(o => o.Key).SelectMany(o => o.Value);
-			var rawRotations = firstOrdered.OrderByDescending(rot => rot.TimeStamp).ToList();
-
 			string print = string.Empty;
 
-			foreach (RotationEvent rot in rawRotations)
+			foreach (RotationEvent rot in rotationService.GetRotations)
 			{
 				print += rot.ToString();
 				print += Environment.NewLine;
@@ -53,7 +50,7 @@ namespace RotationModel
 			foreach (var line in lines)
 			{
 				RotationEvent rot = RotationEvent.Parse(line);
-				parsedReconstruction.AddNewRotation(rot);
+				parsedReconstruction.AddRotation(rot);
 			}
 
 			return parsedReconstruction;
