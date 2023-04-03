@@ -39,15 +39,17 @@ namespace RotationEditor.Commands
 	public class DriftCorrectionCommand : CommandBase
 	{
 		private readonly IDriftcorrectionService driftcorrectionService;
+		private readonly string rotationFileName;
 
-		public DriftCorrectionCommand(IDriftcorrectionService driftcorrectionService) : base()
+		public DriftCorrectionCommand(IDriftcorrectionService driftcorrectionService, string rotationFileName) : base()
 		{
 			this.driftcorrectionService = driftcorrectionService;
+			this.rotationFileName = rotationFileName;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			driftcorrectionService.CreateDriftCorrection();
+			driftcorrectionService.CreateDriftCorrection(rotationFileName);
 		}
 	}
 

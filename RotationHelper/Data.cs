@@ -59,9 +59,9 @@ namespace RotationModel
 
 		public int PlateID { get; }
 		public double TimeStamp { get; }
-		public Coordinates Coordinates { get; }
-		public int ConjugatePlateID { get; }
-		public string? Comment { get; }
+		public Coordinates Coordinates { get; set; }
+		public int ConjugatePlateID { get; set; }
+		public string? Comment { get; set; }
 
 		public RotationEvent(int plateId, double timeStamp, Coordinates coords, int conjugatePlateId, string comment = "")
 		{

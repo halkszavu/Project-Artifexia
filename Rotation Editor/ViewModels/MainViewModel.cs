@@ -12,6 +12,20 @@ namespace RotationEditor.ViewModel
 {
 	public class MainViewModel : ViewModelBase
 	{
+		string _fileName;
+		public string FileName
+		{
+			get => _fileName;
+			set
+			{
+				if(_fileName != value)
+				{
+					_fileName = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
 		public ICommand TestingCommand { get; }
 		public ICommand ExitCommand { get; }
 		public ICommand SaveCommand { get; }
@@ -43,7 +57,7 @@ namespace RotationEditor.ViewModel
 
 			#region Special commands
 			ValidateCommand = new ValidateCommand();
-			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService);
+			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService, FileName);
 			NewPlateCommand = new NewPlateCommand(newPlateService, plateIDsService);
 			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService, plateIDsService);
 			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService);

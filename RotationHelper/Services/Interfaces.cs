@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace RotationModel
 {
 	public interface IDriftcorrectionService
 	{
-		void CreateDriftCorrection();
+		void CreateDriftCorrection(string rotationFileName);
 	}
 
 	public interface INewPlateService

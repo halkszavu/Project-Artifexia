@@ -7,11 +7,11 @@ using System.IO;
 
 namespace RotationModel
 {
-	public class FileManipulationService
+	public static class FileManipulationService
 	{
-		public string DefaultExtension { get => ".rot"; }
+		public static string DefaultExtension { get => ".rot"; }
 
-		public RotationRecontstructionModel ReadFile(Stream fileStream)
+		public static RotationRecontstructionModel ReadFile(Stream fileStream)
 		{
 			using (var reader = new StreamReader(fileStream))
 			{
@@ -20,7 +20,7 @@ namespace RotationModel
 			}
 		}
 
-		public void WriteToFile(Stream fileStream, IGetRotationsService rotationService)
+		public static void WriteToFile(Stream fileStream, IGetRotationsService rotationService)
 		{
 			using (StreamWriter writer = new StreamWriter(fileStream))
 			{

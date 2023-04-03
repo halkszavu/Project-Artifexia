@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using static RotationModel.FileManipulationService;
 
 namespace RotationModel
 {
@@ -76,9 +79,39 @@ namespace RotationModel
 			}
 		}
 
-		public void CreateDriftCorrection()
+		public void CreateDriftCorrection(string rotationFileName)
 		{
-			
+			foreach (int plateID in plateIds)
+			{
+				if (plateID == 1)
+					continue;
+
+				var myRots = Rotations.Where(rot => rot.PlateID == plateID);
+				var lastRotation = myRots.Where(rot => rot.TimeStamp > 1.0).OrderBy(x => x.TimeStamp).First();
+				var rotation1 = myRots.FirstOrDefault(rot => rot.TimeStamp == 1.0);
+				if (lastRotation != null)
+				{
+					if (lastRotation.TimeStamp == StartTime)
+						continue;//if a plate has only one entry at simulation's start, leave it alone, it didn't move independently at all
+					if (rotation1 == null)
+					{
+						//there is no already existing drift correcting rotation entry
+						//let's create one:
+						rotation1 = new(plateID, 1.0D, lastRotation.Coordinates, lastRotation.ConjugatePlateID, "Drift correction");
+						int lastRotIndex = Rotations.IndexOf(lastRotation);
+						InsertRotation(lastRotIndex, rotation1);
+					}
+					else
+					{
+						//there is a drift correction entry we need to update
+						rotation1.Coordinates = lastRotation.Coordinates;
+						rotation1.ConjugatePlateID = lastRotation.ConjugatePlateID;
+						rotation1.Comment = "Drift correction";
+					}
+				}
+			}
+
+			WriteToFile(File.Open(rotationFileName,FileMode.Open), this);
 		}
 
 		public void NewPlateFirstStep(int newPlateid, double timeStamp)
