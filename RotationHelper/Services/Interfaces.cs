@@ -36,4 +36,9 @@ namespace RotationModel
 	{
 		IEnumerable<RotationEvent> GetRotations { get; }
 	}
+
+	public interface IGetPlateIDsService
+	{
+		IEnumerable<int> GetPlateIDs { get; }
+	}
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace RotationModel
 {
-	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService
+	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService
 	{
-		public IEnumerable<RotationEvent> GetRotations => Rotations;
 		public double StartTime { get; private set; }
+		public IEnumerable<RotationEvent> GetRotations => Rotations;
+		public IEnumerable<int> GetPlateIDs => Rotations.Select(r => r.PlateID).Distinct();
 
 		HashSet<int> plateIds;
 		List<RotationEvent> Rotations;

@@ -29,7 +29,7 @@ namespace RotationEditor.ViewModel
 
 		public ObservableCollection<RotationViewModel> Rotations { get; }
 
-		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService)
+		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService, IGetPlateIDsService plateIDsService)
 		{
 			#region Normal commands
 			ExitCommand = new ExitCommand();
@@ -44,9 +44,9 @@ namespace RotationEditor.ViewModel
 			#region Special commands
 			ValidateCommand = new ValidateCommand();
 			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService);
-			NewPlateCommand = new NewPlateCommand(newPlateService);
-			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService);
-			JoinPlateCommand = new JoinPlateCommand(joinIndependentService);
+			NewPlateCommand = new NewPlateCommand(newPlateService, plateIDsService);
+			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService, plateIDsService);
+			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService);
 			#endregion
 
 			TestingCommand = new TestingCommand();

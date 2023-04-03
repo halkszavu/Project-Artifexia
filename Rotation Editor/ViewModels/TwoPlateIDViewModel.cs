@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RotationModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,10 +10,7 @@ namespace RotationEditor.ViewModel
 {
 	internal class TwoPlateIDViewModel : ViewModelBase
 	{
-		public List<int> PlateIDs
-		{
-			get => new() { 1, 100, 200, 300, 400, 500 }; //ParentWnd.Model.GetPlateIDs;
-		}
+		public ObservableCollection<int> PlateIDs { get; }
 
 		int _1selected;
 		public int FirstSelectedIndex
@@ -42,5 +41,10 @@ namespace RotationEditor.ViewModel
 
 		public int FirstPlateID => PlateIDs[FirstSelectedIndex];
 		public int SecondPlateID => PlateIDs[SecondSelectedIndex];
+
+		public TwoPlateIDViewModel(IGetPlateIDsService rotationsService) : base()
+		{
+			PlateIDs = new ObservableCollection<int>(rotationsService.GetPlateIDs);
+		}
 	}
 }

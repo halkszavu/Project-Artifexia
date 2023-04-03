@@ -54,15 +54,17 @@ namespace RotationEditor.Commands
 	public class NewPlateCommand : CommandBase
 	{
 		private readonly INewPlateService newPlateService;
+		private readonly IGetPlateIDsService plateIDsService;
 
-		public NewPlateCommand(INewPlateService newPlateService) : base()
+		public NewPlateCommand(INewPlateService newPlateService, IGetPlateIDsService plateIDsService) : base()
 		{
 			this.newPlateService = newPlateService;
+			this.plateIDsService = plateIDsService;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			var newPlateVM = new NewPlateIDViewModel();
+			var newPlateVM = new NewPlateIDViewModel(plateIDsService);
 			var timeStampVM = new TimeStampViewModel();
 			var newPlateView = new NewPlateID() { DataContext = newPlateVM };
 			var timeStampView = new TimeStamp() { DataContext = timeStampVM };
@@ -89,15 +91,17 @@ namespace RotationEditor.Commands
 	public class IndependentMoveCommand : CommandBase
 	{
 		private readonly IStartIndependentMoveService independentMoveService;
+		private readonly IGetPlateIDsService plateIDsService;
 
-		public IndependentMoveCommand(IStartIndependentMoveService independetMoveService) : base()
+		public IndependentMoveCommand(IStartIndependentMoveService independetMoveService, IGetPlateIDsService plateIDsService) : base()
 		{
 			this.independentMoveService = independetMoveService;
+			this.plateIDsService = plateIDsService;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			var plateIDVM = new PlateIDViewModel();
+			var plateIDVM = new PlateIDViewModel(plateIDsService);
 			var timestampVM = new TimeStampViewModel();
 			var plateIDView = new PlateID() { DataContext = plateIDVM };
 			var timestampView = new TimeStamp() { DataContext = timestampVM };
@@ -115,15 +119,17 @@ namespace RotationEditor.Commands
 	public class JoinPlateCommand : CommandBase
 	{
 		private readonly IJoinIndependentService joinPlateService;
+		private readonly IGetPlateIDsService plateIDsService;
 
-		public JoinPlateCommand(IJoinIndependentService joinPlateService) : base()
+		public JoinPlateCommand(IJoinIndependentService joinPlateService, IGetPlateIDsService plateIDsService) : base()
 		{
 			this.joinPlateService = joinPlateService;
+			this.plateIDsService = plateIDsService;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			var plateIDsVM = new TwoPlateIDViewModel();
+			var plateIDsVM = new TwoPlateIDViewModel(plateIDsService);
 			var timestampVM = new TimeStampViewModel();
 
 			var plateIDView = new PlateID() { DataContext = plateIDsVM };
