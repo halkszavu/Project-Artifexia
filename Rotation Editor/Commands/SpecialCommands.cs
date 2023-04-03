@@ -72,7 +72,10 @@ namespace RotationEditor.Commands
 				{
 					newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, timeStampVM.DesiredTimestamp);
 
-					var coordsVM = new CoordinateViewModel();
+					var coordsVM = new CoordinateViewModel() 
+					{
+						HelpText = "" 
+					};
 					var coordsView = new Coordinate() { DataContext = coordsVM };
 					if (coordsView.ShowDialog() == true)
 					{
@@ -87,16 +90,27 @@ namespace RotationEditor.Commands
 
 	public class IndependentMoveCommand : CommandBase
 	{
-		private readonly IStartIndependentMoveService independetMoveService;
+		private readonly IStartIndependentMoveService independentMoveService;
 
 		public IndependentMoveCommand(IStartIndependentMoveService independetMoveService) : base()
 		{
-			this.independetMoveService = independetMoveService;
+			this.independentMoveService = independetMoveService;
 		}
 
 		public override void Execute(object? parameter)
 		{
+			var plateIDVM = new PlateIDViewModel();
+			var timestampVM = new TimeStampViewModel();
+			var plateIDView = new PlateID() { DataContext = plateIDVM };
+			var timestampView = new TimeStamp() { DataContext = timestampVM };
 
+			if (plateIDView.ShowDialog() == true)
+			{
+				if (timestampView.ShowDialog() == true)
+				{
+					independentMoveService.StartIndependentMove(plateIDVM.SelectedPlateID, timestampVM.DesiredTimestamp);
+				}
+			}
 		}
 	}
 

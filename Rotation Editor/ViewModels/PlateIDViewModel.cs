@@ -26,5 +26,7 @@ namespace RotationEditor.ViewModel
 				}
 			}
 		}
+
+		public int SelectedPlateID => PlateIDs[_selected];
 	}
 }
