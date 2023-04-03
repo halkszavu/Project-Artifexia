@@ -79,9 +79,7 @@ namespace RotationEditor.Commands
 					var coordsView = new Coordinate() { DataContext = coordsVM };
 					if (coordsView.ShowDialog() == true)
 					{
-						var gotCoords = new Coordinates(coordsVM.Latitude, coordsVM.Longitude, coordsVM.Angle);
-
-						newPlateService.NewPlateSecondStep(gotCoords);
+						newPlateService.NewPlateSecondStep(coordsVM.GetCoordinates);
 					}
 				}
 			}
@@ -125,7 +123,26 @@ namespace RotationEditor.Commands
 
 		public override void Execute(object? parameter)
 		{
+			var plateIDsVM = new TwoPlateIDViewModel();
+			var timestampVM = new TimeStampViewModel();
 
+			var plateIDView = new PlateID() { DataContext = plateIDsVM };
+			var timestampView = new TimeStamp() { DataContext = timestampVM };
+
+			if (plateIDView.ShowDialog() == true)
+			{
+				if (timestampView.ShowDialog() == true)
+				{
+					var coordsVM = new CoordinateViewModel()
+					{
+						HelpText = "",
+					};
+					var coordsView = new Coordinate() { DataContext = coordsVM };
+
+					if(coordsView.ShowDialog() == true)
+					joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates);
+				}
+			}
 		}
 	}
 }

@@ -27,6 +27,6 @@ namespace RotationEditor.ViewModel
 			}
 		}
 
-		public int SelectedPlateID => PlateIDs[_selected];
+		public int SelectedPlateID => PlateIDs[SelectedIndex];
 	}
 }

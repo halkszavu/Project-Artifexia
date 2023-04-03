@@ -39,5 +39,8 @@ namespace RotationEditor.ViewModel
 				}
 			}
 		}
+
+		public int FirstPlateID => PlateIDs[FirstSelectedIndex];
+		public int SecondPlateID => PlateIDs[SecondSelectedIndex];
 	}
 }
