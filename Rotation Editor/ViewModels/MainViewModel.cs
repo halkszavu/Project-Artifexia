@@ -1,4 +1,5 @@
-﻿using RotationEditor.Commands;
+﻿using RotationEditor.Resources;
+using RotationEditor.Commands;
 using RotationModel;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace RotationEditor.ViewModel
 
 		public ObservableCollection<RotationViewModel> Rotations { get; }
 
-		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService, IGetPlateIDsService plateIDsService)
+		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService, IGetPlateIDsService plateIDsService, IGetRotationsService getRotationsService)
 		{
 			#region Normal commands
 			ExitCommand = new ExitCommand();
@@ -57,7 +58,7 @@ namespace RotationEditor.ViewModel
 
 			#region Special commands
 			ValidateCommand = new ValidateCommand();
-			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService, FileName);
+			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService, getRotationsService,  this);
 			NewPlateCommand = new NewPlateCommand(newPlateService, plateIDsService);
 			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService, plateIDsService);
 			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService);
@@ -99,6 +100,15 @@ namespace RotationEditor.ViewModel
 				Comment = "Rotation 200",
 			});
 			#endregion
+		}
+
+		public void UpdateRotations(IEnumerable<RotationViewModel> rotations)
+		{
+			Rotations.Clear();
+			foreach (RotationViewModel rotation in rotations)
+			{
+				Rotations.Add(rotation);
+			}
 		}
 	}
 }

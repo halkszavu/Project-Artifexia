@@ -1,4 +1,5 @@
-﻿<local:BaseWindow 
+﻿<local1:BaseWindow  
+        xmlns:local1="clr-namespace:RotationEditor.Resources"
         x:Class="RotationEditor.Views.NewPlateID"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -27,4 +28,4 @@
         <Button Grid.Column="1" Grid.Row="1" Content="Cancel" Margin="3" Click="CancelClick" IsCancel="True"/>
     </Grid>
 
-</local:BaseWindow>
+</local1:BaseWindow>

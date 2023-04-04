@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace RotationEditor
+namespace RotationEditor.Resources
 {
 	internal static class CustomCommands
 	{

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RotationEditor.Resources;
+using System.Collections.Generic;
 
 namespace RotationEditor.Views
 {

@@ -1,4 +1,6 @@
-﻿namespace RotationEditor.Views
+﻿using RotationEditor.Resources;
+
+namespace RotationEditor.Views
 {
 	/// <summary>
 	/// Interaction logic for TwoPlateID.xaml

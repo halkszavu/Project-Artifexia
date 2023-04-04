@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RotationEditor.ViewModel;
 using RotationEditor.Views;
+using RotationEditor.Resources;
 using RotationModel;
 
 namespace RotationEditor.Commands
@@ -39,17 +40,30 @@ namespace RotationEditor.Commands
 	public class DriftCorrectionCommand : CommandBase
 	{
 		private readonly IDriftcorrectionService driftcorrectionService;
-		private readonly string rotationFileName;
+		private readonly IGetRotationsService getRotationsService;
+		private readonly MainViewModel mainViewModel;
 
-		public DriftCorrectionCommand(IDriftcorrectionService driftcorrectionService, string rotationFileName) : base()
+		public DriftCorrectionCommand(IDriftcorrectionService driftcorrectionService, IGetRotationsService getRotationsService, MainViewModel mainViewModel) : base()
 		{
 			this.driftcorrectionService = driftcorrectionService;
-			this.rotationFileName = rotationFileName;
+			this.getRotationsService = getRotationsService;
+			this.mainViewModel = mainViewModel;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			driftcorrectionService.CreateDriftCorrection(rotationFileName);
+			driftcorrectionService.CreateDriftCorrection(mainViewModel.FileName);
+
+			mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
+				new RotationViewModel(rotEvent.PlateID)
+				{
+					TimeStamp = rotEvent.TimeStamp,
+					Latitude = rotEvent.Coordinates.Latitude,
+					Longitude = rotEvent.Coordinates.Longitude,
+					Angle = rotEvent.Coordinates.Angle,
+					ConjugateID = rotEvent.ConjugatePlateID,
+					Comment = rotEvent.Comment,
+				}));
 		}
 	}
 

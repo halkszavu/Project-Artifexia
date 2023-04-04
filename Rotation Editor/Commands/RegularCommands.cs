@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using RotationModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +33,10 @@ namespace RotationEditor.Commands
 	{
 		public override void Execute(object? parameter)
 		{
-			
+			OpenFileDialog odlg = new()
+			{
+				DefaultExt = FileManipulationService.DefaultExtension,
+			};
 		}
 	}
 
