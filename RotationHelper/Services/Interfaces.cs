@@ -42,4 +42,9 @@ namespace RotationModel
 	{
 		IEnumerable<int> GetPlateIDs { get; }
 	}
+
+	public interface IUpdateService
+	{
+		void Update(string fileName);
+	}
 }

@@ -44,13 +44,13 @@ namespace RotationEditor.ViewModel
 
 		public ObservableCollection<RotationViewModel> Rotations { get; }
 
-		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService, IGetPlateIDsService plateIDsService, IGetRotationsService getRotationsService)
+		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService, IGetPlateIDsService plateIDsService, IGetRotationsService getRotationsService, IUpdateService updateService)
 		{
 			#region Normal commands
 			ExitCommand = new ExitCommand();
 			SaveCommand = new SaveCommand();
 			SaveAsCommand = new SaveAsCommand();
-			OpenCommand = new OpenCommand();
+			OpenCommand = new OpenCommand(updateService, getRotationsService, this);
 			NewCommand = new NewCommand();
 			AboutCommand = new AboutCommand();
 			RefreshCommand = new RefreshCommand();

@@ -9,7 +9,7 @@ using static RotationModel.FileManipulationService;
 
 namespace RotationModel
 {
-	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService
+	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService
 	{
 		public double StartTime { get; private set; }
 		public IEnumerable<RotationEvent> GetRotations => Rotations;
@@ -132,6 +132,20 @@ namespace RotationModel
 		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords)
 		{
 			
+		}
+
+		public void Update(string fileName)
+		{
+			//this migth need to relocate
+			//or at least re-done
+			plateIds = new();
+			Rotations = new();
+			StartTime = 0.0D;
+			var tmp = ReadFile(File.Open(fileName,FileMode.Open));
+			foreach (var rot in tmp.Rotations)
+			{
+				AddRotation(rot);
+			}
 		}
 	}
 }

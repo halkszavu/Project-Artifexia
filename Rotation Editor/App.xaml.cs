@@ -22,7 +22,7 @@ namespace RotationEditor
 
 			MainWindow = new MainWindow()
 			{
-				DataContext = new MainViewModel(rotationModel, rotationModel, rotationModel, rotationModel, rotationModel, rotationModel), //I know it looks very silly, but with this, I can later separate if it needs to be.
+				DataContext = new MainViewModel(rotationModel, rotationModel, rotationModel, rotationModel, rotationModel, rotationModel, rotationModel), //I know it looks very silly, but with this, I can later separate if it needs to be.
 			};
 
 			MainWindow.Show();
