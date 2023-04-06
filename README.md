@@ -12,6 +12,7 @@ This Editor requires GPlates which is a free plate tectonic simulator. You can d
   * Initiating independent movement of two co-moving plates
   * Creating the drift correction, so the plates will not move back to their original position after the last existing timestamp
   <sup>This drift correction inserts a new line/updates the line at 1.0 Ma.<sup>
+* Creating a new .rot file. (planned)
   
 ## Extra features (planned or present)
 
