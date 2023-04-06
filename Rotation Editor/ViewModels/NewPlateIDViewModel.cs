@@ -39,6 +39,8 @@ namespace RotationEditor.ViewModel
 			}
 		}
 
+		public int SelectedPlateId => PlateIDs[SelectedPlateIndex];
+
 		public NewPlateIDViewModel(IGetPlateIDsService plateIDsService) : base()
 		{
 			PlateIDs = new ObservableCollection<int>(plateIDsService.GetPlateIDs);

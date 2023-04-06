@@ -88,7 +88,7 @@ namespace RotationEditor.Commands
 			{
 				if (timeStampView.ShowDialog() == true)
 				{
-					newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, timeStampVM.DesiredTimestamp);
+					newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, newPlateVM.SelectedPlateId, timeStampVM.DesiredTimestamp);
 
 					var coordsVM = new CoordinateViewModel() 
 					{

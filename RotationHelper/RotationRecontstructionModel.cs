@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using static RotationModel.FileManipulationService;
-
 namespace RotationModel
 {
 	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService
@@ -40,7 +38,7 @@ namespace RotationModel
 				else
 				{
 					Rotations.Add(rotation);
-					if(rotation.TimeStamp > StartTime)
+					if (rotation.TimeStamp > StartTime)
 						StartTime = rotation.TimeStamp;
 				}
 			}
@@ -75,8 +73,8 @@ namespace RotationModel
 			{
 				plateIds.Add(rotation.PlateID);
 				Rotations.Insert(index, rotation);
-				if(rotation.TimeStamp > StartTime)
-					StartTime=rotation.TimeStamp;
+				if (rotation.TimeStamp > StartTime)
+					StartTime = rotation.TimeStamp;
 			}
 		}
 
@@ -112,32 +110,48 @@ namespace RotationModel
 				}
 			}
 
-			WriteToFile(File.Open(rotationFileName,FileMode.Open), this);
+			SaveModel();
 		}
 
-		public void NewPlateFirstStep(int newPlateid, double timeStamp)
+		(int newPlateId, int parentPlateId, double timeStamp, int parentEntryIndex) newPlateData;
+		public void NewPlateFirstStep(int newPlateId, int parentPlateId, double timeStamp)
 		{
-			
+			newPlateData = (newPlateId, parentPlateId, timeStamp,0);
+			RotationEvent plateMovingIndependently = new(newPlateId, timeStamp, Coordinates.Default, 0, $"{newPlateId} starts moving independently");
+			RotationEvent plateAtEnd = new(newPlateId, 0.0D, Coordinates.Default, 0, $"{newPlateId} at the end");
+
+			var parentLastEntry = Rotations.First(x => (x.PlateID == parentPlateId && x.TimeStamp == StartTime));
+			int parentEntryIndex = Rotations.IndexOf(parentLastEntry);
+			newPlateData.parentEntryIndex = parentEntryIndex;
+
+			InsertRotation(parentEntryIndex, plateMovingIndependently);
+			InsertRotation(parentEntryIndex, plateAtEnd);
+
+			SaveModel();
 		}
 
 		public void NewPlateSecondStep(Coordinates gotCoordinates)
-		{
-			
+		{			
+			RotationEvent plateEndFollowingParent = new(newPlateData.newPlateId, newPlateData.timeStamp, gotCoordinates, newPlateData.parentPlateId, $"{newPlateData.newPlateId} end following {newPlateData.parentPlateId} parent");
+			RotationEvent plateAtStart = new(newPlateData.newPlateId, StartTime, gotCoordinates, newPlateData.parentPlateId, $"{newPlateData.newPlateId} at start");
+
+			InsertRotation(newPlateData.parentEntryIndex + 3, plateEndFollowingParent);
+			InsertRotation(newPlateData.parentEntryIndex + 4, plateAtStart);
 		}
 
 		public void StartIndependentMove(int plateId, double timeStamp)
 		{
-			
+
 		}
 
 		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords)
 		{
-			int parentPlateId = firstPlateId>=secondPlateId?firstPlateId:secondPlateId;
-			int childPlateId = secondPlateId>=firstPlateId?firstPlateId:secondPlateId;
+			int parentPlateId = firstPlateId >= secondPlateId ? firstPlateId : secondPlateId;
+			int childPlateId = secondPlateId >= firstPlateId ? firstPlateId : secondPlateId;
 
 			RotationEvent joiningEvent = new(childPlateId, timeStamp, coords, parentPlateId, $"{childPlateId} start following {parentPlateId}");
 
-			var x = Rotations.First( o=> o.PlateID == childPlateId && o.TimeStamp == timeStamp);
+			var x = Rotations.First(o => o.PlateID == childPlateId && o.TimeStamp == timeStamp);
 			int index = Rotations.IndexOf(x);
 
 			InsertRotation(index, joiningEvent);
@@ -145,7 +159,7 @@ namespace RotationModel
 			var first = Rotations.First(o => o.PlateID == childPlateId && o.TimeStamp == 0.0D);
 			first.ConjugatePlateID = parentPlateId;
 
-			WriteToFile(File.Open(rotationFileName, FileMode.Open), this);
+			SaveModel();
 		}
 
 		public void Update(string fileName)
@@ -156,11 +170,18 @@ namespace RotationModel
 			Rotations = new();
 			StartTime = 0.0D;
 			rotationFileName = fileName;
-			var tmp = ReadFile(File.Open(fileName,FileMode.Open));
+			var tmp = FileManipulationService.ReadFile(File.Open(fileName, FileMode.Open));
 			foreach (var rot in tmp.Rotations)
 			{
 				AddRotation(rot);
 			}
+		}
+
+		void SaveModel()
+		{
+			if (string.IsNullOrEmpty(rotationFileName))
+				throw new Exception();
+			FileManipulationService.WriteToFile(File.Open(rotationFileName, FileMode.Open), this);
 		}
 	}
 }

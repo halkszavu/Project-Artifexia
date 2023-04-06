@@ -13,6 +13,8 @@ namespace RotationModel
 		public double Longitude;
 		public double Angle;
 
+		public static Coordinates Default => new Coordinates(90.0D, 0.0D, 0.0D);
+
 		public Coordinates(double latitude, double longitude, double angle)
 		{
 			Latitude = latitude;

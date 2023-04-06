@@ -14,7 +14,7 @@ namespace RotationModel
 
 	public interface INewPlateService
 	{
-		void NewPlateFirstStep(int newPlateid, double timeStamp);
+		void NewPlateFirstStep(int newPlateId, int parentPlateId, double timeStamp);
 		void NewPlateSecondStep(Coordinates gotCoordinates);
 	}
 
