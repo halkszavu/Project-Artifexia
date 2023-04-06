@@ -52,7 +52,7 @@ namespace RotationEditor.Commands
 
 		public override void Execute(object? parameter)
 		{
-			driftcorrectionService.CreateDriftCorrection(mainViewModel.FileName);
+			driftcorrectionService.CreateDriftCorrection();
 
 			mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
 				new RotationViewModel(rotEvent.PlateID)
@@ -136,13 +136,11 @@ namespace RotationEditor.Commands
 	{
 		private readonly IJoinIndependentService joinPlateService;
 		private readonly IGetPlateIDsService plateIDsService;
-		private readonly MainViewModel mainViewModel;
 
-		public JoinPlateCommand(IJoinIndependentService joinPlateService, IGetPlateIDsService plateIDsService, MainViewModel mainViewModel) : base()
+		public JoinPlateCommand(IJoinIndependentService joinPlateService, IGetPlateIDsService plateIDsService) : base()
 		{
 			this.joinPlateService = joinPlateService;
 			this.plateIDsService = plateIDsService;
-			this.mainViewModel = mainViewModel;
 		}
 
 		public override void Execute(object? parameter)
@@ -164,7 +162,7 @@ namespace RotationEditor.Commands
 					var coordsView = new Coordinate() { DataContext = coordsVM };
 
 					if(coordsView.ShowDialog() == true)
-					joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates, mainViewModel.FileName);
+					joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates);
 				}
 			}
 		}

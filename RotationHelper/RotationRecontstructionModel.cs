@@ -17,6 +17,7 @@ namespace RotationModel
 
 		HashSet<int> plateIds;
 		List<RotationEvent> Rotations;
+		string rotationFileName;
 
 		public RotationRecontstructionModel()
 		{
@@ -79,7 +80,7 @@ namespace RotationModel
 			}
 		}
 
-		public void CreateDriftCorrection(string rotationFileName)
+		public void CreateDriftCorrection()
 		{
 			foreach (int plateID in plateIds)
 			{
@@ -129,7 +130,7 @@ namespace RotationModel
 			
 		}
 
-		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords, string rotationFileName)
+		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords)
 		{
 			int parentPlateId = firstPlateId>=secondPlateId?firstPlateId:secondPlateId;
 			int childPlateId = secondPlateId>=firstPlateId?firstPlateId:secondPlateId;
@@ -154,6 +155,7 @@ namespace RotationModel
 			plateIds = new();
 			Rotations = new();
 			StartTime = 0.0D;
+			rotationFileName = fileName;
 			var tmp = ReadFile(File.Open(fileName,FileMode.Open));
 			foreach (var rot in tmp.Rotations)
 			{

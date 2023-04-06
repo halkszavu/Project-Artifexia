@@ -58,10 +58,10 @@ namespace RotationEditor.ViewModel
 
 			#region Special commands
 			ValidateCommand = new ValidateCommand();
-			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService, getRotationsService,  this);
+			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService, getRotationsService, this);
 			NewPlateCommand = new NewPlateCommand(newPlateService, plateIDsService);
 			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService, plateIDsService);
-			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService, this);
+			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService);
 			#endregion
 
 			TestingCommand = new TestingCommand();

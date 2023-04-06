@@ -9,7 +9,7 @@ namespace RotationModel
 {
 	public interface IDriftcorrectionService
 	{
-		void CreateDriftCorrection(string rotationFileName);
+		void CreateDriftCorrection();
 	}
 
 	public interface INewPlateService
@@ -25,7 +25,7 @@ namespace RotationModel
 
 	public interface IJoinIndependentService
 	{
-		void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords, string rotationFileName);
+		void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords);
 	}
 
 	public interface IValidateService
