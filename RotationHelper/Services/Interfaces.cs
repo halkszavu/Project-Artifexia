@@ -25,7 +25,7 @@ namespace RotationModel
 
 	public interface IJoinIndependentService
 	{
-		void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords);
+		void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords, string rotationFileName);
 	}
 
 	public interface IValidateService

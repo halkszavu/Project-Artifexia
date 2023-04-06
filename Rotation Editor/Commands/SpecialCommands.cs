@@ -136,11 +136,13 @@ namespace RotationEditor.Commands
 	{
 		private readonly IJoinIndependentService joinPlateService;
 		private readonly IGetPlateIDsService plateIDsService;
+		private readonly MainViewModel mainViewModel;
 
-		public JoinPlateCommand(IJoinIndependentService joinPlateService, IGetPlateIDsService plateIDsService) : base()
+		public JoinPlateCommand(IJoinIndependentService joinPlateService, IGetPlateIDsService plateIDsService, MainViewModel mainViewModel) : base()
 		{
 			this.joinPlateService = joinPlateService;
 			this.plateIDsService = plateIDsService;
+			this.mainViewModel = mainViewModel;
 		}
 
 		public override void Execute(object? parameter)
@@ -162,7 +164,7 @@ namespace RotationEditor.Commands
 					var coordsView = new Coordinate() { DataContext = coordsVM };
 
 					if(coordsView.ShowDialog() == true)
-					joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates);
+					joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates, mainViewModel.FileName);
 				}
 			}
 		}

@@ -61,7 +61,7 @@ namespace RotationEditor.ViewModel
 			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService, getRotationsService,  this);
 			NewPlateCommand = new NewPlateCommand(newPlateService, plateIDsService);
 			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService, plateIDsService);
-			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService);
+			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService, this);
 			#endregion
 
 			TestingCommand = new TestingCommand();

@@ -129,9 +129,22 @@ namespace RotationModel
 			
 		}
 
-		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords)
+		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords, string rotationFileName)
 		{
-			
+			int parentPlateId = firstPlateId>=secondPlateId?firstPlateId:secondPlateId;
+			int childPlateId = secondPlateId>=firstPlateId?firstPlateId:secondPlateId;
+
+			RotationEvent joiningEvent = new(childPlateId, timeStamp, coords, parentPlateId, $"{childPlateId} start following {parentPlateId}");
+
+			var x = Rotations.First( o=> o.PlateID == childPlateId && o.TimeStamp == timeStamp);
+			int index = Rotations.IndexOf(x);
+
+			InsertRotation(index, joiningEvent);
+
+			var first = Rotations.First(o => o.PlateID == childPlateId && o.TimeStamp == 0.0D);
+			first.ConjugatePlateID = parentPlateId;
+
+			WriteToFile(File.Open(rotationFileName, FileMode.Open), this);
 		}
 
 		public void Update(string fileName)
