@@ -141,7 +141,18 @@ namespace RotationModel
 
 		public void StartIndependentMove(int plateId, double timeStamp)
 		{
+			var lastEntry = Rotations.First(rot => rot.PlateID == plateId && rot.TimeStamp > 1.0D);
+			int originalConjugateID = lastEntry.ConjugatePlateID;
+			int lastEntryIndex = Rotations.IndexOf(lastEntry);
 
+			RotationEvent endFollowing = new(plateId, timeStamp, lastEntry.Coordinates, lastEntry.ConjugatePlateID, $"End following {originalConjugateID}");
+			Coordinates conjugateCoords = GetCoordinatesOfIDAtTimestep(lastEntry.ConjugatePlateID, timeStamp);
+			RotationEvent startIndependent = new(plateId, timeStamp, conjugateCoords, 0, "Start moving independently");
+
+			InsertRotation(lastEntryIndex, endFollowing);
+			InsertRotation(lastEntryIndex, startIndependent);
+
+			SaveModel();
 		}
 
 		public void JoinIndependentPlates(int firstPlateId, int secondPlateId, double timeStamp, Coordinates coords)
@@ -182,6 +193,25 @@ namespace RotationModel
 			if (string.IsNullOrEmpty(rotationFileName))
 				throw new Exception();
 			FileManipulationService.WriteToFile(File.Open(rotationFileName, FileMode.Open), this);
+		}
+
+		Coordinates GetCoordinatesOfIDAtTimestep(int plateId, double timeStamp, bool isUpper = true)
+		{
+			var plateRotations = Rotations.Where(r => r.PlateID == plateId).Where(r => r.TimeStamp == timeStamp).ToList();
+			if (plateRotations.Any())
+			{
+				if (plateRotations.Count == 1)
+					return plateRotations[0].Coordinates;
+				else
+				{
+					if (isUpper)
+						return plateRotations[0].Coordinates;
+					else
+						return plateRotations[1].Coordinates;
+				}
+			}
+			else
+				throw new ArgumentException("There is no Coordinates for this ID at this Timestamp");
 		}
 	}
 }
