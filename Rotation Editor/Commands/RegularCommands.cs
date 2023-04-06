@@ -16,17 +16,43 @@ namespace RotationEditor.Commands
 
 	public class SaveCommand : CommandBase
 	{
+		private readonly ISaveService saveService;
+
+		public SaveCommand(ISaveService saveService)
+		{
+			this.saveService = saveService;
+		}
+
 		public override void Execute(object? parameter)
 		{
-			
+			saveService.Save();
 		}
 	}
 
 	public class SaveAsCommand : CommandBase
 	{
+		private readonly ISaveService saveService;
+		private readonly MainViewModel mainViewModel;
+
+		public SaveAsCommand(ISaveService saveService, MainViewModel mainViewModel)
+		{
+			this.saveService = saveService;
+			this.mainViewModel = mainViewModel;
+		}
+
 		public override void Execute(object? parameter)
 		{
-			
+			var sdlg = new SaveFileDialog()
+			{
+				DefaultExt = FileManipulationService.DefaultExtension,
+				Filter = "Rotation files (*.rot)|*.rot|All files (*.*)|*.*",
+			};
+
+			if(sdlg.ShowDialog() == true)
+			{
+				mainViewModel.FileName = sdlg.FileName;
+				saveService.Save(mainViewModel.FileName);
+			}
 		}
 	}
 

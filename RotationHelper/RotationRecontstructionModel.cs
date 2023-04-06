@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RotationModel
 {
-	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService
+	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService, ISaveService
 	{
 		public double StartTime { get; private set; }
 		public IEnumerable<RotationEvent> GetRotations => Rotations;
@@ -186,6 +186,17 @@ namespace RotationModel
 			{
 				AddRotation(rot);
 			}
+		}
+
+		public void Save()
+		{
+			SaveModel();
+		}
+
+		public void Save(string fileName)
+		{
+			rotationFileName = fileName;
+			SaveModel();
 		}
 
 		void SaveModel()

@@ -47,4 +47,10 @@ namespace RotationModel
 	{
 		void Update(string fileName);
 	}
+
+	public interface ISaveService
+	{
+		void Save();
+		void Save(string fileName);
+	}
 }
