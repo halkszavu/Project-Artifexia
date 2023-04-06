@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RotationEditor.Commands
 {
@@ -108,7 +109,10 @@ namespace RotationEditor.Commands
 	{
 		public override void Execute(object? parameter)
 		{
-
+			MessageBox.Show(
+				@"This program is for manipulating the .rot file associated with GPlates.
+Created by: Lewis Callman",
+				"About Rotation Editor", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 	}
 
