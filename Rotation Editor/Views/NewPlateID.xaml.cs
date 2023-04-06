@@ -13,12 +13,5 @@ namespace RotationEditor.Views
 		{
 			InitializeComponent();
 		}
-
-		private void btnGenerate_Click(object sender, RoutedEventArgs e)
-		{
-			//NewPlate = ParentWnd.Model.GeneratePlateID(ParentPlate);
-			//int parentID = ParentWnd.Model.GetPlateIDs[SelectedPlateIndex];
-			//NewPlate = ParentWnd.Model.GeneratePlateID(parentID);
-		}
 	}
 }
