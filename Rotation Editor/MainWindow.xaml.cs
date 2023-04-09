@@ -330,6 +330,8 @@ namespace Rotation_Editor
 		private void SaveModelToFile(string fileName)
 		{
 			//Save edits to the existing file/to new file
+			if (fileName != FileName)
+				FileName = fileName;
 			var rot = Mapper.MapToData(Model);
 			FileManipulationTool.WriteFile(FileName, rot);
 		}
