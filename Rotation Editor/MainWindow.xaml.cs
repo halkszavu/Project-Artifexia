@@ -12,15 +12,9 @@ namespace RotationEditor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private string FileName;
-		public ReconstructionModel Model { get; private set; }
-
 		public MainWindow()
 		{
 			InitializeComponent();
-			Model = new ReconstructionModel();
-
-			this.DataContext = Model;
 		}		
 	}
 }
