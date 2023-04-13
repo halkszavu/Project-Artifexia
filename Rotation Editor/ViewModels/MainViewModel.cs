@@ -44,7 +44,15 @@ namespace RotationEditor.ViewModel
 
 		public ObservableCollection<RotationViewModel> Rotations { get; }
 
-		public MainViewModel(IDriftcorrectionService driftCorrectionService, INewPlateService newPlateService, IStartIndependentMoveService startIndependentMoveService, IJoinIndependentService joinIndependentService, IGetPlateIDsService plateIDsService, IGetRotationsService getRotationsService, IUpdateService updateService, ISaveService saveService)
+		public MainViewModel(
+			IDriftcorrectionService driftCorrectionService, 
+			INewPlateService newPlateService,
+			IStartIndependentMoveService startIndependentMoveService,
+			IJoinIndependentService joinIndependentService,
+			IGetPlateIDsService plateIDsService,
+			IGetRotationsService getRotationsService,
+			IUpdateService updateService,
+			ISaveService saveService)
 		{
 			#region Normal commands
 			ExitCommand = new ExitCommand();

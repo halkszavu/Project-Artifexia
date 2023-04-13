@@ -20,9 +20,26 @@ namespace RotationEditor
 		{
 			RotationRecontstructionModel rotationModel = new RotationRecontstructionModel();
 
+			IDriftcorrectionService driftcorrectionService = rotationModel;
+			INewPlateService newPlateService = rotationModel;
+			IStartIndependentMoveService startIndependentMoveService = rotationModel;
+			IJoinIndependentService joinIndependentService = rotationModel;
+			IGetPlateIDsService plateIDsService = rotationModel;
+			IGetRotationsService getRotationsService = rotationModel;
+			IUpdateService updateService = rotationModel;
+			ISaveService saveService = rotationModel;
+
 			MainWindow = new MainWindow()
 			{
-				DataContext = new MainViewModel(rotationModel, rotationModel, rotationModel, rotationModel, rotationModel, rotationModel, rotationModel, rotationModel), //I know it looks very silly, but with this, I can later separate if it needs to be.
+				DataContext = new MainViewModel(
+					driftcorrectionService, 
+					newPlateService, 
+					startIndependentMoveService, 
+					joinIndependentService, 
+					plateIDsService, 
+					getRotationsService, 
+					updateService, 
+					saveService),
 			};
 
 			MainWindow.Show();
