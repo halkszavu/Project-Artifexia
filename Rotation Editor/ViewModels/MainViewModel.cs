@@ -77,36 +77,36 @@ namespace RotationEditor.ViewModel
 			Rotations = new ObservableCollection<RotationViewModel>();
 
 			#region Seeding rotations
-			Rotations.Add(new RotationViewModel(100)
-			{
-				TimeStamp = 1500.0D,
-				ConjugateID = 0,
-				Comment = "Rotation 100",
-			});
-			Rotations.Add(new RotationViewModel(100)
-			{
-				TimeStamp = 1400.0D,
-				ConjugateID = 0,
-				Comment = "Rotation 100",
-			});
-			Rotations.Add(new RotationViewModel(100)
-			{
-				TimeStamp = 1300.0D,
-				ConjugateID = 0,
-				Comment = "Rotation 100",
-			});
-			Rotations.Add(new RotationViewModel(200)
-			{
-				TimeStamp = 1500.0D,
-				ConjugateID = 0,
-				Comment = "Rotation 200",
-			});
-			Rotations.Add(new RotationViewModel(200)
-			{
-				TimeStamp = 1400.0D,
-				ConjugateID = 0,
-				Comment = "Rotation 200",
-			});
+			//Rotations.Add(new RotationViewModel(100)
+			//{
+			//	TimeStamp = 1500.0D,
+			//	ConjugateID = 0,
+			//	Comment = "Rotation 100",
+			//});
+			//Rotations.Add(new RotationViewModel(100)
+			//{
+			//	TimeStamp = 1400.0D,
+			//	ConjugateID = 0,
+			//	Comment = "Rotation 100",
+			//});
+			//Rotations.Add(new RotationViewModel(100)
+			//{
+			//	TimeStamp = 1300.0D,
+			//	ConjugateID = 0,
+			//	Comment = "Rotation 100",
+			//});
+			//Rotations.Add(new RotationViewModel(200)
+			//{
+			//	TimeStamp = 1500.0D,
+			//	ConjugateID = 0,
+			//	Comment = "Rotation 200",
+			//});
+			//Rotations.Add(new RotationViewModel(200)
+			//{
+			//	TimeStamp = 1400.0D,
+			//	ConjugateID = 0,
+			//	Comment = "Rotation 200",
+			//});
 			#endregion
 		}
 
