@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace RotationHelper
+namespace RotationModel
 {
 	[DebuggerDisplay("Lat: {Latitude} Lon: {Longitude} Ang: {Angle}")]
 	public struct Coordinates : IEquatable<Coordinates>
@@ -12,6 +12,8 @@ namespace RotationHelper
 		public double Latitude;
 		public double Longitude;
 		public double Angle;
+
+		public static Coordinates Default => new Coordinates(90.0D, 0.0D, 0.0D);
 
 		public Coordinates(double latitude, double longitude, double angle)
 		{
@@ -48,7 +50,7 @@ namespace RotationHelper
 
 		public override string ToString() => $"{Latitude} {Longitude} {Angle}";
 
-		public override int GetHashCode() => Latitude.GetHashCode() ^ Longitude.GetHashCode() ^ Angle.GetHashCode();
+		public override int GetHashCode() => HashCode.Combine(Latitude, Longitude, Angle);
 	}
 
 	[DebuggerDisplay("{PlateID} {TimeStamp} Coordinates {ConjugatePlateID} ! {Comment}")]
@@ -57,15 +59,19 @@ namespace RotationHelper
 		//400 1900.0   12.0868  -83.5756  -27.0759  000 ! Starts moving independently
 		//ID timestamp coordinates1 2 3 conjugatePlateId ! comment
 
-		public int PlateID { get; private set; }
-		public double TimeStamp { get; set; }
+		public int PlateID { get; }
+		public double TimeStamp { get; }
 		public Coordinates Coordinates { get; set; }
 		public int ConjugatePlateID { get; set; }
 		public string? Comment { get; set; }
 
-		public RotationEvent(int plateId)
+		public RotationEvent(int plateId, double timeStamp, Coordinates coords, int conjugatePlateId, string comment = "")
 		{
 			PlateID = plateId;
+			TimeStamp = timeStamp;
+			Coordinates = coords;
+			ConjugatePlateID = conjugatePlateId;
+			Comment = comment;
 		}
 
 		public override bool Equals(object? obj)
@@ -112,48 +118,17 @@ namespace RotationHelper
 
 			var contents = rough[0].Split(' ').Select(x => x.Trim()).Where(r => !string.IsNullOrEmpty(r)).ToArray();
 
-			RotationEvent rotation = new RotationEvent(int.Parse(contents[0]))
-			{
-				TimeStamp = double.Parse(contents[1]),
-				Coordinates = new Coordinates()
-				{
-					Latitude = double.Parse(contents[2]),
-					Longitude = double.Parse(contents[3]),
-					Angle = double.Parse(contents[4]),
-				},
-				ConjugatePlateID = int.Parse(contents[5]),
-				Comment = rough[1].Trim(),
-			};
+			RotationEvent rotation = new RotationEvent(
+				int.Parse(contents[0]),
+				double.Parse(contents[1]),
+				new Coordinates(
+					double.Parse(contents[2]),
+					double.Parse(contents[3]),
+					double.Parse(contents[4])),
+				int.Parse(contents[5]),
+				rough[1].Trim());
 
 			return rotation;
 		}
-	}
-
-	public class FullRotationReconstruction
-	{
-		public Dictionary<int, List<RotationEvent>> Rotations { get; private set; }
-
-		public FullRotationReconstruction()
-		{
-			Rotations = new Dictionary<int, List<RotationEvent>>();
-		}
-
-		public void AddNewRotation(RotationEvent rotation)
-		{
-			if (rotation == null)
-				throw new ArgumentNullException($"{nameof(rotation)} should never be null");
-			if (rotation.PlateID == 0)
-				throw new ArgumentException("PlateID 000 is used for other purposes, please do not use it!");
-
-			if (Rotations.ContainsKey(rotation.PlateID))
-			{
-				if (Rotations[rotation.PlateID].Contains(rotation))
-					throw new ArgumentException("Same rotation is already added");
-				else
-					Rotations[rotation.PlateID].Add(rotation);
-			}
-			else
-				Rotations[rotation.PlateID] = new List<RotationEvent>() { rotation };
-		}
-	}
+	}	
 }

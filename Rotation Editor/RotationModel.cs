@@ -1,4 +1,4 @@
-﻿using RotationHelper;
+﻿using RotationModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,8 +6,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace Rotation_Editor.ViewModel
+namespace RotationEditor.ViewModel
 {
+	//Should be removed
 	public class RotationModel
 	{
 		public int PlateID { get; set; }
@@ -30,6 +31,7 @@ namespace Rotation_Editor.ViewModel
 		};
 	}
 
+	//Should be removed
 	public class ReconstructionModel : INotifyPropertyChanged
 	{
 		private ObservableCollection<RotationModel> _rotations;

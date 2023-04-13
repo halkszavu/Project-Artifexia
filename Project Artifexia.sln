@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rotation Editor", "Rotation Editor\Rotation Editor.csproj", "{741428E1-EF1A-4A35-838A-D4CE1FF7DA02}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RotationHelper", "RotationHelper\RotationHelper.csproj", "{6B92324E-A6AC-4A68-A7D7-BF6477299C5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RotationModel", "RotationHelper\RotationModel.csproj", "{6B92324E-A6AC-4A68-A7D7-BF6477299C5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test Consol", "Test Consol\Test Consol.csproj", "{F525438B-1351-4607-9B64-688CF386946A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test Consol", "Test Consol\Test Consol.csproj", "{F525438B-1351-4607-9B64-688CF386946A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
