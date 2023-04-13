@@ -18,7 +18,7 @@ namespace RotationEditor.Commands
 
 		public override void Execute(object? parameter)
 		{
-			int x = baseViewModel.SelectedPlateId + 1;
+			int x = baseViewModel.SelectedPlateId;
 			do
 			{
 				x++;
