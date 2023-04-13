@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RotationModel
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService, ISaveService
 	{
 		public double StartTime { get; private set; }
