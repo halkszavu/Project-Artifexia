@@ -124,8 +124,8 @@ namespace RotationModel
 			int parentEntryIndex = Rotations.IndexOf(parentLastEntry);
 			newPlateData.parentEntryIndex = parentEntryIndex;
 
-			InsertRotation(parentEntryIndex, plateMovingIndependently);
-			InsertRotation(parentEntryIndex, plateAtEnd);
+			InsertRotation(parentEntryIndex + 1, plateMovingIndependently);
+			InsertRotation(parentEntryIndex + 1, plateAtEnd);
 
 			SaveModel();
 		}
@@ -137,6 +137,8 @@ namespace RotationModel
 
 			InsertRotation(newPlateData.parentEntryIndex + 3, plateEndFollowingParent);
 			InsertRotation(newPlateData.parentEntryIndex + 4, plateAtStart);
+
+			SaveModel();
 		}
 
 		public void StartIndependentMove(int plateId, double timeStamp)
