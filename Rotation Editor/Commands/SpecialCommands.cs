@@ -148,10 +148,10 @@ namespace RotationEditor.Commands
 			var plateIDsVM = new TwoPlateIDViewModel(plateIDsService);
 			var timestampVM = new TimeStampViewModel();
 
-			var plateIDView = new PlateID() { DataContext = plateIDsVM };
+			var plateIDsView = new TwoPlateID() { DataContext = plateIDsVM };
 			var timestampView = new TimeStamp() { DataContext = timestampVM };
 
-			if (plateIDView.ShowDialog() == true)
+			if (plateIDsView.ShowDialog() == true)
 			{
 				if (timestampView.ShowDialog() == true)
 				{
