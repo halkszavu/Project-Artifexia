@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace RotationEditor.Resources
 {
+	/// <summary>
+	/// Base class for Window type forms. 
+	/// </summary>
 	public abstract class BaseWindow : Window
 	{
 		//public MainWindow ParentWnd => (Application.Current.MainWindow as MainWindow);

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace RotationEditor.Commands
 {
+	/// <summary>
+	/// Base class for implemented commands
+	/// </summary>
 	public abstract class CommandBase : ICommand
 	{
 		public event EventHandler CanExecuteChanged;

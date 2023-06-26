@@ -10,14 +10,23 @@ using RotationModel;
 
 namespace RotationEditor.Commands
 {
+	/// <summary>
+	/// Command for testing purposes. This command can have various effects according to what needs to be tested
+	/// </summary>
 	public class TestingCommand : CommandBase
 	{
+		/// <summary>
+		/// This is where the test should go.
+		/// </summary>
 		public override void Execute(object? parameter)
 		{
 
 		}
 	}
 
+	/// <summary>
+	/// Command for validating the opened .rot database for format.
+	/// </summary>
 	public class ValidateCommand : CommandBase
 	{
 		private readonly IValidateService validateService;
@@ -37,6 +46,9 @@ namespace RotationEditor.Commands
 		}
 	}
 
+	/// <summary>
+	/// Command for generating the drift correction.
+	/// </summary>
 	public class DriftCorrectionCommand : CommandBase
 	{
 		private readonly IDriftcorrectionService driftcorrectionService;
@@ -67,6 +79,9 @@ namespace RotationEditor.Commands
 		}
 	}
 
+	/// <summary>
+	/// Command for generating a new plate.
+	/// </summary>
 	public class NewPlateCommand : CommandBase
 	{
 		private readonly INewPlateService newPlateService;
@@ -104,6 +119,9 @@ namespace RotationEditor.Commands
 		}
 	}
 
+	/// <summary>
+	/// Command for starting an independent movement of a given plate.
+	/// </summary>
 	public class IndependentMoveCommand : CommandBase
 	{
 		private readonly IStartIndependentMoveService independentMoveService;
@@ -132,6 +150,9 @@ namespace RotationEditor.Commands
 		}
 	}
 
+	/// <summary>
+	/// Command for joining a plate to another plate at a given point in time.
+	/// </summary>
 	public class JoinPlateCommand : CommandBase
 	{
 		private readonly IJoinIndependentService joinPlateService;
