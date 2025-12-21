@@ -59,7 +59,7 @@ namespace RotationEditor.ViewModel
 			SaveCommand = new SaveCommand(saveService);
 			SaveAsCommand = new SaveAsCommand(saveService, this);
 			OpenCommand = new OpenCommand(updateService, getRotationsService, this);
-			NewCommand = new NewCommand();
+			NewCommand = new NewCommand(saveService, this);
 			AboutCommand = new AboutCommand();
 			RefreshCommand = new RefreshCommand();
 			#endregion

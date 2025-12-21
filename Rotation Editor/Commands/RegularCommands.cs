@@ -99,9 +99,20 @@ namespace RotationEditor.Commands
 
 	public class NewCommand : CommandBase
 	{
+		private readonly ISaveService saveService;
+		private readonly MainViewModel mainViewModel;
+
+		public NewCommand(ISaveService saveService, MainViewModel mainViewModel)
+		{
+			this.saveService = saveService;
+			this.mainViewModel = mainViewModel;
+		}
+
 		public override void Execute(object? parameter)
 		{
+			// Generate the necessary cratons with the default rotation events
 
+			// Then save the generated data similar to the SaveCommand
 		}
 	}
 
