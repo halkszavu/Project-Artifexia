@@ -208,7 +208,7 @@ namespace RotationModel
 		{
 			if (string.IsNullOrEmpty(rotationFileName))
 				throw new Exception();
-			FileManipulationService.WriteToFile(File.Open(rotationFileName, FileMode.Open), this);
+			FileManipulationService.WriteToFile(File.Open(rotationFileName, FileMode.OpenOrCreate), this);
 		}
 
 		Coordinates GetCoordinatesOfIDAtTimestep(int plateId, double timeStamp, bool isUpper = true)
