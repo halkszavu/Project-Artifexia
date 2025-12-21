@@ -115,8 +115,8 @@ namespace RotationModel
 
 		(int newPlateId, int parentPlateId, double timeStamp, int parentEntryIndex) newPlateData;
 		public void NewPlateFirstStep(int newPlateId, int parentPlateId, double timeStamp)
-		{
-			newPlateData = (newPlateId, parentPlateId, timeStamp,0);
+		{			
+			newPlateData = (newPlateId, parentPlateId, timeStamp, 0);
 			RotationEvent plateMovingIndependently = new(newPlateId, timeStamp, Coordinates.Default, 0, $"{newPlateId} starts moving independently");
 			RotationEvent plateAtEnd = new(newPlateId, 0.0D, Coordinates.Default, 0, $"{newPlateId} at the end");
 
