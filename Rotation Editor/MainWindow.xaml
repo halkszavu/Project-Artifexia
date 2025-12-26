@@ -8,6 +8,10 @@
         Title="Rotation Editor" Height="450" Width="600">
     <Window.InputBindings>
         <KeyBinding Command="{Binding TestingCommand}" Key="F12"/>
+        <KeyBinding Command="{Binding NewCommand}" Modifiers="Control" Key="N"/>
+        <KeyBinding Command="{Binding OpenCommand}" Modifiers="Control" Key="O"/>
+        <KeyBinding Command="{Binding SaveCommand}" Modifiers="Control" Key="S"/>
+        <KeyBinding Command="{Binding SaveAsCommand}" Modifiers="Control+Shift" Key="S"/>
     </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
