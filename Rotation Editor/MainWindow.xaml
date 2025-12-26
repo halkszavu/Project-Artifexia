@@ -6,17 +6,6 @@
         xmlns:local="clr-namespace:RotationEditor"
         mc:Ignorable="d"
         Title="Rotation Editor" Height="450" Width="600">
-    <Window.CommandBindings>
-        <CommandBinding Command="local:CustomCommands.Testing" Executed="TestingCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Exit" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.SaveAs" CanExecute="SaveCommand_CanExecute" Executed="SaveAsCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Comment" Executed="CommentCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Add" Executed="PlusCommand_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Move" Executed="MoveCommand_Executed"/>
-        <CommandBinding Command="ApplicationCommands.Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed"/>
-        <CommandBinding Command="ApplicationCommands.Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed"/>
-        <CommandBinding Command="ApplicationCommands.New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
-    </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Command="{Binding TestingCommand}" Key="F12"/>
     </Window.InputBindings>
@@ -68,10 +57,10 @@
                 <RowDefinition Height="36"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnUp" Grid.Row="0" Margin="1" Command="local:CustomCommands.Move" CommandParameter="1">↑</Button>
-            <Button Name="btnComment" Grid.Row="1" Margin="1" Command="local:CustomCommands.Comment">C</Button>
-            <Button Name="btnPlus" Grid.Row="2" Margin="1" Command="local:CustomCommands.Add">+</Button>
-            <Button x:Name="btnDown" Grid.Row="3" Margin="1" Command="local:CustomCommands.Move" CommandParameter="-1">↓</Button>
+            <Button x:Name="btnUp" Grid.Row="0" Margin="1" >↑</Button>
+            <Button Name="btnComment" Grid.Row="1" Margin="1" >C</Button>
+            <Button Name="btnPlus" Grid.Row="2" Margin="1" >+</Button>
+            <Button x:Name="btnDown" Grid.Row="3" Margin="1" >↓</Button>
         </Grid>
 
         <WrapPanel Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="2">
