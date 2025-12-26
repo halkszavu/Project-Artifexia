@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="CratonCreation" Height="300" Width="400">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Margin="2">
+            <Button Content="Generate" Margin="3"/>
+        </StackPanel>
     </Grid>
 </Window>
