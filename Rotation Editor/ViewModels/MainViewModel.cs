@@ -118,5 +118,11 @@ namespace RotationEditor.ViewModel
 				Rotations.Add(rotation);
 			}
 		}
+
+		internal void ResetViewModel()
+		{
+			FileName = "";
+			Rotations.Clear();
+		}
 	}
 }

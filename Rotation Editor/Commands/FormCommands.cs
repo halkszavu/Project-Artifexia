@@ -27,4 +27,19 @@ namespace RotationEditor.Commands
 			baseViewModel.NewPlate = x;
 		}
 	}
+
+	public class GenerateCratonsCommand : CommandBase
+	{
+		private readonly CratonCreationViewModel cratonCreationViewModel;
+
+		public GenerateCratonsCommand(CratonCreationViewModel cratonCreationViewModel) : base()
+		{
+			this.cratonCreationViewModel = cratonCreationViewModel;
+		}
+
+		public override void Execute(object? parameter)
+		{
+			cratonCreationViewModel.GenerateCratons();
+		}
+	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RotationEditor.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Rotation_Editor.Views
 	/// <summary>
 	/// Interaction logic for CratonCreation.xaml
 	/// </summary>
-	public partial class CratonCreation : Window
+	public partial class CratonCreation : BaseWindow
 	{
 		public CratonCreation()
 		{

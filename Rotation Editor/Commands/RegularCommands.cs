@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Rotation_Editor.Views;
 using RotationEditor.ViewModel;
 using RotationModel;
 using System;
@@ -111,6 +112,17 @@ namespace RotationEditor.Commands
 		public override void Execute(object? parameter)
 		{
 			// Generate the necessary cratons with the default rotation events
+			mainViewModel.ResetViewModel();
+			var cratonVM = new CratonCreationViewModel();
+			var cratonGenerationDialog = new CratonCreation()
+			{
+				DataContext = cratonVM
+			};
+
+			if(cratonGenerationDialog.ShowDialog() == true)
+			{
+
+			}
 
 			// Then save the generated data similar to the SaveCommand
 		}
