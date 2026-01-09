@@ -13,6 +13,7 @@ namespace RotationEditor.ViewModel
 		private int numberOfCratons;
 		private int minCratonID;
 		private int cratonIDIncrement;
+		private double startTime;
 
 		public ObservableCollection<CratonViewModel> Cratons { get; set; }
 
@@ -25,6 +26,7 @@ namespace RotationEditor.ViewModel
 				{
 					numberOfCratons = value;
 					OnPropertyChanged();
+					OnPropertyChanged(nameof(IsDataValid));
 				}
 			}
 		}
@@ -53,6 +55,28 @@ namespace RotationEditor.ViewModel
 			}
 		}
 
+		public double StartTime
+		{
+			get => startTime;
+			set
+			{
+				if(startTime != value)
+				{
+					startTime = value;
+					OnPropertyChanged();
+					OnPropertyChanged(nameof(IsDataValid));
+				}
+			}
+		}
+
+		public bool IsDataValid
+		{
+			get
+			{
+				return NumberOfCratons > 0 && StartTime >= 0.0D;
+			}
+		}
+
 		public ICommand GenerateCratonsCommand { get; set; }
 		public ICommand ClearCratonsCommand { get; set; }
 
@@ -65,6 +89,9 @@ namespace RotationEditor.ViewModel
 				Cratons.Clear();
 				OnPropertyChanged(nameof(Cratons));
 			});
+
+			CratonIDIncrement = 1;
+			MinCratonID = 1;
 		}
 
 		internal void GenerateCratons()
