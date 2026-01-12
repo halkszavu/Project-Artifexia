@@ -101,11 +101,13 @@ namespace RotationEditor.Commands
 	public class NewCommand : CommandBase
 	{
 		private readonly ISaveService saveService;
+		private readonly ICratonService cratonService;
 		private readonly MainViewModel mainViewModel;
 
-		public NewCommand(ISaveService saveService, MainViewModel mainViewModel)
+		public NewCommand(ISaveService saveService, ICratonService cratonService, MainViewModel mainViewModel)
 		{
 			this.saveService = saveService;
+			this.cratonService = cratonService;
 			this.mainViewModel = mainViewModel;
 		}
 
@@ -121,7 +123,13 @@ namespace RotationEditor.Commands
 
 			if(cratonGenerationDialog.ShowDialog() == true)
 			{
-
+				cratonService.ResetModel();
+				cratonService.SetStartTime(cratonVM.StartTime);
+				// We have the craton data in cratonVM
+				foreach(var craton in cratonVM.Cratons)
+				{
+					cratonService.AddCraton(craton.ID, craton.Name);
+				}
 			}
 
 			// Then save the generated data similar to the SaveCommand

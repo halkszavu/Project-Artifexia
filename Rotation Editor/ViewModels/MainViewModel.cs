@@ -52,14 +52,15 @@ namespace RotationEditor.ViewModel
 			IGetPlateIDsService plateIDsService,
 			IGetRotationsService getRotationsService,
 			IUpdateService updateService,
-			ISaveService saveService)
+			ISaveService saveService,
+			ICratonService cratonService)
 		{
 			#region Normal commands
 			ExitCommand = new ExitCommand();
 			SaveCommand = new SaveCommand(saveService);
 			SaveAsCommand = new SaveAsCommand(saveService, this);
 			OpenCommand = new OpenCommand(updateService, getRotationsService, this);
-			NewCommand = new NewCommand(saveService, this);
+			NewCommand = new NewCommand(saveService, cratonService, this);
 			AboutCommand = new AboutCommand();
 			RefreshCommand = new RefreshCommand();
 			#endregion

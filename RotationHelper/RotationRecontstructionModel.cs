@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RotationModel
 {
-	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService, ISaveService
+	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService, ISaveService, ICratonService
 	{
 		public double StartTime { get; private set; }
 		public IEnumerable<RotationEvent> GetRotations => Rotations;
@@ -225,6 +225,25 @@ namespace RotationModel
 			}
 			else
 				throw new ArgumentException("There is no Coordinates for this ID at this Timestamp");
+		}
+
+		public void ResetModel()
+		{
+			plateIds = new();
+			Rotations = new();
+			StartTime = 0.0D;
+			rotationFileName = string.Empty;
+		}
+
+		public void AddCraton(int cratonId, string cratonName)
+		{
+			Rotations.Add(new RotationEvent(cratonId, 0.0D, Coordinates.Default, 0, cratonName));
+			Rotations.Add(new RotationEvent(cratonId, StartTime, Coordinates.Default, 0, cratonName));
+		}
+
+		public void SetStartTime(double startTime)
+		{
+			StartTime = startTime;
 		}
 	}
 }
