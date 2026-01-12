@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Rotation_Editor.Views;
 using RotationEditor.ViewModel;
 using RotationModel;
 using System;
@@ -83,7 +84,7 @@ namespace RotationEditor.Commands
 				mainViewModel.FileName = odlg.FileName;
 				updateService.Update(mainViewModel.FileName);
 
-				mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent=> 
+				mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
 				new RotationViewModel(rotEvent.PlateID)
 				{
 					TimeStamp = rotEvent.TimeStamp,
@@ -99,9 +100,48 @@ namespace RotationEditor.Commands
 
 	public class NewCommand : CommandBase
 	{
+		private readonly IGetRotationsService getRotationsService;
+		private readonly ICratonService cratonService;
+		private readonly MainViewModel mainViewModel;
+
+		public NewCommand(IGetRotationsService getRotations, ICratonService cratonService, MainViewModel mainViewModel)
+		{
+			this.getRotationsService = getRotations;
+			this.cratonService = cratonService;
+			this.mainViewModel = mainViewModel;
+		}
+
 		public override void Execute(object? parameter)
 		{
+			// Generate the necessary cratons with the default rotation events
+			mainViewModel.ResetViewModel();
+			var cratonVM = new CratonCreationViewModel();
+			var cratonGenerationDialog = new CratonCreation()
+			{
+				DataContext = cratonVM
+			};
 
+			if(cratonGenerationDialog.ShowDialog() == true)
+			{
+				cratonService.ResetModel();
+				cratonService.SetStartTime(cratonVM.StartTime);
+				// We have the craton data in cratonVM
+				foreach(var craton in cratonVM.Cratons)
+				{
+					cratonService.AddCraton(craton.ID, craton.Name);
+				}
+			}
+
+			mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
+				new RotationViewModel(rotEvent.PlateID)
+				{
+					TimeStamp = rotEvent.TimeStamp,
+					Latitude = rotEvent.Coordinates.Latitude,
+					Longitude = rotEvent.Coordinates.Longitude,
+					Angle = rotEvent.Coordinates.Angle,
+					ConjugateID = rotEvent.ConjugatePlateID,
+					Comment = rotEvent.Comment,
+				}));
 		}
 	}
 

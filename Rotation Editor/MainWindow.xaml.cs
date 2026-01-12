@@ -15,6 +15,6 @@ namespace RotationEditor
 		public MainWindow()
 		{
 			InitializeComponent();
-		}		
+		}
 	}
 }

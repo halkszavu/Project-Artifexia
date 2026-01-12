@@ -28,6 +28,7 @@ namespace RotationEditor
 			IGetRotationsService getRotationsService = rotationModel;
 			IUpdateService updateService = rotationModel;
 			ISaveService saveService = rotationModel;
+			ICratonService addCratonService = rotationModel;
 
 			MainWindow = new MainWindow()
 			{
@@ -39,7 +40,8 @@ namespace RotationEditor
 					plateIDsService, 
 					getRotationsService, 
 					updateService, 
-					saveService),
+					saveService,
+					addCratonService),
 			};
 
 			MainWindow.Show();
