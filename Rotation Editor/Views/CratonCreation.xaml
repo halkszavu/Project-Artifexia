@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rotation_Editor.Views"
         mc:Ignorable="d"
-        Title="CratonCreation" Height="300" Width="600">
+        Title="CratonCreation" Height="350" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

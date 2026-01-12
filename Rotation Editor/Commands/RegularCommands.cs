@@ -84,7 +84,7 @@ namespace RotationEditor.Commands
 				mainViewModel.FileName = odlg.FileName;
 				updateService.Update(mainViewModel.FileName);
 
-				mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent=> 
+				mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
 				new RotationViewModel(rotEvent.PlateID)
 				{
 					TimeStamp = rotEvent.TimeStamp,
@@ -100,13 +100,13 @@ namespace RotationEditor.Commands
 
 	public class NewCommand : CommandBase
 	{
-		private readonly ISaveService saveService;
+		private readonly IGetRotationsService getRotationsService;
 		private readonly ICratonService cratonService;
 		private readonly MainViewModel mainViewModel;
 
-		public NewCommand(ISaveService saveService, ICratonService cratonService, MainViewModel mainViewModel)
+		public NewCommand(IGetRotationsService getRotations, ICratonService cratonService, MainViewModel mainViewModel)
 		{
-			this.saveService = saveService;
+			this.getRotationsService = getRotations;
 			this.cratonService = cratonService;
 			this.mainViewModel = mainViewModel;
 		}
@@ -132,7 +132,16 @@ namespace RotationEditor.Commands
 				}
 			}
 
-			// Then save the generated data similar to the SaveCommand
+			mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
+				new RotationViewModel(rotEvent.PlateID)
+				{
+					TimeStamp = rotEvent.TimeStamp,
+					Latitude = rotEvent.Coordinates.Latitude,
+					Longitude = rotEvent.Coordinates.Longitude,
+					Angle = rotEvent.Coordinates.Angle,
+					ConjugateID = rotEvent.ConjugatePlateID,
+					Comment = rotEvent.Comment,
+				}));
 		}
 	}
 

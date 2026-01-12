@@ -69,13 +69,7 @@ namespace RotationEditor.ViewModel
 			}
 		}
 
-		public bool IsDataValid
-		{
-			get
-			{
-				return NumberOfCratons > 0 && StartTime >= 0.0D;
-			}
-		}
+		public bool IsDataValid => Cratons.Count > 0;
 
 		public ICommand GenerateCratonsCommand { get; set; }
 		public ICommand ClearCratonsCommand { get; set; }
@@ -88,6 +82,7 @@ namespace RotationEditor.ViewModel
 			{
 				Cratons.Clear();
 				OnPropertyChanged(nameof(Cratons));
+				OnPropertyChanged(nameof(IsDataValid));
 			});
 
 			CratonIDIncrement = 1;
@@ -98,10 +93,11 @@ namespace RotationEditor.ViewModel
 		{
 			for(int i = 0; i < NumberOfCratons; i++)
 			{
-				Cratons.Add(new CratonViewModel(MinCratonID + i * CratonIDIncrement, $"Craton {i + 1}")); // Todo: have naming scheme implemented
+				Cratons.Add(new CratonViewModel(MinCratonID + i * CratonIDIncrement, $"Craton {i + 1}")); // TODO: have naming scheme implemented
 			}
 
 			OnPropertyChanged(nameof(Cratons));
+			OnPropertyChanged(nameof(IsDataValid));
 		}
 	}
 
