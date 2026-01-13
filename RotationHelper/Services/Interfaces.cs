@@ -48,4 +48,11 @@ namespace RotationModel
 		void Save();
 		void Save(string fileName);
 	}
+
+	public interface ICratonService
+	{
+		void ResetModel();
+		void AddCraton(int cratonId, string cratonName);
+		void SetStartTime(double startTime);
+	}
 }

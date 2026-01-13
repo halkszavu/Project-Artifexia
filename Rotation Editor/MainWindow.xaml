@@ -19,6 +19,10 @@
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Command="{Binding TestingCommand}" Key="F12"/>
+        <KeyBinding Command="{Binding NewCommand}" Modifiers="Control" Key="N"/>
+        <KeyBinding Command="{Binding OpenCommand}" Modifiers="Control" Key="O"/>
+        <KeyBinding Command="{Binding SaveCommand}" Modifiers="Control" Key="S"/>
+        <KeyBinding Command="{Binding SaveAsCommand}" Modifiers="Control+Shift" Key="S"/>
     </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -68,10 +72,10 @@
                 <RowDefinition Height="36"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnUp" Grid.Row="0" Margin="1" Command="local:CustomCommands.Move" CommandParameter="1">↑</Button>
-            <Button Name="btnComment" Grid.Row="1" Margin="1" Command="local:CustomCommands.Comment">C</Button>
-            <Button Name="btnPlus" Grid.Row="2" Margin="1" Command="local:CustomCommands.Add">+</Button>
-            <Button x:Name="btnDown" Grid.Row="3" Margin="1" Command="local:CustomCommands.Move" CommandParameter="-1">↓</Button>
+            <Button x:Name="btnUp" Grid.Row="0" Margin="1" >↑</Button>
+            <Button Name="btnComment" Grid.Row="1" Margin="1" >C</Button>
+            <Button Name="btnPlus" Grid.Row="2" Margin="1" >+</Button>
+            <Button x:Name="btnDown" Grid.Row="3" Margin="1" >↓</Button>
         </Grid>
 
         <WrapPanel Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="2">
