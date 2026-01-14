@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace RotationEditor.ViewModel
@@ -105,7 +100,7 @@ namespace RotationEditor.ViewModel
 	{
 		public int ID { get; set; }
 		public string Name { get; set; }
-		public CratonViewModel(int id, string name) 
+		public CratonViewModel(int id, string name)
 		{
 			ID = id;
 			Name = name;

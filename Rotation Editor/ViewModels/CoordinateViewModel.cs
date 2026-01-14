@@ -1,10 +1,4 @@
 ﻿using RotationModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace RotationEditor.ViewModel
 {
@@ -16,7 +10,7 @@ namespace RotationEditor.ViewModel
 			get => _latitude;
 			set
 			{
-				if (_latitude != value)
+				if(_latitude != value)
 				{
 					_latitude = value;
 					OnPropertyChanged();
@@ -29,7 +23,7 @@ namespace RotationEditor.ViewModel
 			get => _longitude;
 			set
 			{
-				if (value != _longitude)
+				if(value != _longitude)
 				{
 					_longitude = value;
 					OnPropertyChanged();
@@ -42,7 +36,7 @@ namespace RotationEditor.ViewModel
 			get => _angle;
 			set
 			{
-				if (value != _angle)
+				if(value != _angle)
 				{
 					_angle = value;
 					OnPropertyChanged();

@@ -40,7 +40,7 @@ namespace RotationEditor.ViewModel
 			get => this._rotations;
 			set
 			{
-				if (value != this._rotations)
+				if(value != this._rotations)
 				{
 					this._rotations = value;
 					OnPropertyChanged();
@@ -68,11 +68,11 @@ namespace RotationEditor.ViewModel
 
 		internal void AddRotation(RotationModel model)
 		{
-			if (!plateIds.Contains(model.PlateID))
+			if(!plateIds.Contains(model.PlateID))
 				plateIds.Add(model.PlateID);
 			Rotations.Add(model);
 
-			if (model.TimeStamp > SimulationStart)
+			if(model.TimeStamp > SimulationStart)
 				SimulationStart = model.TimeStamp;
 
 			OnPropertyChanged(nameof(Rotations));
@@ -87,13 +87,13 @@ namespace RotationEditor.ViewModel
 		public (double latitude, double longitude, double angle) GetCoordinatesOfIDAtTimestep(int plateId, double timeStamp, bool isUpper = true)
 		{
 			var plateRotations = Rotations.Where(r => r.PlateID == plateId).Where(r => r.TimeStamp == timeStamp).ToList();
-			if (plateRotations.Any())
+			if(plateRotations.Any())
 			{
-				if (plateRotations.Count == 1)
+				if(plateRotations.Count == 1)
 					return (plateRotations[0].Latitude, plateRotations[0].Longitude, plateRotations[0].Angle);
 				else
 				{
-					if (isUpper)
+					if(isUpper)
 						return (plateRotations[0].Latitude, plateRotations[0].Longitude, plateRotations[0].Angle);
 					else
 						return (plateRotations[1].Latitude, plateRotations[1].Longitude, plateRotations[1].Angle);
@@ -104,7 +104,7 @@ namespace RotationEditor.ViewModel
 		}
 		public bool IsIDInUse(int id)
 		{
-			if (id == 0)
+			if(id == 0)
 				return true;
 			else
 				return plateIds.Contains(id);
@@ -112,7 +112,7 @@ namespace RotationEditor.ViewModel
 		public int GeneratePlateID(int parentID = 1)
 		{
 			int gen = parentID;
-			while (IsIDInUse(gen))
+			while(IsIDInUse(gen))
 			{
 				gen++;
 			}

@@ -1,11 +1,6 @@
 ﻿using RotationEditor.Commands;
 using RotationModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace RotationEditor.ViewModel
@@ -20,7 +15,7 @@ namespace RotationEditor.ViewModel
 			get => _newPlate;
 			set
 			{
-				if (_newPlate != value)
+				if(_newPlate != value)
 				{
 					_newPlate = value;
 					OnPropertyChanged();
@@ -33,7 +28,7 @@ namespace RotationEditor.ViewModel
 			get => _select;
 			set
 			{
-				if (value != _select)
+				if(value != _select)
 				{
 					_select = value;
 					OnPropertyChanged();

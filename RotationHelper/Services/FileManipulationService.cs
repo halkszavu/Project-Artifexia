@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace RotationModel
@@ -13,7 +9,7 @@ namespace RotationModel
 
 		public static RotationRecontstructionModel ReadFile(Stream fileStream)
 		{
-			using (var reader = new StreamReader(fileStream))
+			using(var reader = new StreamReader(fileStream))
 			{
 				var reconstruction = ParseReconstruction(reader.ReadToEnd());
 				return reconstruction;
@@ -22,7 +18,7 @@ namespace RotationModel
 
 		public static void WriteToFile(Stream fileStream, IGetRotationsService rotationService)
 		{
-			using (StreamWriter writer = new StreamWriter(fileStream))
+			using(StreamWriter writer = new StreamWriter(fileStream))
 			{
 				writer.Write(PrintFullReconstruction(rotationService));
 			}
@@ -32,7 +28,7 @@ namespace RotationModel
 		{
 			string print = string.Empty;
 
-			foreach (RotationEvent rot in rotationService.GetRotations)
+			foreach(RotationEvent rot in rotationService.GetRotations)
 			{
 				print += rot.ToString();
 				print += Environment.NewLine;
@@ -47,7 +43,7 @@ namespace RotationModel
 
 			var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-			foreach (var line in lines)
+			foreach(var line in lines)
 			{
 				RotationEvent rot = RotationEvent.Parse(line);
 				parsedReconstruction.AddRotation(rot);

@@ -1,6 +1,4 @@
 ﻿using RotationEditor.Resources;
-using System.Collections.Generic;
-using System.Windows;
 
 namespace RotationEditor.Views
 {

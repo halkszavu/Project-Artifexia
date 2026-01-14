@@ -1,12 +1,7 @@
-﻿using RotationEditor.Resources;
-using RotationEditor.Commands;
+﻿using RotationEditor.Commands;
 using RotationModel;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace RotationEditor.ViewModel
@@ -45,7 +40,7 @@ namespace RotationEditor.ViewModel
 		public ObservableCollection<RotationViewModel> Rotations { get; }
 
 		public MainViewModel(
-			IDriftcorrectionService driftCorrectionService, 
+			IDriftcorrectionService driftCorrectionService,
 			INewPlateService newPlateService,
 			IStartIndependentMoveService startIndependentMoveService,
 			IJoinIndependentService joinIndependentService,
@@ -114,7 +109,7 @@ namespace RotationEditor.ViewModel
 		public void UpdateRotations(IEnumerable<RotationViewModel> rotations)
 		{
 			Rotations.Clear();
-			foreach (RotationViewModel rotation in rotations)
+			foreach(RotationViewModel rotation in rotations)
 			{
 				Rotations.Add(rotation);
 			}

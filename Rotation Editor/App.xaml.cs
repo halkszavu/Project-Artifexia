@@ -1,13 +1,6 @@
-﻿using RotationEditor;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using RotationEditor.ViewModel;
 using RotationModel;
-using RotationEditor.ViewModel;
+using System.Windows;
 
 namespace RotationEditor
 {
@@ -33,13 +26,13 @@ namespace RotationEditor
 			MainWindow = new MainWindow()
 			{
 				DataContext = new MainViewModel(
-					driftcorrectionService, 
-					newPlateService, 
-					startIndependentMoveService, 
-					joinIndependentService, 
-					plateIDsService, 
-					getRotationsService, 
-					updateService, 
+					driftcorrectionService,
+					newPlateService,
+					startIndependentMoveService,
+					joinIndependentService,
+					plateIDsService,
+					getRotationsService,
+					updateService,
 					saveService,
 					addCratonService),
 			};

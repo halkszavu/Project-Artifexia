@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RotationEditor.ViewModel
+﻿namespace RotationEditor.ViewModel
 {
 	internal class TimeStampViewModel : ViewModelBase
 	{
@@ -14,7 +8,7 @@ namespace RotationEditor.ViewModel
 			get => _timeStamp;
 			set
 			{
-				if (_timeStamp != value)
+				if(_timeStamp != value)
 				{
 					_timeStamp = value;
 					OnPropertyChanged();

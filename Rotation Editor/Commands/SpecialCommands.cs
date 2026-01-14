@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RotationEditor.ViewModel;
+﻿using RotationEditor.ViewModel;
 using RotationEditor.Views;
-using RotationEditor.Resources;
 using RotationModel;
+using System.Linq;
 
 namespace RotationEditor.Commands
 {
@@ -84,18 +79,18 @@ namespace RotationEditor.Commands
 			var timeStampVM = new TimeStampViewModel();
 			var newPlateView = new NewPlateID() { DataContext = newPlateVM };
 			var timeStampView = new TimeStamp() { DataContext = timeStampVM };
-			if (newPlateView.ShowDialog() == true)
+			if(newPlateView.ShowDialog() == true)
 			{
-				if (timeStampView.ShowDialog() == true)
+				if(timeStampView.ShowDialog() == true)
 				{
 					newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, newPlateVM.SelectedPlateId, timeStampVM.DesiredTimestamp);
 
-					var coordsVM = new CoordinateViewModel() 
+					var coordsVM = new CoordinateViewModel()
 					{
-						HelpText = "" 
+						HelpText = ""
 					};
 					var coordsView = new Coordinate() { DataContext = coordsVM };
-					if (coordsView.ShowDialog() == true)
+					if(coordsView.ShowDialog() == true)
 					{
 						newPlateService.NewPlateSecondStep(coordsVM.GetCoordinates);
 					}
@@ -122,9 +117,9 @@ namespace RotationEditor.Commands
 			var plateIDView = new PlateID() { DataContext = plateIDVM };
 			var timestampView = new TimeStamp() { DataContext = timestampVM };
 
-			if (plateIDView.ShowDialog() == true)
+			if(plateIDView.ShowDialog() == true)
 			{
-				if (timestampView.ShowDialog() == true)
+				if(timestampView.ShowDialog() == true)
 				{
 					independentMoveService.StartIndependentMove(plateIDVM.SelectedPlateID, timestampVM.DesiredTimestamp);
 				}
@@ -151,9 +146,9 @@ namespace RotationEditor.Commands
 			var plateIDsView = new TwoPlateID() { DataContext = plateIDsVM };
 			var timestampView = new TimeStamp() { DataContext = timestampVM };
 
-			if (plateIDsView.ShowDialog() == true)
+			if(plateIDsView.ShowDialog() == true)
 			{
-				if (timestampView.ShowDialog() == true)
+				if(timestampView.ShowDialog() == true)
 				{
 					var coordsVM = new CoordinateViewModel()
 					{
@@ -162,7 +157,7 @@ namespace RotationEditor.Commands
 					var coordsView = new Coordinate() { DataContext = coordsVM };
 
 					if(coordsView.ShowDialog() == true)
-					joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates);
+						joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates);
 				}
 			}
 		}

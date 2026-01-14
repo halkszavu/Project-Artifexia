@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RotationModel
 {
@@ -26,19 +24,19 @@ namespace RotationModel
 
 		public void AddRotation(RotationEvent rotation)
 		{
-			if (rotation == null)
+			if(rotation == null)
 				throw new ArgumentNullException($"rotation should never be null");
-			if (rotation.PlateID == 0)
+			if(rotation.PlateID == 0)
 				throw new ArgumentException("PlateID 000 is used for other purposes, please do not use it!");
 
-			if (plateIds.Contains(rotation.PlateID))
+			if(plateIds.Contains(rotation.PlateID))
 			{
-				if (Rotations.Contains(rotation))
+				if(Rotations.Contains(rotation))
 					throw new ArgumentException("Same rotation is already added");
 				else
 				{
 					Rotations.Add(rotation);
-					if (rotation.TimeStamp > StartTime)
+					if(rotation.TimeStamp > StartTime)
 						StartTime = rotation.TimeStamp;
 				}
 			}
@@ -46,26 +44,26 @@ namespace RotationModel
 			{
 				plateIds.Add(rotation.PlateID);
 				Rotations.Add(rotation);
-				if (rotation.TimeStamp > StartTime)
+				if(rotation.TimeStamp > StartTime)
 					StartTime = rotation.TimeStamp;
 			}
 		}
 
 		public void InsertRotation(int index, RotationEvent rotation)
 		{
-			if (rotation == null)
+			if(rotation == null)
 				throw new ArgumentNullException($"rotation should never be null");
-			if (rotation.PlateID == 0)
+			if(rotation.PlateID == 0)
 				throw new ArgumentException("PlateID 000 is used for other purposes, please do not use it!");
 
-			if (plateIds.Contains(rotation.PlateID))
+			if(plateIds.Contains(rotation.PlateID))
 			{
-				if (Rotations.Contains(rotation))
+				if(Rotations.Contains(rotation))
 					throw new ArgumentException("Same rotation is already added");
 				else
 				{
 					Rotations.Insert(index, rotation);
-					if (rotation.TimeStamp > StartTime)
+					if(rotation.TimeStamp > StartTime)
 						StartTime = rotation.TimeStamp;
 				}
 			}
@@ -73,26 +71,26 @@ namespace RotationModel
 			{
 				plateIds.Add(rotation.PlateID);
 				Rotations.Insert(index, rotation);
-				if (rotation.TimeStamp > StartTime)
+				if(rotation.TimeStamp > StartTime)
 					StartTime = rotation.TimeStamp;
 			}
 		}
 
 		public void CreateDriftCorrection()
 		{
-			foreach (int plateID in plateIds)
+			foreach(int plateID in plateIds)
 			{
-				if (plateID == 1)
+				if(plateID == 1)
 					continue;
 
 				var myRots = Rotations.Where(rot => rot.PlateID == plateID);
 				var lastRotation = myRots.Where(rot => rot.TimeStamp > 1.0).OrderBy(x => x.TimeStamp).First();
 				var rotation1 = myRots.FirstOrDefault(rot => rot.TimeStamp == 1.0);
-				if (lastRotation != null)
+				if(lastRotation != null)
 				{
-					if (lastRotation.TimeStamp == StartTime)
+					if(lastRotation.TimeStamp == StartTime)
 						continue;//if a plate has only one entry at simulation's start, leave it alone, it didn't move independently at all
-					if (rotation1 == null)
+					if(rotation1 == null)
 					{
 						//there is no already existing drift correcting rotation entry
 						//let's create one:
@@ -115,7 +113,7 @@ namespace RotationModel
 
 		(int newPlateId, int parentPlateId, double timeStamp, int parentEntryIndex) newPlateData;
 		public void NewPlateFirstStep(int newPlateId, int parentPlateId, double timeStamp)
-		{			
+		{
 			newPlateData = (newPlateId, parentPlateId, timeStamp, 0);
 			RotationEvent plateMovingIndependently = new(newPlateId, timeStamp, Coordinates.Default, 0, $"{newPlateId} starts moving independently");
 			RotationEvent plateAtEnd = new(newPlateId, 0.0D, Coordinates.Default, 0, $"{newPlateId} at the end");
@@ -131,7 +129,7 @@ namespace RotationModel
 		}
 
 		public void NewPlateSecondStep(Coordinates gotCoordinates)
-		{			
+		{
 			RotationEvent plateEndFollowingParent = new(newPlateData.newPlateId, newPlateData.timeStamp, gotCoordinates, newPlateData.parentPlateId, $"{newPlateData.newPlateId} end following {newPlateData.parentPlateId} parent");
 			RotationEvent plateAtStart = new(newPlateData.newPlateId, StartTime, gotCoordinates, newPlateData.parentPlateId, $"{newPlateData.newPlateId} at start");
 
@@ -184,7 +182,7 @@ namespace RotationModel
 			StartTime = 0.0D;
 			rotationFileName = fileName;
 			var tmp = FileManipulationService.ReadFile(File.Open(fileName, FileMode.Open));
-			foreach (var rot in tmp.Rotations)
+			foreach(var rot in tmp.Rotations)
 			{
 				AddRotation(rot);
 			}
@@ -203,7 +201,7 @@ namespace RotationModel
 
 		void SaveModel()
 		{
-			if (string.IsNullOrEmpty(rotationFileName))
+			if(string.IsNullOrEmpty(rotationFileName))
 				throw new Exception();
 			FileManipulationService.WriteToFile(File.Open(rotationFileName, FileMode.Open), this);
 		}
@@ -211,13 +209,13 @@ namespace RotationModel
 		Coordinates GetCoordinatesOfIDAtTimestep(int plateId, double timeStamp, bool isUpper = true)
 		{
 			var plateRotations = Rotations.Where(r => r.PlateID == plateId).Where(r => r.TimeStamp == timeStamp).ToList();
-			if (plateRotations.Any())
+			if(plateRotations.Any())
 			{
-				if (plateRotations.Count == 1)
+				if(plateRotations.Count == 1)
 					return plateRotations[0].Coordinates;
 				else
 				{
-					if (isUpper)
+					if(isUpper)
 						return plateRotations[0].Coordinates;
 					else
 						return plateRotations[1].Coordinates;

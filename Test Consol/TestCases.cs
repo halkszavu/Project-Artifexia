@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Test_Consol
+﻿namespace Test_Consol
 {
 	internal static class TestCases
 	{
 		public readonly static string Test1 = "501 1750.0   90.0    0.0    0.0  000 ! Ocean I start moving independently";
-		public readonly static string Test2 = 
+		public readonly static string Test2 =
 @"001  0.0   90.0    0.0    0.0  000 !
 001 2000.0   90.0    0.0    0.0  000 !
 100  0.0   90.0    0.0    0.0  000 ! Craton Atuva at end

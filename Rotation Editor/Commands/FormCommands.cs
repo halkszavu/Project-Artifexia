@@ -1,9 +1,4 @@
 ﻿using RotationEditor.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RotationEditor.Commands
 {
@@ -22,7 +17,7 @@ namespace RotationEditor.Commands
 			do
 			{
 				x++;
-			} while (baseViewModel.PlateIDs.Contains(x));
+			} while(baseViewModel.PlateIDs.Contains(x));
 
 			baseViewModel.NewPlate = x;
 		}

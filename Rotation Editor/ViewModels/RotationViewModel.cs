@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RotationEditor.ViewModel
+﻿namespace RotationEditor.ViewModel
 {
 	public class RotationViewModel : ViewModelBase
 	{
 		public int PlateID { get; }
 		private double timeStamp;
 
-		public double TimeStamp 
-		{ 
-			get => timeStamp; 
-			set 
+		public double TimeStamp
+		{
+			get => timeStamp;
+			set
 			{
-				if (timeStamp != value)
+				if(timeStamp != value)
 				{
 					timeStamp = value;
 					OnPropertyChanged();
@@ -24,12 +18,12 @@ namespace RotationEditor.ViewModel
 			}
 		}
 		private double longitude;
-		public double Longitude 
+		public double Longitude
 		{
 			get => longitude;
 			set
 			{
-				if (longitude != value)
+				if(longitude != value)
 				{
 					longitude = value;
 					OnPropertyChanged();
@@ -42,7 +36,7 @@ namespace RotationEditor.ViewModel
 			get => latitude;
 			set
 			{
-				if (latitude != value)
+				if(latitude != value)
 				{
 					latitude = value;
 					OnPropertyChanged();
@@ -55,7 +49,7 @@ namespace RotationEditor.ViewModel
 			get => angle;
 			set
 			{
-				if (angle != value)
+				if(angle != value)
 				{
 					angle = value;
 					OnPropertyChanged();
@@ -68,7 +62,7 @@ namespace RotationEditor.ViewModel
 			get => conjugateID;
 			set
 			{
-				if (conjugateID != value)
+				if(conjugateID != value)
 				{
 					conjugateID = value;
 					OnPropertyChanged();
@@ -81,7 +75,7 @@ namespace RotationEditor.ViewModel
 			get => comment;
 			set
 			{
-				if (comment != value)
+				if(comment != value)
 				{
 					comment = value;
 					OnPropertyChanged();

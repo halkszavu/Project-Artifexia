@@ -1,10 +1,5 @@
 ﻿using RotationModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RotationEditor.ViewModel
 {
@@ -19,7 +14,7 @@ namespace RotationEditor.ViewModel
 			get => _selected;
 			set
 			{
-				if (_selected != value)
+				if(_selected != value)
 				{
 					_selected = value;
 					OnPropertyChanged();

@@ -2,11 +2,7 @@
 using Rotation_Editor.Views;
 using RotationEditor.ViewModel;
 using RotationModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace RotationEditor.Commands

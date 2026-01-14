@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -24,9 +23,9 @@ namespace RotationModel
 
 		public override bool Equals([NotNullWhen(true)] object? obj)
 		{
-			if (obj == null)
+			if(obj == null)
 				return false;
-			else if (obj.GetType() != typeof(Coordinates))
+			else if(obj.GetType() != typeof(Coordinates))
 				return false;
 			else
 				return Equals((Coordinates)obj);
@@ -34,11 +33,11 @@ namespace RotationModel
 
 		public bool Equals(Coordinates other)
 		{
-			if (Latitude != other.Latitude)
+			if(Latitude != other.Latitude)
 				return false;
-			else if (Longitude != other.Longitude)
+			else if(Longitude != other.Longitude)
 				return false;
-			else if (Angle != other.Angle)
+			else if(Angle != other.Angle)
 				return false;
 			else
 				return true;
@@ -76,11 +75,11 @@ namespace RotationModel
 
 		public override bool Equals(object? obj)
 		{
-			if (obj == null)
+			if(obj == null)
 				return false;
-			else if (ReferenceEquals(this, obj))
+			else if(ReferenceEquals(this, obj))
 				return true;
-			else if (obj.GetType() != typeof(RotationEvent))
+			else if(obj.GetType() != typeof(RotationEvent))
 				return false;
 			else
 				return Equals((RotationEvent)obj);
@@ -88,15 +87,15 @@ namespace RotationModel
 
 		public bool Equals(RotationEvent? other)
 		{
-			if (other == null)
+			if(other == null)
 				return false;
-			else if (this.PlateID != other.PlateID)
+			else if(this.PlateID != other.PlateID)
 				return false;
-			else if (this.ConjugatePlateID != other.ConjugatePlateID)
+			else if(this.ConjugatePlateID != other.ConjugatePlateID)
 				return false;
-			else if (this.TimeStamp != other.TimeStamp)
+			else if(this.TimeStamp != other.TimeStamp)
 				return false;
-			else if (this.Coordinates != other.Coordinates)
+			else if(this.Coordinates != other.Coordinates)
 				return false;
 			else
 				return true;
@@ -104,7 +103,7 @@ namespace RotationModel
 
 		public override string ToString()
 		{
-			if (ConjugatePlateID == 0)
+			if(ConjugatePlateID == 0)
 				return $"{PlateID:D3} {TimeStamp:F1} {Coordinates} 000 ! {Comment}";
 			else
 				return $"{PlateID:D3} {TimeStamp:F1} {Coordinates} {ConjugatePlateID:D3} ! {Comment}";
@@ -130,5 +129,5 @@ namespace RotationModel
 
 			return rotation;
 		}
-	}	
+	}
 }
