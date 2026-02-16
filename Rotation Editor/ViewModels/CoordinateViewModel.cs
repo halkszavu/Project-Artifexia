@@ -1,4 +1,5 @@
 ﻿using RotationModel;
+using RotationModel.Data;
 
 namespace RotationEditor.ViewModel
 {

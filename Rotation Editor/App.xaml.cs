@@ -1,5 +1,6 @@
 ﻿using RotationEditor.ViewModel;
 using RotationModel;
+using RotationModel.Services;
 using System.Windows;
 
 namespace RotationEditor

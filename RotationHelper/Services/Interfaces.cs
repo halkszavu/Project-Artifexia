@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using RotationModel.Data;
+using System.Collections.Generic;
 
-namespace RotationModel
+namespace RotationModel.Services
 {
 	public interface IDriftcorrectionService
 	{

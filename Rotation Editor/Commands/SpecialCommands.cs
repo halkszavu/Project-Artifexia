@@ -1,6 +1,7 @@
 ﻿using RotationEditor.ViewModel;
 using RotationEditor.Views;
 using RotationModel;
+using RotationModel.Services;
 using System.Linq;
 
 namespace RotationEditor.Commands
