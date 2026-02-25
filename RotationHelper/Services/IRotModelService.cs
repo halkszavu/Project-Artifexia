@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RotationModel.Services
 {
-	internal interface IRotModelService
+	public interface IRotModelService
 	{
 		IEnumerable<RotationEvent> GetRotations { get; }
 		IEnumerable<int> GetPlateIDs { get; }

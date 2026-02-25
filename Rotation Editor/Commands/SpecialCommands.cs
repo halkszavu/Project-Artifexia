@@ -16,9 +16,9 @@ namespace RotationEditor.Commands
 
 	public class ValidateCommand : CommandBase
 	{
-		private readonly IValidateService validateService;
+		private readonly IRotModelService validateService;
 
-		public ValidateCommand(IValidateService validateService) : base()
+		public ValidateCommand(IRotModelService validateService) : base()
 		{
 			this.validateService = validateService;
 		}
@@ -35,22 +35,20 @@ namespace RotationEditor.Commands
 
 	public class DriftCorrectionCommand : CommandBase
 	{
-		private readonly IDriftcorrectionService driftcorrectionService;
-		private readonly IGetRotationsService getRotationsService;
+		private readonly IRotModelService rotModelService;
 		private readonly MainViewModel mainViewModel;
 
-		public DriftCorrectionCommand(IDriftcorrectionService driftcorrectionService, IGetRotationsService getRotationsService, MainViewModel mainViewModel) : base()
+		public DriftCorrectionCommand(IRotModelService driftcorrectionService, MainViewModel mainViewModel) : base()
 		{
-			this.driftcorrectionService = driftcorrectionService;
-			this.getRotationsService = getRotationsService;
+			this.rotModelService = driftcorrectionService;
 			this.mainViewModel = mainViewModel;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			driftcorrectionService.CreateDriftCorrection();
+			rotModelService.CreateDriftCorrection();
 
-			mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
+			mainViewModel.UpdateRotations(rotModelService.GetRotations.Select(rotEvent =>
 				new RotationViewModel(rotEvent.PlateID)
 				{
 					TimeStamp = rotEvent.TimeStamp,
@@ -65,18 +63,16 @@ namespace RotationEditor.Commands
 
 	public class NewPlateCommand : CommandBase
 	{
-		private readonly INewPlateService newPlateService;
-		private readonly IGetPlateIDsService plateIDsService;
+		private readonly IRotModelService rotModelService;
 
-		public NewPlateCommand(INewPlateService newPlateService, IGetPlateIDsService plateIDsService) : base()
+		public NewPlateCommand(IRotModelService newPlateService) : base()
 		{
-			this.newPlateService = newPlateService;
-			this.plateIDsService = plateIDsService;
+			this.rotModelService = newPlateService;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			var newPlateVM = new NewPlateIDViewModel(plateIDsService);
+			var newPlateVM = new NewPlateIDViewModel(rotModelService);
 			var timeStampVM = new TimeStampViewModel();
 			var newPlateView = new NewPlateID() { DataContext = newPlateVM };
 			var timeStampView = new TimeStamp() { DataContext = timeStampVM };
@@ -84,7 +80,7 @@ namespace RotationEditor.Commands
 			{
 				if(timeStampView.ShowDialog() == true)
 				{
-					newPlateService.NewPlateFirstStep(newPlateVM.NewPlate, newPlateVM.SelectedPlateId, timeStampVM.DesiredTimestamp);
+					rotModelService.NewPlateFirstStep(newPlateVM.NewPlate, newPlateVM.SelectedPlateId, timeStampVM.DesiredTimestamp);
 
 					var coordsVM = new CoordinateViewModel()
 					{
@@ -93,7 +89,7 @@ namespace RotationEditor.Commands
 					var coordsView = new Coordinate() { DataContext = coordsVM };
 					if(coordsView.ShowDialog() == true)
 					{
-						newPlateService.NewPlateSecondStep(coordsVM.GetCoordinates);
+						rotModelService.NewPlateSecondStep(coordsVM.GetCoordinates);
 					}
 				}
 			}
@@ -102,18 +98,16 @@ namespace RotationEditor.Commands
 
 	public class IndependentMoveCommand : CommandBase
 	{
-		private readonly IStartIndependentMoveService independentMoveService;
-		private readonly IGetPlateIDsService plateIDsService;
+		private readonly IRotModelService rotModelService;
 
-		public IndependentMoveCommand(IStartIndependentMoveService independetMoveService, IGetPlateIDsService plateIDsService) : base()
+		public IndependentMoveCommand(IRotModelService independetMoveService) : base()
 		{
-			this.independentMoveService = independetMoveService;
-			this.plateIDsService = plateIDsService;
+			this.rotModelService = independetMoveService;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			var plateIDVM = new PlateIDViewModel(plateIDsService);
+			var plateIDVM = new PlateIDViewModel(rotModelService);
 			var timestampVM = new TimeStampViewModel();
 			var plateIDView = new PlateID() { DataContext = plateIDVM };
 			var timestampView = new TimeStamp() { DataContext = timestampVM };
@@ -122,7 +116,7 @@ namespace RotationEditor.Commands
 			{
 				if(timestampView.ShowDialog() == true)
 				{
-					independentMoveService.StartIndependentMove(plateIDVM.SelectedPlateID, timestampVM.DesiredTimestamp);
+					rotModelService.StartIndependentMove(plateIDVM.SelectedPlateID, timestampVM.DesiredTimestamp);
 				}
 			}
 		}
@@ -130,18 +124,16 @@ namespace RotationEditor.Commands
 
 	public class JoinPlateCommand : CommandBase
 	{
-		private readonly IJoinIndependentService joinPlateService;
-		private readonly IGetPlateIDsService plateIDsService;
+		private readonly IRotModelService rotModelService;
 
-		public JoinPlateCommand(IJoinIndependentService joinPlateService, IGetPlateIDsService plateIDsService) : base()
+		public JoinPlateCommand(IRotModelService joinPlateService) : base()
 		{
-			this.joinPlateService = joinPlateService;
-			this.plateIDsService = plateIDsService;
+			this.rotModelService = joinPlateService;
 		}
 
 		public override void Execute(object? parameter)
 		{
-			var plateIDsVM = new TwoPlateIDViewModel(plateIDsService);
+			var plateIDsVM = new TwoPlateIDViewModel(rotModelService);
 			var timestampVM = new TimeStampViewModel();
 
 			var plateIDsView = new TwoPlateID() { DataContext = plateIDsVM };
@@ -158,7 +150,7 @@ namespace RotationEditor.Commands
 					var coordsView = new Coordinate() { DataContext = coordsVM };
 
 					if(coordsView.ShowDialog() == true)
-						joinPlateService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates);
+						rotModelService.JoinIndependentPlates(plateIDsVM.FirstPlateID, plateIDsVM.SecondPlateID, timestampVM.DesiredTimestamp, coordsVM.GetCoordinates);
 				}
 			}
 		}

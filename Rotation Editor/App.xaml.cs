@@ -14,28 +14,14 @@ namespace RotationEditor
 		{
 			RotationRecontstructionModel rotationModel = new RotationRecontstructionModel();
 
-			IDriftcorrectionService driftcorrectionService = rotationModel;
-			INewPlateService newPlateService = rotationModel;
-			IStartIndependentMoveService startIndependentMoveService = rotationModel;
-			IJoinIndependentService joinIndependentService = rotationModel;
-			IGetPlateIDsService plateIDsService = rotationModel;
-			IGetRotationsService getRotationsService = rotationModel;
-			IUpdateService updateService = rotationModel;
-			ISaveService saveService = rotationModel;
-			ICratonService addCratonService = rotationModel;
+			IRotModelService rotModelService = rotationModel;
+			IRotFileService rotFileService = rotationModel;
 
 			MainWindow = new MainWindow()
 			{
 				DataContext = new MainViewModel(
-					driftcorrectionService,
-					newPlateService,
-					startIndependentMoveService,
-					joinIndependentService,
-					plateIDsService,
-					getRotationsService,
-					updateService,
-					saveService,
-					addCratonService),
+					rotModelService,
+					rotFileService),
 			};
 
 			MainWindow.Show();

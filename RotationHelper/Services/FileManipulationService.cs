@@ -18,7 +18,7 @@ namespace RotationModel
 			}
 		}
 
-		public static void WriteToFile(Stream fileStream, IGetRotationsService rotationService)
+		public static void WriteToFile(Stream fileStream, IRotModelService rotationService)
 		{
 			using(StreamWriter writer = new StreamWriter(fileStream))
 			{
@@ -26,7 +26,7 @@ namespace RotationModel
 			}
 		}
 
-		private static string PrintFullReconstruction(IGetRotationsService rotationService)
+		private static string PrintFullReconstruction(IRotModelService rotationService)
 		{
 			string print = string.Empty;
 

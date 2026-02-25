@@ -41,7 +41,7 @@ namespace RotationEditor.ViewModel
 
 		public ICommand GenerateNewPlateID { get; }
 
-		public NewPlateIDViewModel(IGetPlateIDsService plateIDsService) : base()
+		public NewPlateIDViewModel(IRotModelService plateIDsService) : base()
 		{
 			PlateIDs = new ObservableCollection<int>(plateIDsService.GetPlateIDs);
 			GenerateNewPlateID = new GenerateNewPlateIDCommand(this);

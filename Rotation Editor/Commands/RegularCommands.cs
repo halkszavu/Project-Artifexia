@@ -15,9 +15,9 @@ namespace RotationEditor.Commands
 
 	public class SaveCommand : CommandBase
 	{
-		private readonly ISaveService saveService;
+		private readonly IRotFileService saveService;
 
-		public SaveCommand(ISaveService saveService)
+		public SaveCommand(IRotFileService saveService)
 		{
 			this.saveService = saveService;
 		}
@@ -30,10 +30,10 @@ namespace RotationEditor.Commands
 
 	public class SaveAsCommand : CommandBase
 	{
-		private readonly ISaveService saveService;
+		private readonly IRotFileService saveService;
 		private readonly MainViewModel mainViewModel;
 
-		public SaveAsCommand(ISaveService saveService, MainViewModel mainViewModel)
+		public SaveAsCommand(IRotFileService saveService, MainViewModel mainViewModel)
 		{
 			this.saveService = saveService;
 			this.mainViewModel = mainViewModel;
@@ -57,11 +57,11 @@ namespace RotationEditor.Commands
 
 	public class OpenCommand : CommandBase
 	{
-		private readonly IUpdateService updateService;
-		private readonly IGetRotationsService getRotationsService;
+		private readonly IRotFileService updateService;
+		private readonly IRotModelService getRotationsService;
 		private readonly MainViewModel mainViewModel;
 
-		public OpenCommand(IUpdateService updateService, IGetRotationsService getRotationsService, MainViewModel mainViewModel) : base()
+		public OpenCommand(IRotFileService updateService, IRotModelService getRotationsService, MainViewModel mainViewModel) : base()
 		{
 			this.updateService = updateService;
 			this.getRotationsService = getRotationsService;
@@ -97,14 +97,12 @@ namespace RotationEditor.Commands
 
 	public class NewCommand : CommandBase
 	{
-		private readonly IGetRotationsService getRotationsService;
-		private readonly ICratonService cratonService;
+		private readonly IRotModelService rotModelService;
 		private readonly MainViewModel mainViewModel;
 
-		public NewCommand(IGetRotationsService getRotations, ICratonService cratonService, MainViewModel mainViewModel)
+		public NewCommand(IRotModelService rotModelService, MainViewModel mainViewModel)
 		{
-			this.getRotationsService = getRotations;
-			this.cratonService = cratonService;
+			this.rotModelService = rotModelService;
 			this.mainViewModel = mainViewModel;
 		}
 
@@ -120,16 +118,16 @@ namespace RotationEditor.Commands
 
 			if(cratonGenerationDialog.ShowDialog() == true)
 			{
-				cratonService.ResetModel();
-				cratonService.SetStartTime(cratonVM.StartTime);
+				rotModelService.ResetModel();
+				rotModelService.SetStartTime(cratonVM.StartTime);
 				// We have the craton data in cratonVM
 				foreach(var craton in cratonVM.Cratons)
 				{
-					cratonService.AddCraton(craton.ID, craton.Name);
+					rotModelService.AddCraton(craton.ID, craton.Name);
 				}
 			}
 
-			mainViewModel.UpdateRotations(getRotationsService.GetRotations.Select(rotEvent =>
+			mainViewModel.UpdateRotations(rotModelService.GetRotations.Select(rotEvent =>
 				new RotationViewModel(rotEvent.PlateID)
 				{
 					TimeStamp = rotEvent.TimeStamp,

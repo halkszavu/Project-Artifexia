@@ -9,6 +9,5 @@ namespace RotationModel.Services
 		void Update(string fileName);
 		void Save();
 		void Save(string fileName);
-
 	}
 }

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace RotationModel
 {
-	public class RotationRecontstructionModel : IDriftcorrectionService, INewPlateService, IStartIndependentMoveService, IJoinIndependentService, IGetRotationsService, IGetPlateIDsService, IUpdateService, ISaveService, ICratonService
+	public class RotationRecontstructionModel : IRotModelService, IRotFileService
 	{
 		public double StartTime { get; private set; }
 		public IEnumerable<RotationEvent> GetRotations => Rotations;
@@ -244,6 +244,11 @@ namespace RotationModel
 		public void SetStartTime(double startTime)
 		{
 			StartTime = startTime;
+		}
+
+		public void Validate()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

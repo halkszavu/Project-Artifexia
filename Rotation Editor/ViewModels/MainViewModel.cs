@@ -41,32 +41,25 @@ namespace RotationEditor.ViewModel
 		public ObservableCollection<RotationViewModel> Rotations { get; }
 
 		public MainViewModel(
-			IDriftcorrectionService driftCorrectionService,
-			INewPlateService newPlateService,
-			IStartIndependentMoveService startIndependentMoveService,
-			IJoinIndependentService joinIndependentService,
-			IGetPlateIDsService plateIDsService,
-			IGetRotationsService getRotationsService,
-			IUpdateService updateService,
-			ISaveService saveService,
-			ICratonService cratonService)
+			IRotModelService rotModelService,
+			IRotFileService rotFileService)
 		{
 			#region Normal commands
 			ExitCommand = new ExitCommand();
-			SaveCommand = new SaveCommand(saveService);
-			SaveAsCommand = new SaveAsCommand(saveService, this);
-			OpenCommand = new OpenCommand(updateService, getRotationsService, this);
-			NewCommand = new NewCommand(getRotationsService, cratonService, this);
+			SaveCommand = new SaveCommand(rotFileService);
+			SaveAsCommand = new SaveAsCommand(rotFileService, this);
+			OpenCommand = new OpenCommand(rotFileService, rotModelService, this);
+			NewCommand = new NewCommand(rotModelService, this);
 			AboutCommand = new AboutCommand();
 			RefreshCommand = new RefreshCommand();
 			#endregion
 
 			#region Special commands
-			ValidateCommand = new ValidateCommand();
-			DriftCorrectionCommand = new DriftCorrectionCommand(driftCorrectionService, getRotationsService, this);
-			NewPlateCommand = new NewPlateCommand(newPlateService, plateIDsService);
-			IndependentMoveCommand = new IndependentMoveCommand(startIndependentMoveService, plateIDsService);
-			JoinPlateCommand = new JoinPlateCommand(joinIndependentService, plateIDsService);
+			ValidateCommand = new ValidateCommand(rotModelService);
+			DriftCorrectionCommand = new DriftCorrectionCommand(rotModelService, this);
+			NewPlateCommand = new NewPlateCommand(rotModelService);
+			IndependentMoveCommand = new IndependentMoveCommand(rotModelService);
+			JoinPlateCommand = new JoinPlateCommand(rotModelService);
 			#endregion
 
 			TestingCommand = new TestingCommand();
